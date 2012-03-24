@@ -1,0 +1,1176 @@
+##
+#
+# AROMA Installer - Installer Script
+#       (c) 2011 by Ahmad Amarullah
+#           amarullz - xda-developers 
+#
+#
+##
+
+##
+#
+# OLD UPDATER-BINARY
+#
+# Here you can use old command for flashing files, like:
+#  mount
+#  umount
+#  delete_recursive
+#  format
+#  package_extract_dir
+#  set_perm_recursive
+#
+
+## CHECKING Configuration from aroma-config
+#
+# Check it using if else statement, with file_getprop
+# in /tmp/aroma
+#
+# Example:
+# if
+#      file_getprop("/tmp/aroma/customize.prop","item.6.3") == "1"
+# then
+#   ... here the command ...
+# endif;
+#
+
+## INFO COMMAND FOR AROMA
+#
+#-- DIFFERENT BEHAVIOUR
+#
+# set_progress(0.5);
+#    Set Progress position: 0.0 = 0%; 0.5 = 50%; 1.0 = 100%
+#    
+# show_progress(0.2, 400);
+#    show_progress( progress size, number of files to be extracted );
+#    if we had 50 files, and want to "add" 0.2 into progress after all finished
+#    use (0.2, 50)
+#
+# show_progress(0.2, "-2000");
+#    show_progress( progress size, wait for 2000ms );
+#    For show progress with time as progress indicator, use negative value. After 2second progress will add 0.2/20% into the value
+#    use (0.2, "-2000"). Note, use quote for value "-2000"
+#
+# ui_print("@ Title");
+#    Set progress title
+#
+# ui_print("Default Text");
+#    Set Normal Log Text
+#
+##
+
+#####################################################################################################
+#
+# .sense installation script using aroma with "devpackage"
+#
+# made using some simple code from ONeill123 and the default AROMA sample
+# some bugs fixed by jmztaylor and skippycentral.
+#
+ui_print("@.sense 2.0");
+ui_print("@build date: 21/03/12");
+ui_print("@benjamingwynn");
+set_progress(0.0);
+ui_print(" ");
+ui_print("Installing...");
+mount("MTD", "system", "/system");
+#-- If you have started it in PIM (themes) then..
+if
+  file_getprop("/tmp/aroma/pim.prop","selected") == "1"
+then
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "1"
+    then
+      ui_print("Installing Glass theme...");
+      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
+    then
+      ui_print("Installing stock theme...");
+      package_extract_dir("packages-onlyone/Theme/Stock", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "3"
+    then
+      ui_print("Installing CM7 theme...");
+      package_extract_dir("packages-onlyone/Theme/CM7", "/system");
+    endif;
+else
+#-- lets shove the rest of the script into an else command, not a very good idea but I don't think there is any other way to end it!
+#-- Now lets format and mount some drives
+ui_print("Formatting system...");
+format("MTD", "system");
+#-- Give a pointless message
+ui_print("preparing core");
+#-- Extract the file to a tempory folder
+package_extract_file("scripts/check_data_app", "/tmp/check_data_app");
+#-- Set a permission on this folder so it may execute
+set_perm(0, 0, 0777, "/tmp/check_data_app");
+#-- Starts the now executable program..
+run_program("/tmp/check_data_app");
+#-- Now that thats done we are going to mount some other partitions
+ui_print("mounting...");
+mount("MTD", "userdata", "/data");
+#
+# "DEVPACKAGE" SCRIPTING ENGINE
+#
+
+# Main system files.
+
+# First extract the APK's and stuff. If you have a GSM Wildfire S then that is all you need so far
+
+ui_print("Installing main core");
+package_extract_dir("system", "/system");
+ui_print("Done installing core");
+
+# Okay, now if you have a different device then extract the support for it to run correctly...
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "2"
+    then
+      ui_print("Installing packages for the CDMA WFS");
+      package_extract_dir("devicesupport/marvelc/system", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "3"
+    then
+      ui_print("Installing packages for the Salsa");
+      package_extract_dir("devicesupport/salsa/system", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "4"
+    then
+      ui_print("Installing packages for the Heroc");
+      package_extract_dir("devicesupport/heroc/system", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "5"
+    then
+      ui_print("Installing packages for the Hero");
+      package_extract_dir("devicesupport/system/hero", "/system");
+    endif;
+
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "6"
+    then
+      ui_print("Installing packages for the Liberty");
+      package_extract_dir("devicesupport/liberty/system", "/system");
+    endif;
+
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "7"
+    then
+      ui_print("Installing packages for the Legend");
+      package_extract_dir("devicesupport/system/legend", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/device.prop","selected") == "8"
+    then
+      ui_print("Installing packages for the Pico");
+      package_extract_dir("devicesupport/pico/system", "/system");
+    endif;
+
+
+# Now that we have that out of the way we can extract the kernel depending on what you selected
+
+
+# Look for marvel kernel's
+
+    if
+      file_getprop("/tmp/aroma/kernel-marvel.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (M1)...");
+      package_extract_dir("devicesupport/marvel/kernels/MarvelKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvel/modules/MarvelKernel1", "/system/lib/modules");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/kernel-marvel.prop","selected") == "2"
+    then
+      ui_print("Installing kernel (M2)...");
+      package_extract_dir("devicesupport/marvel/kernels/MarvelKernel2", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvel/modules/MarvelKernel2", "/system/lib/modules");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/kernel-marvel.prop","selected") == "3"
+    then
+      ui_print("Installing kernel (M3)...");
+      package_extract_dir("devicesupport/marvel/kernels/MarvelKernel3", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvel/modules/MarvelKernel3", "/system/lib/modules");
+    endif;
+
+# Look for other device kernels
+
+#- marvelc
+
+    if
+      file_getprop("/tmp/aroma/kernel-marvelc.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (MC1)...");
+      package_extract_dir("devicesupport/marvelc/kernels/MarvelcKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvelc/modules/MarvelcKernel1", "/system/lib/modules");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/kernel-marvelc.prop","selected") == "2"
+    then
+      ui_print("Installing kernel (MC2)...");
+      package_extract_dir("devicesupport/marvelc/kernels/MarvelcKernel2", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvelc/modules/MarvelcKernel2", "/system/lib/modules");
+    endif;
+
+#- Salsa
+
+    if
+      file_getprop("/tmp/aroma/kernel-salsa.prop","selected") == "1"
+    then
+      ui_print("Installing kernel...");
+      package_extract_dir("devicesupport/salsa/kernels/SalsaKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/salsa/modules/SalsaKernel1", "/system/lib/modules");
+    endif;
+
+#- Heroc
+
+    if
+      file_getprop("/tmp/aroma/kernel-heroc.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (HC1)...");
+      package_extract_dir("devicesupport/heroc/kernels/HerocKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/heroc/modules/HerocKernel1", "/system/lib/modules");
+    endif;
+
+#- Hero
+
+    if
+      file_getprop("/tmp/aroma/kernel-hero.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (H1)...");
+      package_extract_dir("devicesupport/hero/kernels/HerocKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/hero/modules/HerocKernel1", "/system/lib/modules");
+    endif;
+
+#- Liberty
+
+    if
+      file_getprop("/tmp/aroma/kernel-liberty.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (LI1)...");
+      package_extract_dir("devicesupport/marvel/kernels/MarvelKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/marvel/modules/MarvelKernel1", "/system/lib/modules");
+    endif;
+
+#- Legend
+
+    if
+      file_getprop("/tmp/aroma/kernel-legend.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (LE1)...");
+      package_extract_dir("devicesupport/legend/kernels/LegendKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/legend/modules/LegendKernel1", "/system/lib/modules");
+    endif;
+
+#- Pico
+
+    if
+      file_getprop("/tmp/aroma/kernel-pico.prop","selected") == "1"
+    then
+      ui_print("Installing kernel (P1)...");
+      package_extract_dir("devicesupport/pico/kernels/PicoKernel1", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/pico/modules/PicoKernel1", "/system/lib/modules");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/kernel-pico.prop","selected") == "2"
+    then
+      ui_print("Installing kernel (P2)...");
+      package_extract_dir("devicesupport/pico/kernels/PicoKernel2", "/tmp");
+       write_raw_image("/tmp/boot.img", "boot");
+       delete("/tmp/boot.img");
+      package_extract_dir("devicesupport/pico/modules/PicoKernel2", "/system/lib/modules");
+    endif;
+
+
+#-- Okay thats done... now lets link up stuff with the toolbox.
+symlink("toolbox", "/system/bin/cat");
+symlink("toolbox", "/system/bin/chmod");
+symlink("toolbox", "/system/bin/chown");
+symlink("toolbox", "/system/bin/chownto");
+symlink("toolbox", "/system/bin/cmp");
+symlink("toolbox", "/system/bin/date");
+symlink("toolbox", "/system/bin/dd");
+symlink("toolbox", "/system/bin/df");
+symlink("toolbox", "/system/bin/dmesg");
+symlink("toolbox", "/system/bin/getevent");
+symlink("toolbox", "/system/bin/getprop");
+symlink("toolbox", "/system/bin/hd");
+symlink("toolbox", "/system/bin/id");
+symlink("toolbox", "/system/bin/ifconfig");
+symlink("toolbox", "/system/bin/iftop");
+symlink("toolbox", "/system/bin/insmod");
+symlink("toolbox", "/system/bin/ioctl");
+symlink("toolbox", "/system/bin/ionice");
+symlink("toolbox", "/system/bin/kill");
+symlink("toolbox", "/system/bin/ln");
+symlink("toolbox", "/system/bin/log");
+symlink("toolbox", "/system/bin/ls");
+symlink("toolbox", "/system/bin/lsmod");
+symlink("toolbox", "/system/bin/lsof");
+symlink("toolbox", "/system/bin/mkdir");
+symlink("toolbox", "/system/bin/mount");
+symlink("toolbox", "/system/bin/mv");
+symlink("toolbox", "/system/bin/nandread");
+symlink("toolbox", "/system/bin/netstat");
+symlink("toolbox", "/system/bin/newfs_msdos");
+symlink("toolbox", "/system/bin/notify");
+symlink("toolbox", "/system/bin/printenv");
+symlink("toolbox", "/system/bin/ps");
+symlink("toolbox", "/system/bin/renice");
+symlink("toolbox", "/system/bin/rm");
+symlink("toolbox", "/system/bin/rmdir");
+symlink("toolbox", "/system/bin/rmmod");
+symlink("toolbox", "/system/bin/route");
+symlink("toolbox", "/system/bin/schedtop");
+symlink("toolbox", "/system/bin/sendevent");
+symlink("toolbox", "/system/bin/setconsole");
+symlink("toolbox", "/system/bin/setprop");
+symlink("toolbox", "/system/bin/sleep");
+symlink("toolbox", "/system/bin/smd");
+symlink("toolbox", "/system/bin/start");
+symlink("toolbox", "/system/bin/stop");
+symlink("toolbox", "/system/bin/sync");
+symlink("toolbox", "/system/bin/top");
+symlink("toolbox", "/system/bin/umount");
+symlink("toolbox", "/system/bin/uptime");
+symlink("toolbox", "/system/bin/vmstat");
+symlink("toolbox", "/system/bin/watchprops");
+symlink("toolbox", "/system/bin/wipe");
+#-- Yay! Done!
+
+
+#
+#
+# OKAY!!!
+#               NOW THAT CORE IS SET UP I AM ABOUT TO INSTALL YOUR PACKAGES! I HOPE THIS
+#               WORKS!!!!
+#
+#
+# APPS AND WIDGETS... LETS GO!
+#
+#
+
+#-- Let's do Applications first
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.1") == "1"
+    then
+      ui_print("Installing Ringtone Trimmer");
+      package_extract_dir("packages/apps_data/RingtoneTrimmer", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.2") == "1"
+    then
+      ui_print("Installing Twitter");
+      package_extract_dir("packages/apps_data/Twitter", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.3") == "1"
+    then
+      ui_print("Installing ES File Explorer");
+      package_extract_dir("packages/apps_data/ESFileExplorer", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.4") == "1"
+    then
+      ui_print("Installing Flash 11");
+      package_extract_dir("packages/apps_data/Flash11", "/data/app");
+    endif;
+
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.5") == "1"
+    then
+      ui_print("Installing Teeter");
+      package_extract_dir("packages/apps_data/Teeter", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.6") == "1"
+    then
+      ui_print("Installing Flashlight");
+      package_extract_dir("packages/apps_data/Flashlight", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.7") == "1"
+    then
+      ui_print("Installing GMail");
+      package_extract_dir("packages/apps_data/GMail", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.8") == "1"
+    then
+      ui_print("Installing Better Facebook");
+      package_extract_dir("packages/apps_data/BetterFacebook", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.9") == "1"
+    then
+      ui_print("Installing AdFree");
+      package_extract_dir("packages/apps_data/AdFree", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.10") == "1"
+    then
+      ui_print("Installing ROM Manager");
+      package_extract_dir("packages/apps_data/ROMManager", "/data/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.11") == "1"
+    then
+      ui_print("Installing NoThrills");
+      package_extract_dir("packages/apps_data/NoThrillsCPU", "/data/app");
+    endif;
+
+	    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.12") == "1"
+    then
+      ui_print("Installing Better YouTube");
+      package_extract_dir("packages/apps_data/BetterYouTube", "/data/app");
+    endif;
+	
+#
+#-- Now for system apps
+set_progress(0.5);
+#
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.1") == "1"
+    then
+      ui_print("Installing App Sharing");
+      package_extract_dir("packages/apps_sys/AppSharing", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.2") == "1"
+    then
+      ui_print("Installing Browser");
+      package_extract_dir("packages/apps_sys/Browser", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.3") == "1"
+    then
+      ui_print("Installing Calculator");
+      package_extract_dir("packages/apps_sys/Calculator", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.4") == "1"
+    then
+      ui_print("Installing Calendar");
+      package_extract_dir("packages/apps_sys/Calendar", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.5") == "1"
+    then
+      ui_print("Installing Friend Stream");
+      package_extract_dir("packages/apps_sys/FriendStream", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.6") == "1"
+    then
+      ui_print("Installing Google Search");
+      package_extract_dir("packages/apps_sys/GoogleSearch", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.7") == "1"
+    then
+      ui_print("Installing File Manager");
+      package_extract_dir("packages/apps_sys/HFileManager", "/system/app");
+    endif;
+
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.8") == "1"
+    then
+      ui_print("Installing FM Radio");
+      package_extract_dir("packages/apps_sys/FMRadio", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.9") == "1"
+    then
+      ui_print("Installing HTC Likes");
+      package_extract_dir("packages/apps_sys/HTCLikes", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.10") == "1"
+    then
+      ui_print("Installing HTC Sound Recorder");
+      package_extract_dir("packages/apps_sys/HTCSoundRecorder", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.11") == "1"
+    then
+      ui_print("Installing HTC Mail");
+      package_extract_dir("packages/apps_sys/HTCMail", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.12") == "1"
+    then
+      ui_print("Installing Google Maps");
+      package_extract_dir("packages/apps_sys/GoogleMaps", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.13") == "1"
+    then
+      ui_print("Installing My HTC");
+      package_extract_dir("packages/apps_sys/MyHTC", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.14") == "1"
+    then
+      ui_print("Installing Google Talk");
+      package_extract_dir("packages/apps_sys/GoogleTalk", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.15") == "1"
+    then
+      ui_print("Installing HTC Task Manager");
+      package_extract_dir("packages/apps_sys/HTCTaskManager", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.16") == "1"
+    then
+      ui_print("Installing Usage Monitor");
+      package_extract_dir("packages/apps_sys/UsageMonitor", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.17") == "1"
+    then
+      ui_print("Installing Weather");
+      package_extract_dir("packages/apps_sys/Weather","/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.18") == "1"
+    then
+      ui_print("Installing HTC Clock");
+      package_extract_dir("packages/apps_sys/HTCClock","/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.2.18") == "1"
+    then
+      ui_print("Installing MIUI Filemanager");
+      package_extract_dir("packages/apps_sys/MIUIFM","/system/app");
+    endif;
+
+#
+#-- Install widgets...
+#
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.1") == "1"
+    then
+      ui_print("Installing Calendar Widget");
+      package_extract_dir("packages/widgets/Clock/Calendar", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.2") == "1"
+    then
+      ui_print("Installing Clock Widget");
+      package_extract_dir("packages/widgets/Clock/35Clock", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.3") == "1"
+    then
+      ui_print("Installing Clock 4.0 mod");
+      package_extract_dir("packages/widgets/Clock/40Clock", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.4") == "1"
+    then
+      ui_print("Installing Contacts Widget");
+      package_extract_dir("packages/widgets/Contacts", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.5") == "1"
+    then
+      ui_print("Installing Friendstream");
+      package_extract_dir("packages/widgets/FriendStream", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.6") == "1"
+    then
+      ui_print("Installing HTC Likes Widget");
+      package_extract_dir("packages/widgets/HTCLikes", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.7") == "1"
+    then
+      ui_print("Installing Mail");
+      package_extract_dir("packages/widgets/Mail", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.8") == "1"
+    then
+      ui_print("Installing Messaging Widget");
+      package_extract_dir("packages/widgets/Messaging", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.9") == "1"
+    then
+      ui_print("Installing Music Widget");
+      package_extract_dir("packages/widgets/Music", "/system/app");
+    endif;
+	
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.10") == "1"
+    then
+      ui_print("Installing Quick Launch Widget");
+      package_extract_dir("packages/widgets/QuickLaunch", "/system/app");
+	 endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.11") == "1"
+    then
+      ui_print("Installing Settings Widget");
+      package_extract_dir("packages/widgets/Settings", "/system/app");
+    endif;
+	
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.3.12") == "1"
+    then
+      ui_print("Installing Weather Widget");
+      package_extract_dir("packages/widgets/Weather", "/system/app");
+    endif;
+
+#- Now that we've scared the crap out of our users we can begin installation of experimental stuff
+
+    if
+      file_getprop("/tmp/aroma/experimental.prop","item.1.1") == "1"
+    then
+      ui_print("Installing EXPERIMENTAL 1");
+      package_extract_dir("packages/experimental/package1", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/experimental.prop","item.1.2") == "1"
+    then
+      ui_print("Installing experimental 2");
+      package_extract_dir("packages/experimental/package2", "/system");
+    endif;
+
+#- Okay, all experimental stuff done!
+
+#
+# - Keyboard []
+# - Boot animation []
+# - Theme []
+# - Music []
+# - Rosie Tweaks []
+# - Gallery []
+# - Camera []
+# - Lockscreen []
+# - Others
+# - Link2SD (a simple app install) []
+#
+# [[[WARNING]]]
+#
+# SINCE THE INTRODUCTION OF "DEVPACKAGE" THE FOLLOWING ARE NO LONGER IN ORDER!
+# PLEASE BE CAREFUL BEFORE CHANING THE SCRIPT.
+#
+#- Keyboard
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.2") == "1"
+    then
+      ui_print("Installing HTC Keyboard");
+      package_extract_dir("packages-onlyone/Keyboard/HTC", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.2") == "2"
+    then
+      ui_print("Installing Gingerbread keyboard");
+      package_extract_dir("packages-onlyone/Keyboard/Gingerbread", "/data/app");
+    endif;
+
+
+#- Boot animations
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "1"
+    then
+      ui_print("Installing ICS Boot Animation");
+      package_extract_dir("packages-onlyone/BootAnimation/ICSStyle", "/system/customize/resource");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "2"
+    then
+      ui_print("Installing Nexus One Boot Animation");
+      package_extract_dir("packages-onlyone/BootAnimation/NexusOne", "/system/customize/resource");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "3"
+    then
+      ui_print("Installing HTC Boot Animation");
+      package_extract_dir("packages-onlyone/BootAnimation/HTCStyle", "/system/customize/resource");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "4"
+    then
+      ui_print("Installing default Android bootanimation");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "5"
+    then
+      ui_print("Installing Honeycomb bootanimation");
+      package_extract_dir("packages-onlyone/BootAnimation/Honeycomb", "/system/customize/resource");
+    endif;
+
+
+#- Themes
+
+#
+# PLEASE NOTE THAT THE THEMES ARE COPIED DIRECTLY INTO THE SYSTEM PARTITON! THEY MUST BE FILE STRUCTURED CORRECTLY
+#
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "1"
+    then
+      ui_print("Installing Glass theme...");
+      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
+    then
+      ui_print("Installing stock theme...");
+      package_extract_dir("packages-onlyone/Theme/Stock", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.1") == "3"
+    then
+      ui_print("Installing CM7 theme...");
+      package_extract_dir("packages-onlyone/Theme/CM7", "/system");
+    endif;
+
+#- Music
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "1"
+    then
+      ui_print("Installing ICS Music");
+      package_extract_dir("packages-onlyone/Music/ICS", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "2"
+    then
+      ui_print("Installing MIUI Music");
+      package_extract_dir("packages-onlyone/Music/MIUI", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "3"
+    then
+      ui_print("Installing Sense 3.5 music");
+      package_extract_dir("packages-onlyone/Music/Sense", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "4"
+    then
+      ui_print("Installing Sense 2.1 music");
+      package_extract_dir("packages-onlyone/Music/SenseOld", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "5"
+    then
+      ui_print("Installing CM7 music");
+      package_extract_dir("packages-onlyone/Music/CM7", "/system/app");
+    endif;
+
+#- Rosie Tweaks
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.4") == "1"
+    then
+      ui_print("Installing default Roise");
+      package_extract_dir("packages-onlyone/Rosie/Default", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.4") == "2"
+    then
+      ui_print("Installing 5x4 Apps");
+      package_extract_dir("packages-onlyone/Rosie/MoreApps", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.4") == "3"
+    then
+      ui_print("Installing Rhyme Rosie");
+      package_extract_dir("packages-onlyone/Rosie/Rhyme", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.4") == "4"
+    then
+      ui_print("Installing White Roise");
+      package_extract_dir("packages-onlyone/Rosie/White", "/system/app");
+    endif;
+
+#- Gallery App
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.5") == "1"
+    then
+      ui_print("Installing Gingerbread Gallery");
+      package_extract_dir("packages-onlyone/Gallery/Gingerbread", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.5") == "2"
+    then
+      ui_print("Installing old Sense gallery");
+      package_extract_dir("packages-onlyone/Gallery/Sense21", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.5") == "3"
+    then
+      ui_print("Installing Sense 3.5 Gallery");
+      package_extract_dir("packages-onlyone/Gallery/Sense35", "/system/app");
+    endif;
+
+#- Camera App
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.6") == "1"
+    then
+      ui_print("Installing MIUI Camera...");
+      package_extract_dir("packages-onlyone/Camera/MIUI", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.6") == "2"
+    then
+      ui_print("Installing Sense 3.5 Camera...");
+      package_extract_dir("packages-onlyone/Camera/Sense", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.6") == "3"
+    then
+      ui_print("Installing Sense 2.1 Camera...");
+      package_extract_dir("packages-onlyone/Camera/SenseOld", "/system/app");
+    endif;
+
+#- Lockscreen
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.7") == "1"
+    then
+      ui_print("Installing new lockscreen...");
+      package_extract_dir("packages-onlyone/Lockscreen/New", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.7") == "2"
+    then
+      ui_print("Installing old lockscreen...");
+      package_extract_dir("packages-onlyone/Lockscreen/Old", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.7") == "3"
+    then
+      ui_print("Installing Gingerbread lockscreen...");
+    endif;
+	
+	    if
+      file_getprop("/tmp/aroma/mods.prop","selected.7") == "4"
+    then
+      ui_print("Installing new 4.0 lockscreen...");
+      package_extract_dir("packages-onlyone/Lockscreen/40Lock", "/system/app");
+    endif;
+
+#- Audio Enchantments
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.8") == "2"
+    then
+      ui_print("Installing DSP Equalizer");
+      package_extract_dir("packages-onlyone/Audio/DSPEqualizer", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.8") == "3"
+    then
+      ui_print("Installing Beats Audio");
+      package_extract_dir("packages-onlyone/Audio/BeatsAudio", "/system");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.8") == "4"
+    then
+      ui_print("Installing both audio mods...");
+      package_extract_dir("packages-onlyone/Audio/BeatsAudio", "/system");
+      package_extract_dir("packages-onlyone/Audio/DSPEqualizer", "/system");
+    endif;
+
+#- OTA update App
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.11") == "2"
+    then
+      ui_print("Installing OTA updates app...");
+      package_extract_dir("packages-onlyone/OTA", "/system/app");
+    endif;
+
+# From this point on the options are not in order. Add anything new above
+#
+#- Link2SD, not to be confussed with data2sd!
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.10") == "3"
+    then
+      ui_print("Installing Link2SD");
+      package_extract_dir("packages-onlyone/Misc/Link2SD", "/data/app");
+    endif;
+
+#
+# Now that thats done I'm going to see if you selected Data2SD and install it if so.
+#
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.10") == "2"
+    then
+      ui_print("Installing Data2SD");
+      delete("/system/etc/init.d/40a2sd");
+      delete("/system/etc/init.d/03stuff2sd");
+      delete("/system/etc/init.d/10apps2sd");
+      delete("/system/etc/init.d/04apps2sd");
+      package_extract_dir("packages-onlyone/data2whatever/system", "/system");
+      package_extract_dir("packages-onlyone/data2whatever/data", "/data");
+      set_perm(0, 2000, 0755, "/system/etc/init.d/01data2whatever");
+      set_perm(0, 2000, 0755, "/system/etc/init.d/98zipalign");
+      set_perm(0, 2000, 0755, "/system/etc/init.d/991complete");
+      set_perm(0, 2000, 0755, "/system/xbin/e2fsck");
+      set_perm(0, 2000, 0755, "/system/xbin/tune2fs");
+      set_perm(0, 2000, 0755, "/system/xbin/mkfs.ext4");
+      set_perm(1000, 1000, 771, "/system/data_internal");
+      symlink("/system/xbin/e2fsck", "/system/bin/e2fsck");
+      symlink("/system/xbin/tune2fs", "/system/bin/tune2fs");
+      symlink("/system/xbin/mkfs.ext4", "/system/bin/mkfs.ext4");
+      symlink("/system/data_internal/mtab", "/system/etc/mtab");
+    endif;
+#
+#
+#
+#
+#
+#
+# CUSTOMIZATION SCRIPTING END NOW!
+#
+# YAY!
+#
+#
+
+#-- End our MASSIVE if command from eairlier.
+endif;
+
+#--Lets link the toolbox stuff up!
+ui_print("Linking files...");
+symlink("toolbox", "/system/bin/cat");
+symlink("toolbox", "/system/bin/chmod");
+symlink("toolbox", "/system/bin/chown");
+symlink("toolbox", "/system/bin/chownto");
+symlink("toolbox", "/system/bin/cmp");
+symlink("toolbox", "/system/bin/date");
+symlink("toolbox", "/system/bin/dd");
+symlink("toolbox", "/system/bin/df");
+symlink("toolbox", "/system/bin/dmesg");
+symlink("toolbox", "/system/bin/getevent");
+symlink("toolbox", "/system/bin/getprop");
+symlink("toolbox", "/system/bin/hd");
+symlink("toolbox", "/system/bin/id");
+symlink("toolbox", "/system/bin/ifconfig");
+symlink("toolbox", "/system/bin/iftop");
+symlink("toolbox", "/system/bin/insmod");
+symlink("toolbox", "/system/bin/ioctl");
+symlink("toolbox", "/system/bin/ionice");
+symlink("toolbox", "/system/bin/kill");
+symlink("toolbox", "/system/bin/ln");
+symlink("toolbox", "/system/bin/log");
+symlink("toolbox", "/system/bin/ls");
+symlink("toolbox", "/system/bin/lsmod");
+symlink("toolbox", "/system/bin/lsof");
+symlink("toolbox", "/system/bin/mkdir");
+symlink("toolbox", "/system/bin/mount");
+symlink("toolbox", "/system/bin/mv");
+symlink("toolbox", "/system/bin/nandread");
+symlink("toolbox", "/system/bin/netstat");
+symlink("toolbox", "/system/bin/newfs_msdos");
+symlink("toolbox", "/system/bin/notify");
+symlink("toolbox", "/system/bin/printenv");
+symlink("toolbox", "/system/bin/ps");
+symlink("toolbox", "/system/bin/renice");
+symlink("toolbox", "/system/bin/rm");
+symlink("toolbox", "/system/bin/rmdir");
+symlink("toolbox", "/system/bin/rmmod");
+symlink("toolbox", "/system/bin/route");
+symlink("toolbox", "/system/bin/schedtop");
+symlink("toolbox", "/system/bin/sendevent");
+symlink("toolbox", "/system/bin/setconsole");
+symlink("toolbox", "/system/bin/setprop");
+symlink("toolbox", "/system/bin/sleep");
+symlink("toolbox", "/system/bin/smd");
+symlink("toolbox", "/system/bin/start");
+symlink("toolbox", "/system/bin/stop");
+symlink("toolbox", "/system/bin/sync");
+symlink("toolbox", "/system/bin/top");
+symlink("toolbox", "/system/bin/umount");
+symlink("toolbox", "/system/bin/uptime");
+symlink("toolbox", "/system/bin/vmstat");
+symlink("toolbox", "/system/bin/watchprops");
+symlink("toolbox", "/system/bin/wipe");
+ui_print(" ");
+
+ui_print("@ Setting permissions...");
+#-- Setting permissions for DATA....
+set_perm_recursive(1000, 1000, 0771, 0644, "/data/app");
+#-- Okay... Sorted? No! We must mark some permissions on sysye,...
+#-- Lets tell the user that we are going to do some mad permission thing
+ui_print("set permissions");
+#-- Start the mad permission thing... Yawn...
+set_perm_recursive(0, 0, 0755, 0644, "/system");
+set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
+set_perm(0, 3003, 06755, "/system/bin/ip");
+set_perm(0, 3003, 02750, "/system/bin/netcfg");
+set_perm(0, 3004, 02755, "/system/bin/ping");
+#-- Make the progress bar is move a bit!
+
+#-- Continue setting permissions on the system partition...
+set_perm(0, 2000, 06750, "/system/bin/run-as");
+set_perm_recursive(1002, 1002, 0755, 0440, "/system/etc/bluetooth");
+set_perm(0, 0, 0755, "/system/etc/bluetooth");
+set_perm(1000, 1000, 0640, "/system/etc/bluetooth/auto_pairing.conf");
+set_perm(3002, 3002, 0444, "/system/etc/bluetooth/blacklist.conf");
+set_perm(1002, 1002, 0440, "/system/etc/dbus.conf");
+set_perm(1014, 2000, 0550, "/system/etc/dhcpcd/dhcpcd-run-hooks");
+set_perm(0, 2000, 0550, "/system/etc/init.goldfish.sh");
+set_perm(0, 0, 04755, "/system/bin/bash");
+#-- Make a symbolic link with /system/bin/bash and sh
+symlink("/system/bin/bash", "/system/bin/sh");
+#-- Lets set some more permissions....
+set_perm(0, 0, 0777, "/system/bin/a2sd");
+set_perm(0, 0, 0777, "/system/etc/init.d/00banner");
+set_perm(0, 0, 0777, "/system/etc/init.d/01sysctl");
+set_perm(0, 0, 0777, "/system/etc/init.d/02firstboot");
+set_perm(0, 0, 0777, "/system/etc/init.d/04apps2sd");
+set_perm(0, 0, 0777, "/system/etc/init.d/99complete");
+set_perm(0, 0, 0777, "/system/bin/launcha2sd");
+set_perm(0, 0, 0777, "/system/bin/starta2sd");
+set_perm(0, 0, 0777, "/system/bin/jita2sd");
+set_perm(0, 0, 0777, "/system/bin/chka2sd");
+set_perm(0, 0, 0777, "/system/bin/zipalign");
+set_perm(0, 0, 0777, "/system/bin/sysinit");
+set_perm(0, 0, 0777, "/system/bin/busybox.a2sd");
+set_perm(0, 0, 0644, "/system/bin/apps2sd.hlp");
+set_perm(0, 0, 0777, "/system/xbin/a2sd");
+set_perm(0, 0, 0777, "/system/bin/dtinstall");
+set_perm(0, 0, 06755, "/system/bin/su");
+#-- Lets move the progress bar...
+#-- Lets make another symbolic link
+symlink("/system/bin/su", "/system/xbin/su");
+#-- More permission stuff!
+set_perm_recursive(0, 0, 0755, 0555, "/system/etc/ppp");
+set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
+#-- Yay! Permission setting is done on the system partition for now...
+#-- Display to the user that we are about to install busybox for them.
+ui_print("Installing busybox");
+#-- Set a certain permission on busybox
+set_perm(0, 1000, 0755, "/system/xbin/busybox");
+#-- Symoblicly link two files.
+symlink("/system/xbin/busybox", "/system/bin/busybox");
+#-- Extract the busybox file to the temory directory.
+package_extract_file("scripts/installbusybox", "/tmp/installbusybox");
+#-- Set executable permissions on the file
+set_perm(0, 0, 0777, "/tmp/installbusybox");
+#-- Run the program
+run_program("/tmp/installbusybox");
+#-- Now that the program is finished we can move the progress bar
+set_progress(1.00);
+# Now copy that dotsense file!
+package_extract_file("extractinfo", "/system");
+
+#-- Finish
+ui_print(" ");
+ui_print("@ Finished");
+ui_print("Everything finished correctly.");

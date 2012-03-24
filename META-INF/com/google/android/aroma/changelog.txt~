@@ -1,0 +1,20 @@
+<b><#selectbg_g>.sense beta 1.2</#></b>
+<*>
+<*>New theme, honeysense </*> 
+<*>New install screen for what phone you have in aroma to make things less complex for new users </*>
+<*>Cleaned up kernels and put them into there own folder </*>
+<*>Added Honeycomb boot animation </*>
+<*>Added Android boot animation </*>
+<*>Fixed some bugs in script (nothing noticeable) </*>
+<*>Fixed generic HTC bootanimation </*>
+<*>New option for stock Gingerbread boot </*>
+<*>New option for beats audio, new mod section for audio tweaks in aroma </*>
+<*>Fixed Sense music FC (thanks ONeill123) </*>
+<*>Fixed wrongly labelled *2sd mods </*>
+<*>New option for enabling/disabling OTA update support </*>
+<*>Added option for optional keyboards (only one keyboard for now) </*>
+<*>Fixed account sync issue in settings </*> 
+<*>Removed HTC's updater </*>
+
+<b><#selectbg_g>.sense beta 1.1</#></b>
+<*>Inital beta release</*>

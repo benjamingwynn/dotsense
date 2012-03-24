@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?> 
+- <Packages catFlag="1" dverion="0" next="0" sort="1" filter="0" lang="en" timestamp="1278080073550">
+- <Package downloadCount="34832" ratingCount="3214" cat="1" rating="40" version="1.00" size="1 MB" reldate="20100607" name="com.htc.rosiewidgets.battery" label="Battery" GUID="xxx1" id="1" install="" framework="7" desc="Battery" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.battery/1.00/010/com.htc.rosiewidgets.battery_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.battery/1.00/010/com.htc.rosiewidgets.battery_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.battery/1.00/010/com.htc.rosiewidgets.battery.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="18222" ratingCount="2312" cat="1" rating="36" version="1.00" size="279 KB" reldate="20100607" name="com.htc.android.calculator.widget" label="Calculator" GUID="xxx2" id="2" install="" framework="7" desc="Calculator" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.android.calculator.widget/1.00/010/com.htc.android.calculator.widget_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.android.calculator.widget/1.00/010/com.htc.android.calculator.widget_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.android.calculator.widget/1.00/010/com.htc.android.calculator.widget.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="33247" ratingCount="4546" cat="1" rating="42" version="1.00" size="78 KB" reldate="20100607" name="com.htc.rosiewidgets.callmom" label="Call Mom" GUID="xxx3" id="3" install="" framework="7" desc="Call Mom" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.callmom/1.00/010/com.htc.rosiewidgets.callmom_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.callmom/1.00/010/com.htc.rosiewidgets.callmom_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.callmom/1.00/010/com.htc.rosiewidgets.callmom.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="83493" ratingCount="7346" cat="1" rating="39" version="1.50" size="175 KB" reldate="20100607" name="com.htc.rosiewidgets.daychallenge" label="Daily Challenge" GUID="xxx5" id="5" install="" framework="7" desc="Daily Challenge" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.daychallenge/1.50/010/com.htc.rosiewidgets.daychallenge_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.daychallenge/1.50/010/com.htc.rosiewidgets.daychallenge_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.daychallenge/1.50/010/com.htc.rosiewidgets.daychallenge.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="3944" ratingCount="3453" cat="1" rating="48" version="1.00" size="401 KB" reldate="20100607" name="com.htc.rosiewidgets.fakecall" label="Fake Call" GUID="xxx7" id="7" install="" framework="7" desc="Fake Call" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fakecall/1.00/010/com.htc.rosiewidgets.fakecall_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fakecall/1.00/010/com.htc.rosiewidgets.fakecall_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fakecall/1.00/010/com.htc.rosiewidgets.fakecall.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="83287" ratingCount="8756" cat="1" rating="37" version="1.00" size="874 KB" reldate="20100607" name="com.htc.rosiewidgets.fortune_cookie" label="Fortune Cookie" GUID="xxx8" id="8" install="" framework="7" desc="Fortune Cookie" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fortune_cookie/1.00/010/com.htc.rosiewidgets.fortune_cookie_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fortune_cookie/1.00/010/com.htc.rosiewidgets.fortune_cookie_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.fortune_cookie/1.00/010/com.htc.rosiewidgets.fortune_cookie.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="211" ratingCount="5830" cat="1" rating="44" version="1.50" size="91 KB" reldate="20100607" name="com.htc.htcprofileswidget" label="Profile" GUID="xxx10" id="10" install="" framework="7" desc="Profile" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcprofileswidget/1.50/010/com.htc.htcprofileswidget_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcprofileswidget/1.50/010/com.htc.htcprofileswidget_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcprofileswidget/1.50/010/com.htc.htcprofileswidget.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="895" ratingCount="9348" cat="1" rating="42" version="1.50" size="52 KB" reldate="20100607" name="com.htc.htcringtonewidget" label="Ringtone" GUID="xxx11" id="11" install="" framework="7" desc="Ringtone" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcringtonewidget/1.50/010/com.htc.htcringtonewidget_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcringtonewidget/1.50/010/com.htc.htcringtonewidget_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.htcringtonewidget/1.50/010/com.htc.htcringtonewidget.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="8732" ratingCount="3484" cat="1" rating="39" version="1.00" size="242 KB" reldate="20100607" name="com.htc.rosiewidgets.quickrecord" label="Quick Record" GUID="xxx12" id="12" install="" framework="7" desc="Quick Record" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.quickrecord/1.00/010/com.htc.rosiewidgets.quickrecord_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.quickrecord/1.00/010/com.htc.rosiewidgets.quickrecord_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.quickrecord/1.00/010/com.htc.rosiewidgets.quickrecord.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="1984" ratingCount="4871" cat="1" rating="43" version="1.00" size="97 KB" reldate="20100607" name="com.htc.rosiewidgets.sandtimer" label="Sand Timer" GUID="xxx13" id="13" install="" framework="7" desc="Sand Timer" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.sandtimer/1.00/010/com.htc.rosiewidgets.sandtimer_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.sandtimer/1.00/010/com.htc.rosiewidgets.sandtimer_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.sandtimer/1.00/010/com.htc.rosiewidgets.sandtimer.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="389" ratingCount="1243" cat="1" rating="48" version="1.00" size="1 MB" reldate="20100607" name="com.htc.rosiewidgets.task" label="Tasks" GUID="xxx14" id="14" install="" framework="7" desc="Tasks" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.task/1.00/010/com.htc.rosiewidgets.task_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.task/1.00/010/com.htc.rosiewidgets.task_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.task/1.00/010/com.htc.rosiewidgets.task.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="273" ratingCount="9831" cat="1" rating="39" version="1.50" size="149 KB" reldate="20100607" name="com.htc.rosiewidgets.todayinhistory" label="Today in History" GUID="xxx16" id="16" install="" framework="7" desc="Today in History" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.todayinhistory/1.50/010/com.htc.rosiewidgets.todayinhistory_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.todayinhistory/1.50/010/com.htc.rosiewidgets.todayinhistory_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.todayinhistory/1.50/010/com.htc.rosiewidgets.todayinhistory.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="33" ratingCount="7293" cat="1" rating="42" version="1.00" size="114 KB" reldate="20100607" name="com.htc.rosiewidgets.translator" label="Translator" GUID="xxx17" id="17" install="" framework="7" desc="Translator" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.translator/1.00/010/com.htc.rosiewidgets.translator_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.translator/1.00/010/com.htc.rosiewidgets.translator_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.translator/1.00/010/com.htc.rosiewidgets.translator.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="81822" ratingCount="2541" cat="1" rating="43" version="1.00" size="5 MB" reldate="20100524" name="com.htc.rosiewidgets.coinflip" label="Coin Flip" GUID="xxx4" id="4" install="" framework="7" desc="Coin Flip" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.coinflip/1.00/010/com.htc.rosiewidgets.coinflip_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.coinflip/1.00/010/com.htc.rosiewidgets.coinflip_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.coinflip/1.00/010/com.htc.rosiewidgets.coinflip.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="1889" ratingCount="4531" cat="1" rating="45" version="1.00" size="1 MB" reldate="20100524" name="com.htc.rosiewidgets.dice" label="Dice" GUID="xxx6" id="6" install="" framework="7" desc="Dice" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.dice/1.00/010/com.htc.rosiewidgets.dice_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.dice/1.00/010/com.htc.rosiewidgets.dice_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.dice/1.00/010/com.htc.rosiewidgets.dice.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="34438" ratingCount="3874" cat="1" rating="41" version="1.50" size="442 KB" reldate="20100409" name="com.htc.rosiewidgets.note" label="Notes" GUID="xxx9" id="9" install="" framework="7" desc="Notes" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.note/1.50/010/com.htc.rosiewidgets.note_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.note/1.50/010/com.htc.rosiewidgets.note_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.note/1.50/010/com.htc.rosiewidgets.note.apk" /> 
+  <Require name="0" /> 
+  </Package>
+- <Package downloadCount="3284" ratingCount="4329" cat="1" rating="44" version="1.50" size="104 KB" reldate="20100409" name="com.htc.rosiewidgets.tipcalculator" label="Tip Calculator" GUID="xxx15" id="15" install="" framework="7" desc="Tip Calculator" type="1" author="Planner" corporation="HTC">
+  <Icon url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.tipcalculator/1.50/010/com.htc.rosiewidgets.tipcalculator_icon.png" /> 
+  <Preview url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.tipcalculator/1.50/010/com.htc.rosiewidgets.tipcalculator_0.png" /> 
+  <Download url="http://ota-test.htc.com/repository/android/Widgets/com.htc.rosiewidgets.tipcalculator/1.50/010/com.htc.rosiewidgets.tipcalculator.apk" /> 
+  <Require name="0" /> 
+  </Package>
+  </Packages>

@@ -1,0 +1,10 @@
+#!/system/bin/sh
+
+
+# Tune low memory killer.
+
+echo "0,1,2,4,12,13" > /sys/module/lowmemorykiller/parameters/adj
+echo "1536,2048,4096,5120,12800,25600" > /sys/module/lowmemorykiller/parameters/minfree
+
+
+

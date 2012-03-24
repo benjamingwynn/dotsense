@@ -1,0 +1,563 @@
+#!/system/bin/sh
+#
+# data2whatever v0.3 alpha by melethron
+# 
+# based on cyanogens a2sd
+# 
+ 
+
+echo "       __      __           ___               __          __                     ":
+echo "  ____/ /___ _/ /_____ _   |__ \    _      __/ /_  ____ _/ /____ _   _____  _____";
+echo " / __  / __  / __/ __  /   __/ /   | | /| / / __ \/ __  / __/ _ \ | / / _ \/ ___/";
+echo "/ /_/ / /_/ / /_/ /_/ /   / __/    | |/ |/ / / / / /_/ / /_/  __/ |/ /  __/ /    ";
+echo "\__,_/\__,_/\__/\__,_/   /____/    |__/|__/_/ /_/\__,_/\__/\___/|___/\___/_/     ";
+echo "    ....with partition alignment for SD-EXT ";
+echo " ";
+                                                                       
+                                                                                                      
+if [ -e /system/life-on-the-edge ]
+then
+      echo "with";
+      echo " ";
+      echo "___________________                            ___________                _________              ";
+      echo "___  /___(_)__  __/____     _____________      __  /___  /______     ___________  /______ _____  ";
+      echo "__  / __  /__  /_ _  _ \    _  __ \_  __ \     _  __/_  __ \  _ \    _  _ \  __  /__  __  /  _ \ ";
+      echo "_  /___  / _  __/ /  __/    / /_/ /  / / /     / /_ _  / / /  __/    /  __/ /_/ / _  /_/ //  __/ ";
+      echo "/_____/_/  /_/    \___/     \____//_/ /_/      \__/ /_/ /_/\___/     \___/\__,_/  _\__, / \___/  ";
+      echo "                                                                                  /____/         ";
+      echo " ";
+      echo " ";
+fi;
+    
+echo " +++ Checking for second partition on microSD";                                                        
+
+if [ -e /dev/block/mmcblk0p2 ];
+then
+	echo " +++ Second partition on microSD found: Starting data2whatever script";
+	echo " ====================================================================";
+	echo " ";
+	echo " +++ Mounting internal mtd";
+	sync;
+	busybox umount /data;
+	busybox sleep 1;
+	busybox mount -o noatime,nodiratime,nosuid,nodev  /dev/block/mtdblock5 /system/data_internal;
+	
+	# temporary logfile ... moved to sd-card later
+	busybox mkdir /mnt/asec/tmp;
+	log=/mnt/asec/tmp/data2whateverlog;
+	e2fscklog=/mnt/asec/tmp/e2fscklog;	
+	echo " "					>> $log;
+	echo "============================="		>> $log;
+	date						>> $log;
+	echo "============================="		>> $log;
+	echo " "					>> $log;
+	
+
+
+	echo " +++ Checking Partition 2 alignment";
+	conf=/mnt/asec/tmp/fdiskconf;
+	parttable="busybox fdisk -lu /dev/block/mmcblk0";
+	# fetching start- and endsector of partition 2 and swap partition (if it exists)
+	# and fix values if for any case the bootflag is set for a partition (this would retutn "*" for sectorstartp2) 
+	bootflagp2=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p2 | busybox  awk '{print $2}'`;
+	if [ "$bootflagp2" = "*" ];
+	then
+		sectorstartp2=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p2 | busybox  awk '{print $3}'`;
+		sectorendp2=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p2 | busybox  awk '{print $4}'`;
+	else
+		sectorstartp2=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p2 | busybox  awk '{print $2}'`;
+		sectorendp2=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p2 | busybox  awk '{print $3}'`;
+	fi;
+	
+	if [ -e /dev/block/mmcblk0p3 ];
+	then
+		bootflagp3=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p3 | busybox  awk '{print $2}'`;
+		if [ "$bootflagp3" = "*" ];
+		then
+			sectorstartp3=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p3 | busybox  awk '{print $3}'`;
+			sectorendp3=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p3 | busybox  awk '{print $4}'`;
+		else
+			sectorstartp3=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p3 | busybox  awk '{print $2}'`;
+			sectorendp3=`busybox fdisk -lu /dev/block/mmcblk0 | grep mmcblk0p3 | busybox  awk '{print $3}'`;
+		fi;
+		alignmentcheckp3=`expr $sectorstartp3 % 2048`;
+		alignmb=`expr $sectorstartp3 / 2048`
+		swapexist="1";
+	else
+		alignmentcheckp3="0";
+		swapexist="0";
+	fi;
+	# mb alignement for log and echo
+	alignmbp2=`expr $sectorstartp2 / 2048`;
+	# getting remainder of division by 2048 
+	alignmentcheckp2=`expr $sectorstartp2 % 2048`;
+	
+	# checking alignment
+	if [ "$alignmentcheckp2" = "0" ] && [ "$alignmentcheckp3" = "0" ];
+	then
+		# remainder 0 ("sector" mod 2048 = 0)  means the starting sector is a multiple of 2048 and thus already aligned to MB
+		# echo for logcat
+		echo " +++ Your SD-EXT Partition is already aligned and starts at $alignmb MB";
+		if [ "$swapexist" = "1" ];
+		then
+		      echo " +++ Your Swap Partition is also aligned";
+		fi;
+		echo "     Partitiontable (with sectors) of your SD is:";
+		echo " ";
+		echo " -----------------Partition table--------------------";
+		echo " ";
+		$parttable;
+		echo " ";
+		echo " ----------------------------------------------------";
+		
+		# logfile
+		echo " +++  Your Partition(s) are already aligned and data2whatever didn't modify them " >> $log; 
+		echo " ------------------------------------------------------------------------------- " >> $log;
+		echo " "										 >> $log;
+	else
+		# remainder != 0 means the partition is not aligned (at least for 1024k ;) )
+		# the script will calculates the new starting sector by getting the next multiple of 2048 from old start sector
+		# Note that for sector=d*2048+r with r!=0: expr ( sector / 2048) gives d (division without rest)
+
+		
+		# Adding modifaction info to logfile
+		echo " +++ Your Partition(s) are NOT aligned and data2whatever modified them:	" >> $log;
+		echo " ----------------------------------------------------------------------   " >> $log;
+		echo " "									  >> $log;
+		
+		echo "     Partitiontable (with sectors) of your SD is:";
+		echo " ";
+		echo " -----------------Partition table--------------------";
+		echo " ";
+		$parttable;
+		echo " ";
+		echo " ----------------------------------------------------";
+		
+		# SD-EXT alignment
+		if [ "$alignmentcheckp2" != "0" ]
+		then
+			# starting secto for alignment
+			newsectorstartp2=`expr \( $sectorstartp2 / 2048 + 1 \) \* 2048`;
+
+			# echo for logcat
+			echo " +++ Your SD-EXT Partition is NOT aligned:";
+			echo "     - The starting sector is                       $sectorstartp2";
+			echo "     - The next sector for a 1024kb alignement is:  $newsectorstartp2";
+			
+			# logfile
+			echo " +++ Your SD-Ext Partition started at sector:          $sectorstartp2 	" >> $log;
+			echo "     => your SD-ext partition was NOT 1024k aligned		 	" >> $log; 
+			echo "        and it should start at following sector:       $newsectorstartp2	" >> $log;
+			echo "  "									  >> $log;
+		fi;
+		
+		# Swap alignment 
+		if [ "$alignmentcheckp3" != "0" ]
+		then
+			# starting sector for alignment
+			newsectorstartp3=`expr \( $sectorstartp3 / 2048 + 1 \) \* 2048`;
+			newsectorendp2=`expr $newsectorstartp3 - 1`;
+
+			# echo for logcat
+			echo " +++ Your Swap Partition is NOT aligned:";
+			echo "     - The starting sector is                       $sectorstartp3";
+			echo "     - The next sector for a 1024kb alignement is:  $newsectorstartp3";
+			
+			# logfile
+			echo " +++ Your Swap Partition started at sector:            $sectorstartp3 	" >> $log;
+			echo "     => your Swap partition was NOT 1024k aligned			 	" >> $log; 
+			echo "        and it should start at following sector:       $newsectorstartp3	" >> $log;
+			echo " "									  >> $log;
+		fi;
+		
+		
+
+		
+
+		echo " "										>> $log;
+		echo " +++ OLD Partition table of your SD-Card: "					>> $log;
+		echo " ---------------------------------------- "					>> $log;
+		echo "  " 										>> $log;
+		echo "__________________________fdisk_Partition_table_____________________________"	>> $log;
+		$parttable >> $log;
+		echo "____________________________________________________________________________"	>> $log;
+		echo "  " 										>> $log;
+		echo "  " 										>> $log;
+		
+		# creating configfile for fdisk - these are the buttons pressed for a certain action;
+		echo " +++ Creating fdsik config file";		
+		
+		# show sectors instead of cylinders
+		echo "u" >  $conf;		
+		
+		# (d)elete the partition (2) - 
+		# INFO: this will deleted even if it IS aligned to let endsector match the starting sector of the swap partition
+		# this wouldnt be nescassry but if this is not done this would lead to (up to) 1 mb missing
+		echo "d" >> $conf;
+		echo "2" >> $conf;
+		
+		# (d)elete partition (3) if present
+		if [ "$swapexist" = "1" ];
+		then
+			echo "d" >> $conf;
+			echo "3" >> $conf;
+		fi;
+		
+		# create (n)ew (p)rimary partition (2) 
+		echo "n" >> $conf;
+		echo "p" >> $conf;
+		echo "2" >> $conf;
+		
+		# new start sector if not aligned - old if already aligned
+		if [ -n "$newsectorstartp2" ];
+		then 
+			echo "$newsectorstartp2" >> $conf;
+		else
+			echo "$sectorstartp2" >> $conf;
+		fi;
+		
+		# new endsector of p2 if p3 is present AND is not aligned
+		if [ -n "$newsectorendp2" ];
+		then
+			echo "$newsectorendp2 " >> $conf;
+		else
+			echo "$sectorendp2" >> $conf;
+		fi;
+
+		#swap if it exists
+		if [ "$swapexist" = "1" ];
+		then
+			# (n)ew (p)rimary partition (3);
+			echo "n" >> $conf;
+			echo "p" >> $conf;
+			echo "3" >> $conf;
+			# new sector if needed
+			if [ -n "$newsectorstartp3" ];
+			then 
+				echo "$newsectorstartp3" >> $conf;
+			else
+				echo "$sectorstartp3" >> $conf;
+			fi;
+			echo "$sectorendp3" >> $conf;
+		fi;
+				
+		# Write the partition table;
+		echo "w" >> $conf;
+		
+		# running fdisk
+		echo " +++ Your SD partitiontable will now be recreated  	 ";
+		echo "     You will now see some output of fdisk         	 ";
+		echo "     Dont get confused by the warnings - those refer to DOS";
+		echo " ";
+		echo " ------------------fdisk output---------------------";
+		echo " ";
+		busybox fdisk /dev/block/mmcblk0 < $conf;
+		echo " ";
+		echo " ----------------------------------------------------";
+		sync;
+		sleep 1;
+		
+
+		# logcat echo
+		echo " ";
+		echo " +++ Your SD Partitiontable has been recreated: ";
+		echo " ";
+		echo " -----------------Partition table--------------------";
+		echo " ";
+		$parttable;
+		echo " ";
+		echo " ----------------------------------------------------";
+		
+		# logfile adding new part table
+		echo " +++ The Partitiontable has been modified	"				 	>> $log;
+		echo " ----------------------------------------	"					>> $log;
+		echo "  " 										>> $log;
+		echo "__________________________fdisk_Partition_table_____________________________"	>> $log;
+		$parttable >> $log;
+		echo "____________________________________________________________________________"	>> $log;
+		echo "  " 										>> $log;
+		echo "  " 										>> $log;
+		echo "  " 										>> $log;
+		
+		# format the new SD-ext partition with ext4 and log the output
+		echo " +++ The partition will now be formated as ext3 ";
+		echo " +++ The SD-ext partition got formated with EXT3 afterwards:"			>> $log;
+		echo " -----------------------------------------------------------"			>> $log;
+		echo "  " 										>> $log;
+		echo "  " 										>> $log;
+		echo "_________________________mke2fs+tune2fs_output______________________________"	>> $log;
+		/system/xbin/mke2fs -m 0 -L userdata /dev/block/mmcblk0p2 >> $log;
+		/system/xbin/tune2fs -O has_journal /dev/block/mmcblk0p2 >> $log;
+		/system/xbin/tune2fs -l /dev/block/mmcblk0p2 >> $log;
+		echo "____________________________________________________________________________"	>> $log;
+		echo "  " 										>> $log;
+		echo "  " 										>> $log;
+
+		if [ -e /dev/block/mmcblk0p3 ];
+		then
+			busybox mkswap /dev/block/mmcblk0p3;
+		fi;
+			
+		
+		sync;
+	fi;
+	
+
+      
+
+
+    # Changing too noop scheduler + adding cat for logcat
+    echo " +++ Changing scheduler for sd card:";
+    hasdeadline=`cat /sys/block/mmcblk0/queue/scheduler | grep deadline`;
+    if [ -n "$hasdeadline" ];
+    then
+	echo deadline > /sys/block/mmcblk0/queue/scheduler; 
+	cat /sys/block/mmcblk0/queue/scheduler;
+	echo " +++ Changing scheduler for mtd:";
+	for i in 1 2 3 4 5;
+	do
+		echo deadline > /sys/block/mtdblock$i/queue/scheduler;
+	done;
+	cat /sys/block/mtdblock5/queue/scheduler;
+    else
+	echo noop > /sys/block/mmcblk0/queue/scheduler; 
+	cat /sys/block/mmcblk0/queue/scheduler;
+	echo " +++ Changing scheduler for mtd:";
+	for i in 1 2 3 4 5;
+	do
+		echo noop > /sys/block/mtdblock$i/queue/scheduler;
+	done;
+	cat /sys/block/mtdblock5/queue/scheduler;
+     fi;
+    
+
+
+    # Mounts
+    echo " +++ Checking external Partition:";
+    busybox mount -o noatime,nodiratime,nosuid,nodev  /dev/block/mmcblk0p2 /data;
+    
+    # btrfs partition
+    mountbtrfs=`busybox mount | grep btrfs`;
+    if [ -n "$mountbtrfs" ];
+    then 
+	  echo "    --- btrfs Partition found - remounting with optimizations";
+	  busybox mount -t btrfs -o remount,noatime,nodiratime,nosuid,nodev,ssd_spread  /dev/block/mmcblk0p2 /data;
+    fi;
+    
+    # ReiserFS Partition
+    mountreiser=`busybox mount | grep reiser`;
+    if [ -n "$mountreiser" ];
+    then 
+	  echo "    --- ReiserFS Partition found";
+    fi;
+    
+
+    
+    # ext2 / ext3 /ext 4 partition
+    mountext=`busybox mount | egrep 'ext2|ext3|ext4'`;
+    if [ -n "$mountext" ]; 
+    then
+	echo "    --- Ext2 / Ext3 / Ext4 Partition found - checking filesystem and creating log";
+	sync;
+	busybox umount /data;
+	sleep 1;
+	e2fsck -yvf /dev/block/mmcblk0p2 >> $e2fscklog;
+	# logging e2fsck with more info (thx moebius83 from XDA)
+	FSCHECK=$?;                                                                                                                                                              
+	if [ $FSCHECK -ne 0 ]; 
+	then
+		if [ $FSCHECK -eq 1 ];
+		then                                                                                 
+			echo "      - Filesystem errors detected and corrected";                                                  
+		elif [ $FSCHECK -eq 2 ];
+		then                                                                               
+			echo "      - Major filesystem errors detected, reboot needed!";                     
+		else                                                                                   
+			echo "      - e2fsck exited with exit code: $FSCHECK unhandled serious error!";
+		fi;                                                                                 
+		
+		echo " +++ Errors found on Filesystem check - see the attached log for more info:"	>> $log;                                      
+		echo " --------------------------------------------------------------------------"	>> $log;
+		echo " "										>> $log;
+		echo "____________________________e2fsck_output__________________________________"	>> $log;
+		cat $e2fscklog >> $log;                           
+		echo "___________________________________________________________________________"	>> $log;
+		echo " "										>> $log;
+	else                                                                                          
+		echo " +++ Filesystem  check found no errors - no log attached"				>> $log;
+		echo " -------------------------------------------------------"				>> $log; 
+		echo " "										>> $log;
+	fi;
+	
+	
+	# LIFE-ON-THE-EDGE Mod
+	if [ -e /system/life-on-the-edge ];
+	then
+		echo "    --- life-on-the-edge mod active - mounting as loop device";
+		tune2fs -O ^has_journal /dev/block/mmcblk0p2;
+		busybox losetup /dev/block/loop0 /dev/block/mmcblk0p2; 
+		busybox mount -o sync,noatime,nodiratime,nosuid,nodev /dev/block/loop0 /data;
+	else 
+		echo "    --- life-on-the-edge-mod NOT active - mounting with default options";
+		tune2fs -O has_journal /dev/block/mmcblk0p2;
+		busybox mount -o noatime,nodiratime,nosuid,nodev  /dev/block/mmcblk0p2 /data;
+	fi;
+    fi;
+    
+    busybox chown 1000:1000 /data;
+    busybox chmod 771 /data;
+
+
+
+
+    # move apps etc from internal memory to sdcard
+    for i in anr app app-private data dontpanic drm backup tombstones local;
+    do
+        if [ ! -d /data/$i ];
+	then
+	    mkdir /data/$i;
+	fi;
+
+	if  [ "$i" != "local" ]
+	then
+	    busybox chown 1000:1000 /data/$i;
+	    busybox chmod 771 /data/$i;
+	fi;
+	if [ "$i" = "local" ];
+	then
+	    busybox chown 2000:2000 /data/$i;
+	    busybox chmod 771 /data/$i;
+	fi;
+	
+	if [ -d /system/data_internal/$i ]
+	then 
+	    echo " +++ Moving "$i" from internal to SD-Card";
+	    busybox cp -a /system/data_internal/$i/* /data/$i/;
+	    busybox rm -rf /system/data_internal/$i;
+	fi;
+    done;
+
+
+
+    # /data/system to internal if on sd
+    if [ ! -d /system/data_internal/system ];
+    then
+	 busybox mkdir /system/data_internal/system;
+    fi;
+
+    busybox chown 1000.1000 /system/data_internal/system;
+    busybox chmod 771 /system/data_internal/system;
+
+    if [ -d /data/system ] && [ ! -h /data/system ];
+    then
+	echo " +++  /data/system found on sd -> moving to internal";
+	busybox cp -a /data/system/* /system/data_internal/system;
+	busybox rm -rf /data/system/*;
+    fi;
+	
+    # /data/misc to internal if on sd
+    if [ ! -d /system/data_internal/misc ];
+    then
+	busybox mkdir /system/data_internal/misc;
+    fi;
+    busybox chown 1000.9998 /system/data_internal/misc;
+    busybox chmod 01771 /system/data_internal/misc;
+
+    if [ -d /data/misc ] && [ ! -h /data/misc ];
+    then
+	echo " +++ /data/misc found on sd -> Moving to internal";
+	busybox cp -a /data/misc/* /system/data_internal/misc;
+	busybox rm -rf /data/misc/*;
+    fi;
+
+	
+    # data/property to internal if on sd
+    if [ ! -d /system/data_internal/property ];
+    then
+	busybox mkdir /system/data_internal/property;
+    fi;
+    busybox chown 0.0 /system/data_internal/property;
+    busybox chmod 700 /system/data_internal/property;
+
+    if [ -d /data/property ] && [ ! -h /data/property ];
+    then
+	echo " +++ /data/property found on sd -> Moving to internal";
+	busybox cp -a /data/property/* /system/data_internal/property/;
+	busybox rm -rf /data/property/*;
+    fi;
+	
+    # data/dalvik-cache to internal if on sd
+    if [ ! -d /system/data_internal/dalvik-cache ];
+    then
+	busybox mkdir /system/data_internal/dalvik-cache;
+    fi;
+    busybox chown 0.0 /system/data_internal/dalvik-cache;
+    busybox chmod 771 /system/data_internal/dalvik-cache;
+
+    if [ -d /data/dalvik-cache ] && [ ! -h /data/dalvik-cache ];
+    then
+	echo " +++ /data/dalvik-cache found on sd -> Moving to internal";
+	busybox cp -a /data/dalvik-cache/* /system/data_internal/dalvik-cache/;
+	busybox rm -rf /data/dalvik-cache/*;
+    fi;
+
+    # Symlinks 
+    for i in property misc system dalvik-cache;
+    do
+	if [ ! -h /data/$i ];
+	then
+	    echo " +++ Creating symlink for $i"
+	    busybox rm -rf /data/$i;
+	    busybox ln -s /system/data_internal/$i /data/$i;
+	fi;
+    done;
+    
+    # swap support
+    # check swap partition and kernel support -> if true enable swap
+    if [ -e /proc/swaps ] && [ -e /dev/block/mmcblk0p3 ]
+    then
+	echo " +++ swap partition found and kernel support for swap is active -> swap activated";
+	busybox mkswap	/dev/block/mmcblk0p3;
+	busybox swapon	/dev/block/mmcblk0p3;
+	sysctl -w vm.swappiness=40;
+    else
+	echo " +++ Either no swap partition found or no kernel support -> swap not active";
+    fi;
+
+
+    # end of log
+    echo "  "									>> $log;
+    echo "###################################################################"	>> $log;
+    echo " "									>> $log;
+
+    # log to sd	
+    echo " +++ copying log to sd-card: check /sdcard/data2whateverlog.txt";
+    busybox mount /dev/block/mmcblk0p1 /sdcard;
+    # new logfile header if not present
+    if [ ! -e /sdcard/data2whateverlog.txt ];
+    then
+		echo " =========================================================== " 	>  /sdcard/data2whateverlog.txt;
+		echo "                 data2whatever by melethron                  " 	>> /sdcard/data2whateverlog.txt;
+		echo " =========================================================== " 	>> /sdcard/data2whateverlog.txt;
+		echo " "								>> /sdcard/data2whateverlog.txt;
+    fi;
+    # attaching temp log
+    cat $log >> /sdcard/data2whateverlog.txt;
+    busybox rm -fr /mnt/asec/tmp;
+    sync;
+    busybox umount /sdcard;
+    sleep 1;	
+
+
+    setprop cm.a2sd.active 1;   
+    echo " +++  init script completed";
+
+    
+
+
+else
+    echo " ERROR : No second Partition on microSD found: the ROM will most likely not work or only use app2sd";
+fi;
+
+
+sync;

@@ -1,0 +1,8 @@
+#!/system/bin/sh
+#
+# force button-backlight off
+# idogx@diypda.com
+#
+
+echo 0 > /sys/class/leds/button-backlight/brightness
+chmod 444 /sys/class/leds/button-backlight/brightness

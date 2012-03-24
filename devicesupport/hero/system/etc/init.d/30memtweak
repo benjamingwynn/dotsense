@@ -1,0 +1,29 @@
+#!/system/bin/sh
+
+
+# Force standard memory tunables.
+
+cat > /data/local.prop <<EOF 
+ro.HOME_APP_ADJ=0
+ro.FOREGROUND_APP_MEM 2048
+ro.HOME_APP_MEM=3072
+ro.HOME_APP_MEM 3072
+ro.VISIBLE_APP_MEM 3072
+ro.PERCEPTIBLE_APP_MEM 4096
+ro.HEAVY_WEIGHT_APP_MEM 4096
+ro.SECONDARY_SERVER_MEM 6144
+ro.BACKUP_APP_MEM 6144
+ro.HIDDEN_APP_MEM 6144
+ro.HIDDEN_APP_MIN_ADJ 6
+ro.CONTENT_PROVIDER_MEM 12800
+ro.CONTENT_PROVIDER_ADJ 14
+ro.EMPTY_APP_MEM 25600
+EOF
+
+# Tune low memory killer.
+
+echo "0,1,2,4,12,13" > /sys/module/lowmemorykiller/parameters/adj
+echo "1536,2048,4096,5120,12800,25600" > /sys/module/lowmemorykiller/parameters/minfree
+
+
+

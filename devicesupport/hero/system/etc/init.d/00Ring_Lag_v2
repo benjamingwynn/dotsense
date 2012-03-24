@@ -1,0 +1,35 @@
+#!/system/bin/sh
+
+#00Ring_lag_v2 computerfreek#
+
+MAX_PHONE() # remove lag when answering phone calls
+
+pidphone=`pidof com.android.phone`;
+if [ $pidphone ];
+then
+	echo -17 > /proc/$pidphone/oom_adj; # exclude com.android.phone from oom-killer;
+	renice -20 $pidphone; # set highest nice level for com.android.phone;
+	log -p i -t ScreenState "*** MAX phone *** set oom_adj(-17) and nice(-20) for com.android.phone";
+	exit;
+else
+	sleep 1;
+	MAX_PHONE;
+
+
+# Background process to check screen state;
+(while [ 1 ]; 
+do
+	cat /sys/power/wait_for_fb_wake;
+    AWAKE_MODE;
+
+	cat /sys/power/wait_for_fb_sleep;
+	SLEEP_MODE;
+ 
+then
+
+# One-time process to optimize com.android.phone;
+(while [ 1 ];
+
+	sleep 10;
+	MAX_PHONE;
+;  \  fi 

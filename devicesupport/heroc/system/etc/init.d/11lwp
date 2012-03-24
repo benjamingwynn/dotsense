@@ -1,0 +1,1 @@
+renice -15 `pgrep android.process.acore'

@@ -1,0 +1,22 @@
+#!/system/bin/sh
+
+
+if [ -e /proc/sys/vm/vfs_cache_pressure ]; then
+	echo "50" > /proc/sys/vm/vfs_cache_pressure
+fi
+
+if [ -e /proc/sys/vm/dirty_expire_centisecs ]; then
+	echo "3000" > /proc/sys/vm/dirty_expire_centisecs
+fi
+
+if [ -e /proc/sys/vm/dirty_writeback_centisecs ]; then
+	echo "500" > /proc/sys/vm/dirty_writeback_centisecs
+fi
+
+if [ -e /proc/sys/vm/dirty_ratio ]; then
+	echo "22" > /proc/sys/vm/dirty_ratio
+fi
+
+if [ -e /proc/sys/vm/dirty_background_ratio ]; then
+	echo "4" > /proc/sys/vm/dirty_background_ratio
+fi

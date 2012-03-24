@@ -1,0 +1,152 @@
+#!/system/bin/sh
+# Put together and refined by zeppelinrox.
+Edited by scottypeterson. See included links for resources.
+#
+# For debugging, delete the # at the beginning of the following 2 lines, and check the end of /data/98KickAssKernel.log file to see what may have fubarred.
+#set -x;
+#exec > /data/98KickAssKernel.log 2>&1;
+#
+echo "";
+if [ ! "`id | grep =0`" ]; then
+	echo " You are NOT running this script as root...";
+	echo "";
+	echo "                      ...No SuperUser for you!!";
+	echo "";
+	echo "     ...Please Run as Root and try again...";
+	echo "";
+	exit 69;
+fi;
+busybox mount -o remount,rw /system 2>/dev/null;
+for m in /dev/block/mtdblock*;
+do
+busybox mount -o remount,rw $m /system 2>/dev/null;
+done;
+busybox sysctl -p;
+#
+# Disable normalized sleeper
+#
+busybox mount -t debugfs none /sys/kernel/debug 2>/dev/null;
+echo NO_NORMALIZED_SLEEPER > /sys/kernel/debug/sched_features 2>/dev/null;
+busybox umount /sys/kernel/debug;
+#
+# Memory management
+#
+# http://www.linuxinsight.com/proc_sys_hierarchy.html
+# http://forum.xda-developers.com/showthread.php?t=813309
+# http://forum.xda-developers.com/showthread.php?p=12445735
+# http://forum.xda-developers.com/showthread.php?p=4806456
+# http://intl.feedfury.com/content/47077504-tweak-skript-f-r-android-spica.html
+#
+busybox sysctl -e -w vm.oom_kill_allocating_task=0;
+busybox sysctl -e -w vm.panic_on_oom=0;
+busybox sysctl -e -w vm.dirty_background_ratio=50;
+busybox sysctl -e -w vm.dirty_ratio=70;
+busybox sysctl -e -w vm.min_free_kbytes=4096;
+busybox sysctl -e -w vm.vfs_cache_pressure=50;
+busybox sysctl -e -w vm.overcommit_memory=1;
+busybox sysctl -e -w vm.min_free_order_shift=4;
+busybox sysctl -e -w vm.laptop_mode=0;
+busybox sysctl -e -w vm.block_dump=0;
+# Misc tweaks for battery life
+#
+busybox sysctl -e -w vm.dirty_writeback_centisecs=2000;
+busybox sysctl -e -w vm.dirty_expire_centisecs=1000;
+#
+busybox sysctl -e -w kernel.panic=0;
+busybox sysctl -e -w kernel.panic_on_oops=1;
+busybox sysctl -e -w kernel.msgmni=2048;
+busybox sysctl -e -w kernel.msgmax=64000;
+busybox sysctl -e -w kernel.shmmni=4096;
+busybox sysctl -e -w kernel.shmall=2097152;
+busybox sysctl -e -w kernel.shmmax=268435456;
+busybox sysctl -e -w kernel.sem='500 512000 64 2048';
+busybox sysctl -e -w kernel.sched_features=24189;
+busybox sysctl -e -w kernel.hung_task_timeout_secs=30;             # Set to 0 to disable but can cause black screen on incoming calls
+busybox sysctl -e -w kernel.sched_latency_ns=18000000;
+busybox sysctl -e -w kernel.sched_min_granularity_ns=1500000;
+busybox sysctl -e -w kernel.sched_wakeup_granularity_ns=3000000;
+busybox sysctl -e -w kernel.sched_compat_yield=1;
+busybox sysctl -e -w kernel.sched_shares_ratelimit=256000;
+busybox sysctl -e -w kernel.sched_child_runs_first=0;
+busybox sysctl -e -w kernel.threads-max=5000;
+busybox sysctl -e -w fs.lease-break-time=10;
+busybox sysctl -e -w fs.file-max=65536;
+#
+# Queue size modifications
+busybox sysctl -e -w net.core.wmem_max=524288;
+busybox sysctl -e -w net.core.rmem_max=524288;
+busybox sysctl -e -w net.core.rmem_default=262144;
+busybox sysctl -e -w net.core.wmem_default=262144;
+busybox sysctl -e -w net.core.optmem_max=20480;
+busybox sysctl -e -w net.unix.max_dgram_qlen=50;
+#
+busybox sysctl -e -w net.ipv4.udp_rmem_min=6144;
+busybox sysctl -e -w net.ipv4.udp_wmem_min=6144;
+busybox sysctl -e -w net.ipv4.tcp_rfc1337=1;
+busybox sysctl -e -w net.ipv4.ip_no_pmtu_disc=0;
+busybox sysctl -e -w net.ipv4.tcp_ecn=0;
+busybox sysctl -e -w net.ipv4.route.flush=1;
+busybox sysctl -e -w net.ipv4.tcp_rmem='6144 87380 524288';
+busybox sysctl -e -w net.ipv4.tcp_wmem='6144 87380 524288';
+#
+# From http://www.speedguide.net/articles/linux-tweaking-121
+busybox sysctl -e -w net.ipv4.tcp_timestamps=0;
+busybox sysctl -e -w net.ipv4.tcp_sack=1;
+busybox sysctl -e -w net.ipv4.tcp_fack=1;
+busybox sysctl -e -w net.ipv4.tcp_window_scaling=1;
+#
+# Re-use sockets in time-wait state
+busybox sysctl -e -w net.ipv4.tcp_tw_recycle=1;
+busybox sysctl -e -w net.ipv4.tcp_tw_reuse=1;
+#
+# KickAss Underutilized Networking Tweaks below as recommended by avgjoemomma (from XDA)
+#
+busybox sysctl -e -w net.ipv4.tcp_congestion_control=cubic;        # Change network congestion algorithm to CUBIC
+#
+# Hardening the TCP/IP stack to SYN attacks
+# See http://www.symantec.com/connect/articles/hardening-tcpip-stack-syn-attacks
+busybox sysctl -e -w net.ipv4.tcp_syncookies=1;
+busybox sysctl -e -w net.ipv4.conf.all.rp_filter=1;
+busybox sysctl -e -w net.ipv4.conf.default.rp_filter=1;
+busybox sysctl -e -w net.ipv4.tcp_synack_retries=2;
+busybox sysctl -e -w net.ipv4.tcp_syn_retries=2;
+busybox sysctl -e -w net.ipv4.tcp_max_syn_backlog=1024;
+#
+busybox sysctl -e -w net.ipv4.tcp_max_tw_buckets=16384;            # Bump up tw_buckets in case we get DoS'd
+busybox sysctl -e -w net.ipv4.icmp_echo_ignore_all=1;              # Ignore pings
+busybox sysctl -e -w net.ipv4.icmp_ignore_bogus_error_responses=1; # Enable bad error message protection (should be enabled by default)
+busybox sysctl -e -w net.ipv4.tcp_no_metrics_save=1;               # Don't cache ssthresh from previous connection
+busybox sysctl -e -w net.ipv4.tcp_fin_timeout=15;
+busybox sysctl -e -w net.ipv4.tcp_keepalive_intvl=30;
+busybox sysctl -e -w net.ipv4.tcp_keepalive_probes=5;
+busybox sysctl -e -w net.ipv4.tcp_keepalive_time=1800;
+busybox sysctl -e -w net.ipv4.ip_forward=0;                        # Disable IP Packet forwarding (should be disabled already)
+#
+# Don't accept source routing
+busybox sysctl -e -w net.ipv4.conf.default.accept_source_route=0 ;
+busybox sysctl -e -w net.ipv4.conf.all.accept_source_route=0;
+#
+# Don't accept redirects
+busybox sysctl -e -w net.ipv4.conf.all.accept_redirects=0;
+busybox sysctl -e -w net.ipv4.conf.default.accept_redirects=0;
+busybox sysctl -e -w net.ipv4.conf.all.secure_redirects=0;
+busybox sysctl -e -w net.ipv4.conf.default.secure_redirects=0;
+# End of KickAss Underutilized Networking Tweaks lulz
+#
+# Remount with noatime and nodiratime
+#
+for k in $(busybox mount | cut -d " " -f3);
+do
+busybox sync;
+busybox mount -o remount,noatime $k 2>/dev/null;
+done;
+busybox mount -o remount,ro /system 2>/dev/null;
+for m in /dev/block/mtdblock*;
+do
+busybox mount -o remount,ro $m /system 2>/dev/null;
+done;
+echo "";
+echo "        ================================";
+echo "         ) 98KickAssKernel Completed! (";
+echo "        ================================";
+echo "";

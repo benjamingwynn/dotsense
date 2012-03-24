@@ -1,0 +1,8 @@
+#!/bin/sh
+
+/bin/mount -o remount,rw /
+
+/bin/rm -r /voodoo/root/usr/*
+
+/bin/mount -o remount,ro /
+

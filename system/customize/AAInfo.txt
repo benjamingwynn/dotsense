@@ -1,0 +1,6 @@
+TaskID : 224294
+Project : Pico
+SKU : HTCCN CHS[1400]
+ROM Ver : 1.20.1400.7
+Customization Id : 257563
+RCMS Id : 369

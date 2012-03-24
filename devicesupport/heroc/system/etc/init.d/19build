@@ -1,0 +1,18 @@
+#!/system/bin/sh
+#
+#st@matis build.prop tweak script
+#
+# build.prop tweaks
+setprop dalvik.vm.execution-mode=int:jit
+setprop persist.sys.purgeable_assets=1
+setprop dalvik.vm.dexopt-flags=m=y
+setprop ro.media.enc.jpeg.quality=90
+setprop dalvik.vm.heapsize=48m
+setprop ro.telephony.call_ring.delay=800
+setprop debug.performance.tuning=1
+setprop ro.ril.disable.power.collapse=0
+setprop pm.sleep_mode=1
+setprop video.accelerate.hw=1
+setprop windowsmgr.max_events_per_sec=150
+setprop ro.ril.disable.power.collapse=1
+setprop wifi.supplicant_scan_interval=150

@@ -1,0 +1,16 @@
+.sense beta 2.0.1
+
+(it is named 2.0.1 after the ROM failed on many devices with 2.0 - the name in build.prop was never changed - same for the upload name)
+
+Please do not distribute or disassemble my ROM without written (or typed) permission from myself. This will be from eaither benjamingwynn from XDA forums or at the email 13gwynn@gmail.com. Don't be shy (I get PM's every day, I'm happy to help)
+
+.............................
+
+If you have got permission to disassemble this ROM or you are adding a mod then please note the following file information
+
+NAME: BETA 2.0
+CODENAME: Nemesis
+REAL-VERSION: 4
+FILE-STRUCTURE-TYPE: DevPackage 1.01
+LAST-BUILD-DATE: 20/03/12
+TYPE: LABBUILD

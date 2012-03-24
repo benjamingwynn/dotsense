@@ -1,0 +1,37 @@
+#!/system/bin/sh
+
+# ===========================================================================
+#  seo
+#
+#  LastChangedDate: 2011-06-26 20:27:06 +0200 (dim. 26 juin 2011) 
+# ===========================================================================
+#
+#  Quick and dirty way to calibrate battery
+#  after fresh rom install
+#
+# ===========================================================================
+
+# ===========================================================================
+#  Run this section until battery is calibrated
+# ===========================================================================
+
+SLEEP=120
+
+if [ -e /data/.battery-calibrated ] ; then
+	exit 0
+fi
+
+(
+while : ; do
+	LEVEL=$(cat /sys/class/power_supply/battery/capacity)
+	CUR=$(cat /sys/class/power_supply/battery/batt_current)
+	if [ "$LEVEL" == "100" ] && [ "$CUR" == "0" ] ; then
+		log -p i -t battery-calibration "*** LEVEL: $LEVEL CUR: $CUR***: calibrating..."
+		rm -f /data/system/batterystats.bin
+		touch /data/.battery-calibrated
+		exit 0
+	fi
+	# log -p i -t battery-calibration "*** LEVEL: $LEVEL CUR: $CUR ***: sleeping for $SLEEP s..."
+	sleep $SLEEP
+done
+) &

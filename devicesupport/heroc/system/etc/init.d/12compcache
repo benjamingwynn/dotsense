@@ -1,0 +1,38 @@
+#!/system/bin/sh
+#
+# Compcache handler
+# Decides whether or not Compcache is enabled
+#
+
+if [ -e /system/bin/log ];
+then
+    LOGI="log -p i -t compcache --"
+    LOGE="log -p e -t compcache --"
+else
+    LOGI=echo
+    LOGE=echo
+fi
+
+MEMTOTAL=$( awk '{ if ($1 eq "MemTotal:") print $2 ;exit }' </proc/meminfo )
+
+PROP=`getprop persist.service.compcache`
+if [ -z "$PROP" ];
+then
+  PROP=`getprop ro.compcache.default`
+  if [ -n "$PROP" ];
+  then
+      $LOGI "no default persist.service.compcache, using default of $PROP"
+      setprop persist.service.compcache $PROP
+  else
+      PROP=0
+  fi
+fi
+
+if [ $PROP != 0 ]
+then
+  CCSIZE=$(($(($MEMTOTAL * $PROP)) / 100))
+  $LOGI "Starting compcache of ${CCSIZE}Kb (${PROP}%)"
+  logwrapper /system/bin/compcache start $CCSIZE
+else
+  $LOGI "Compcache disabled."
+fi

@@ -1,0 +1,6 @@
+#!/system/bin/sh
+
+sync;
+setprop cm.filesystem.ready 1;
+
+
