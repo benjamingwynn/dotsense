@@ -68,6 +68,12 @@ writetmpfile(
   		  "selected=0\n"
  	   );
 
+#- Fixes experimental bug
+writetmpfile(
+	  "experimental.prop",
+  		  "selected=0\n"
+ 	   );
+
 #
 # STEP 1 - SELECT THEME
 #
