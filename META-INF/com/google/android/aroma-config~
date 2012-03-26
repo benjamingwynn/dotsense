@@ -466,7 +466,7 @@ if prop("device.prop","selected")=="1" then
 
 	    "Overclockable",          "m1ndha3xr's overclockable kernel",                    "@personalize",
 		"Stable",          "idogx's non-oc kernel",                               "@personalize",
-		"Universal",     "Experimental kernel made by jmz",                              "@personalize"
+		"JMZ OC 3.5",     "Now stable overclockable 3.5 kernel",                              "@personalize"
 
   );
 endif;
@@ -490,7 +490,7 @@ if prop("device.prop","selected")=="2" then
 	  #------------------+-----------------------------------------------------------+---------------#
 
 	    "Stable",          "idogx's non-oc kernel",                    "@personalize",
-		"Universal",          "Experimental kernel made by jmz",                               "@personalize"
+		"JMZ OC 3.5",          "Now stable overclockable 3.5 kernel",                               "@personalize"
 
   );
 endif;
@@ -631,7 +631,7 @@ if prop("device.prop","selected")=="8" then
 	  #------------------+-----------------------------------------------------------+---------------#
 
 	    "Stock",          "HTC's kernel, very stable",                    "@personalize",
-		"yannou90",          "Overclockable to 800mhz!",                               "@personalize"
+		"yannou90",          "Overclockable to over 800mhz!",                               "@personalize"
 
   );
 endif;
