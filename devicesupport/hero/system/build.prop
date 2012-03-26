@@ -72,7 +72,7 @@ ro.build.changelist=188047
 ro.product.ua=
 ro.build.fingerprint=htccn_chs/htc_marvel/marvel:2.3.5/GRJ90/188047.7:user/release-keys
 ro.build.project=Salsa_S:224294
-ro.product.version=.sense 2.0 - benjamingwynn
+ro.product.version=.sense beta 2.0.1 - benjamingwynn
 ro.build.languageremove=29
 ro.build.sense.version=3.5
 keyguard.no_require_sim=1
@@ -243,4 +243,4 @@ dalvik.vm.stack-trace-file=/data/anr/traces.txt
 
 ro.goo.developerid=benjamingwynn
 ro.goo.rom=dotSense
-ro.goo.version=4
+ro.goo.version=5

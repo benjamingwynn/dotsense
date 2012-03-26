@@ -243,4 +243,4 @@ dalvik.vm.stack-trace-file=/data/anr/traces.txt
 
 ro.goo.developerid=benjamingwynn
 ro.goo.rom=dotSense
-ro.goo.version=3
+ro.goo.version=5
