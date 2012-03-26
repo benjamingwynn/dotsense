@@ -122,14 +122,9 @@ mount("MTD", "userdata", "/data");
 
 ui_print("Installing main core");
 package_extract_dir("system", "/system");
+ui_print("Done installing core");
 
 # Okay, now if you have a different device then extract the support for it to run correctly...
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "1"
-    then
-      ui_print("Installing packages for the Wildfire S");
-    endif;
 
     if
       file_getprop("/tmp/aroma/device.prop","selected") == "2"
