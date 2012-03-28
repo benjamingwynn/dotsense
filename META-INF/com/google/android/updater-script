@@ -800,8 +800,8 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "1"
     then
       ui_print("Installing Glass theme...");
-      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
     endif;
+      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
