@@ -1,116 +1,24 @@
-##
-#
-# AROMA Installer - Installer Script
-#       (c) 2011 by Ahmad Amarullah
-#           amarullz - xda-developers 
-#
-#
-##
-
-##
-#
-# OLD UPDATER-BINARY
-#
-# Here you can use old command for flashing files, like:
-#  mount
-#  umount
-#  delete_recursive
-#  format
-#  package_extract_dir
-#  set_perm_recursive
-#
-
-## CHECKING Configuration from aroma-config
-#
-# Check it using if else statement, with file_getprop
-# in /tmp/aroma
-#
-# Example:
-# if
-#      file_getprop("/tmp/aroma/customize.prop","item.6.3") == "1"
-# then
-#   ... here the command ...
-# endif;
-#
-
-## INFO COMMAND FOR AROMA
-#
-#-- DIFFERENT BEHAVIOUR
-#
-# set_progress(0.5);
-#    Set Progress position: 0.0 = 0%; 0.5 = 50%; 1.0 = 100%
-#    
-# show_progress(0.2, 400);
-#    show_progress( progress size, number of files to be extracted );
-#    if we had 50 files, and want to "add" 0.2 into progress after all finished
-#    use (0.2, 50)
-#
-# show_progress(0.2, "-2000");
-#    show_progress( progress size, wait for 2000ms );
-#    For show progress with time as progress indicator, use negative value. After 2second progress will add 0.2/20% into the value
-#    use (0.2, "-2000"). Note, use quote for value "-2000"
-#
-# ui_print("@ Title");
-#    Set progress title
-#
-# ui_print("Default Text");
-#    Set Normal Log Text
-#
-##
-
-#####################################################################################################
 #
 # .sense installation script using aroma with "devpackage"
 #
 # made using some simple code from ONeill123 and the default AROMA sample
 # some bugs fixed by jmztaylor and skippycentral.
 #
-ui_print("@.sense 2.0");
-ui_print("@build date: 21/03/12");
+# Thanks to amarullz for the original AROMA installation manifest
+
+ui_print("@.sense 2.0.1");
+ui_print("@build date: 28/03/12");
 ui_print("@benjamingwynn");
 set_progress(0.0);
 ui_print(" ");
-ui_print("Installing...");
+ui_print("@Preparing for installation...");
 mount("MTD", "system", "/system");
-#-- If you have started it in PIM (themes) then..
-if
-  file_getprop("/tmp/aroma/pim.prop","selected") == "1"
-then
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.1") == "1"
-    then
-      ui_print("Installing Glass theme...");
-      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
-    then
-      ui_print("Installing stock theme...");
-      package_extract_dir("packages-onlyone/Theme/Stock", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.1") == "3"
-    then
-      ui_print("Installing CM7 theme...");
-      package_extract_dir("packages-onlyone/Theme/CM7", "/system");
-    endif;
-else
-#-- lets shove the rest of the script into an else command, not a very good idea but I don't think there is any other way to end it!
-#-- Now lets format and mount some drives
 ui_print("Formatting system...");
 format("MTD", "system");
-#-- Give a pointless message
-ui_print("preparing core");
-#-- Extract the file to a tempory folder
 package_extract_file("scripts/check_data_app", "/tmp/check_data_app");
-#-- Set a permission on this folder so it may execute
 set_perm(0, 0, 0777, "/tmp/check_data_app");
-#-- Starts the now executable program..
 run_program("/tmp/check_data_app");
-#-- Now that thats done we are going to mount some other partitions
-ui_print("mounting...");
+ui_print("Mounting...");
 mount("MTD", "userdata", "/data");
 #
 # "DEVPACKAGE" SCRIPTING ENGINE
@@ -119,10 +27,21 @@ mount("MTD", "userdata", "/data");
 # Main system files.
 
 # First extract the APK's and stuff. If you have a GSM Wildfire S then that is all you need so far
+ui_print("@Installing system files");
 
-ui_print("Installing main core");
-package_extract_dir("system", "/system");
-ui_print("Done installing core");
+#- Files needed to be stored at root (build.prop, etc.)
+ui_print("Extraction of main started");
+package_extract_dir("core", "/system");
+ui_print("Extraction of main finished");
+
+#- Busybox
+ui_print("Installing busybox");
+set_perm(0, 1000, 0755, "/system/xbin/busybox");
+symlink("/system/xbin/busybox", "/system/bin/busybox");
+package_extract_file("scripts/installbusybox", "/tmp/installbusybox");
+set_perm(0, 0, 0777, "/tmp/installbusybox");
+run_program("/tmp/installbusybox");
+ui_print("Busybox installed");
 
 # Okay, now if you have a different device then extract the support for it to run correctly...
 
@@ -180,6 +99,7 @@ ui_print("Done installing core");
 
 # Now that we have that out of the way we can extract the kernel depending on what you selected
 
+ui_print("@Kernel installation");
 
 # Look for marvel kernel's
 
@@ -321,6 +241,8 @@ ui_print("Done installing core");
 
 
 #-- Okay thats done... now lets link up stuff with the toolbox.
+ui_print("@Toolbox");
+ui_print("Linking up TB...");
 symlink("toolbox", "/system/bin/cat");
 symlink("toolbox", "/system/bin/chmod");
 symlink("toolbox", "/system/bin/chown");
@@ -389,6 +311,7 @@ symlink("toolbox", "/system/bin/wipe");
 #
 
 #-- Let's do Applications first
+ui_print("@Installing packages");
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.1") == "1"
@@ -686,7 +609,7 @@ set_progress(0.5);
     then
       ui_print("Installing Quick Launch Widget");
       package_extract_dir("packages/widgets/QuickLaunch", "/system/app");
-	 endif;
+    endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.3.11") == "1"
@@ -1039,6 +962,8 @@ set_progress(0.5);
 
 #-- End our MASSIVE if command from eairlier.
 # Do some permission stuff
+ui_print("@Post-install");
+ui_print("System permissions");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
@@ -1054,9 +979,6 @@ set_perm(1002, 1002, 0440, "/system/etc/dbus.conf");
 set_perm(1014, 2000, 0550, "/system/etc/dhcpcd/dhcpcd-run-hooks");
 set_perm(0, 2000, 0550, "/system/etc/init.goldfish.sh");
 set_perm(0, 0, 04755, "/system/bin/bash");
-endif;
-
-#--Lets link the toolbox stuff up!
 ui_print("Linking files...");
 symlink("toolbox", "/system/bin/cat");
 symlink("toolbox", "/system/bin/chmod");
@@ -1111,24 +1033,14 @@ symlink("toolbox", "/system/bin/uptime");
 symlink("toolbox", "/system/bin/vmstat");
 symlink("toolbox", "/system/bin/watchprops");
 symlink("toolbox", "/system/bin/wipe");
-ui_print(" ");
-
-ui_print("@ Setting permissions...");
-#-- Setting permissions for DATA....
 set_perm_recursive(1000, 1000, 0771, 0644, "/data/app");
-#-- Okay... Sorted? No! We must mark some permissions on sysye,...
-#-- Lets tell the user that we are going to do some mad permission thing
-ui_print("set permissions");
-#-- Start the mad permission thing... Yawn...
+ui_print("Data permissions");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
 set_perm(0, 3003, 06755, "/system/bin/ip");
 set_perm(0, 3003, 02750, "/system/bin/netcfg");
 set_perm(0, 3004, 02755, "/system/bin/ping");
-#-- Make the progress bar is move a bit!
-
-#-- Continue setting permissions on the system partition...
 set_perm(0, 2000, 06750, "/system/bin/run-as");
 set_perm_recursive(1002, 1002, 0755, 0440, "/system/etc/bluetooth");
 set_perm(0, 0, 0755, "/system/etc/bluetooth");
@@ -1158,31 +1070,11 @@ set_perm(0, 0, 0644, "/system/bin/apps2sd.hlp");
 set_perm(0, 0, 0777, "/system/xbin/a2sd");
 set_perm(0, 0, 0777, "/system/bin/dtinstall");
 set_perm(0, 0, 06755, "/system/bin/su");
-#-- Lets move the progress bar...
-#-- Lets make another symbolic link
 symlink("/system/bin/su", "/system/xbin/su");
-#-- More permission stuff!
 set_perm_recursive(0, 0, 0755, 0555, "/system/etc/ppp");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
-#-- Yay! Permission setting is done on the system partition for now...
-#-- Display to the user that we are about to install busybox for them.
-ui_print("Installing busybox");
-#-- Set a certain permission on busybox
-set_perm(0, 1000, 0755, "/system/xbin/busybox");
-#-- Symoblicly link two files.
-symlink("/system/xbin/busybox", "/system/bin/busybox");
-#-- Extract the busybox file to the temory directory.
-package_extract_file("scripts/installbusybox", "/tmp/installbusybox");
-#-- Set executable permissions on the file
-set_perm(0, 0, 0777, "/tmp/installbusybox");
-#-- Run the program
-run_program("/tmp/installbusybox");
-#-- Now that the program is finished we can move the progress bar
 set_progress(1.00);
-# Now copy that dotsense file!
-package_extract_file("extractinfo", "/system");
-
 #-- Finish
 ui_print(" ");
-ui_print("@ Finished");
-ui_print("Everything finished correctly.");
+ui_print("@Finished");
+ui_print(".sense is now installed on your phone");

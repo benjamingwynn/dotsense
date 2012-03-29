@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssetTypes lang="en" timestamp="1278562001582">
+<AssetType iconUrl="" trigger="app" label="application" id="1"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="widget" label="widget" id="2"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="soundset" label="soundset" id="3"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="scene" label="scene" id="4"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="skin" label="skin" id="5"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="wallpaper" label="wallpaper" id="6"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="ringtone" label="ringtone" id="7"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="alarm" label="alarm" id="8"/>
+<AssetType iconUrl="https://ota-test.htc.com/repository/android/apps/asset/app/com.htc.rosiewidgets.dice/1.00/110/com.htc.rosiewidgets.dice_icon.png" trigger="notification" label="notification" id="9"/>
+</AssetTypes>
+
