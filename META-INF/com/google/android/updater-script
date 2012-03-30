@@ -1,10 +1,14 @@
+# ~ created by benjamingwynn ~
 #
 # .sense installation script using aroma with "devpackage"
 #
 # made using some simple code from ONeill123 and the default AROMA sample
 # some bugs fixed by jmztaylor and skippycentral.
 #
-# Thanks to amarullz for the original AROMA installation manifest
+# Thanks to amarullz for the original AROMA installation manifest and the
+# guys who made busybox for mounting devices better
+#
+# MADE BY BENJAMIN GWYNN 2012 FOR THE .SENSE ROM FOR MDPI HTC DEVICES
 
 ui_print("@.sense 2.0.1");
 ui_print("@build date: 28/03/12");
@@ -12,14 +16,17 @@ ui_print("@benjamingwynn");
 set_progress(0.0);
 ui_print(" ");
 ui_print("@Preparing for installation...");
-mount("MTD", "system", "/system");
+
+# Mount, format and enjoy (now uses busybox)
+
+#- Mount SYSTEM
+run_program("/sbin/busybox", "mount", "/system");
+#- Format
 ui_print("Formatting system...");
-format("MTD", "system");
-package_extract_file("scripts/check_data_app", "/tmp/check_data_app");
-set_perm(0, 0, 0777, "/tmp/check_data_app");
-run_program("/tmp/check_data_app");
+run_program("/sbin/busybox", "format", "/system");
+#- Mount DATA
 ui_print("Mounting...");
-mount("MTD", "userdata", "/data");
+run_program("/sbin/busybox", "mount", "/data");
 #
 # "DEVPACKAGE" SCRIPTING ENGINE
 #

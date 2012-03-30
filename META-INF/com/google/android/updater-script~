@@ -4,7 +4,10 @@
 # made using some simple code from ONeill123 and the default AROMA sample
 # some bugs fixed by jmztaylor and skippycentral.
 #
-# Thanks to amarullz for the original AROMA installation manifest
+# Thanks to amarullz for the original AROMA installation manifest and the
+# guys who made busybox for mounting devices better
+#
+# MADE BY BENJAMIN GWYNN 2012 FOR THE .SENSE ROM FOR MDPI HTC DEVICES
 
 ui_print("@.sense 2.0.1");
 ui_print("@build date: 28/03/12");
@@ -12,14 +15,17 @@ ui_print("@benjamingwynn");
 set_progress(0.0);
 ui_print(" ");
 ui_print("@Preparing for installation...");
-mount("MTD", "system", "/system");
+
+# Mount, format and enjoy (now uses busybox)
+
+#- Mount SYSTEM
+run_program("/sbin/busybox", "mount", "/system");
+#- Format
 ui_print("Formatting system...");
-format("MTD", "system");
-package_extract_file("scripts/check_data_app", "/tmp/check_data_app");
-set_perm(0, 0, 0777, "/tmp/check_data_app");
-run_program("/tmp/check_data_app");
+run_program("/sbin/busybox", "format", "/system");
+#- Mount DATA
 ui_print("Mounting...");
-mount("MTD", "userdata", "/data");
+run_program("/sbin/busybox", "mount", "/data");
 #
 # "DEVPACKAGE" SCRIPTING ENGINE
 #
@@ -962,6 +968,8 @@ set_progress(0.5);
 
 #-- End our MASSIVE if command from eairlier.
 # Do some permission stuff
+ui_print("@Post-install");
+ui_print("System permissions");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
@@ -977,8 +985,6 @@ set_perm(1002, 1002, 0440, "/system/etc/dbus.conf");
 set_perm(1014, 2000, 0550, "/system/etc/dhcpcd/dhcpcd-run-hooks");
 set_perm(0, 2000, 0550, "/system/etc/init.goldfish.sh");
 set_perm(0, 0, 04755, "/system/bin/bash");
-
-#--Lets link the toolbox stuff up!
 ui_print("Linking files...");
 symlink("toolbox", "/system/bin/cat");
 symlink("toolbox", "/system/bin/chmod");
@@ -1033,24 +1039,14 @@ symlink("toolbox", "/system/bin/uptime");
 symlink("toolbox", "/system/bin/vmstat");
 symlink("toolbox", "/system/bin/watchprops");
 symlink("toolbox", "/system/bin/wipe");
-ui_print(" ");
-
-ui_print("@ Setting permissions...");
-#-- Setting permissions for DATA....
 set_perm_recursive(1000, 1000, 0771, 0644, "/data/app");
-#-- Okay... Sorted? No! We must mark some permissions on sysye,...
-#-- Lets tell the user that we are going to do some mad permission thing
-ui_print("set permissions");
-#-- Start the mad permission thing... Yawn...
+ui_print("Data permissions");
 set_perm_recursive(0, 0, 0755, 0644, "/system");
 set_perm_recursive(0, 0, 0777, 0777, "/system/etc/init.d");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/bin");
 set_perm(0, 3003, 06755, "/system/bin/ip");
 set_perm(0, 3003, 02750, "/system/bin/netcfg");
 set_perm(0, 3004, 02755, "/system/bin/ping");
-#-- Make the progress bar is move a bit!
-
-#-- Continue setting permissions on the system partition...
 set_perm(0, 2000, 06750, "/system/bin/run-as");
 set_perm_recursive(1002, 1002, 0755, 0440, "/system/etc/bluetooth");
 set_perm(0, 0, 0755, "/system/etc/bluetooth");
@@ -1080,16 +1076,11 @@ set_perm(0, 0, 0644, "/system/bin/apps2sd.hlp");
 set_perm(0, 0, 0777, "/system/xbin/a2sd");
 set_perm(0, 0, 0777, "/system/bin/dtinstall");
 set_perm(0, 0, 06755, "/system/bin/su");
-#-- Lets move the progress bar...
-#-- Lets make another symbolic link
 symlink("/system/bin/su", "/system/xbin/su");
-#-- More permission stuff!
 set_perm_recursive(0, 0, 0755, 0555, "/system/etc/ppp");
 set_perm_recursive(0, 2000, 0755, 0755, "/system/xbin");
-#-- Yay! Permission setting is done on the system partition for now
-#-- Now that the program is finished we can move the progress bar
 set_progress(1.00);
 #-- Finish
 ui_print(" ");
-ui_print("@ Finished");
-ui_print("Everything finished correctly.");
+ui_print("@Finished");
+ui_print(".sense is now installed on your phone");
