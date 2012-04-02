@@ -1,47 +1,63 @@
-#- This is actually 2.0.1 - It just didn't get changed bellow!
-
-### LICENSE:
+# LICENSE:
 #
 # Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
 # Copyright (C) 2012 Benjamin Gwynn ( http://benjaminprofile.moonfruit.com/ )
 #
-#### You may not distribute, edit, base or use this work as reference without written ####
-#### permission from myself. I always accept themes, launchers, device support        ####
-#### packages, etc. as long as you ask first and state what you will do.              ####
+# Distributed with .sense 3.0 and above.
+#
+# .sense installation script using aroma with "devpackage"
+#
+# made using some simple code from ONeill123 and the default AROMA sample
+# some bugs fixed by jmztaylor and skippycentral.
+#
+# Thanks to amarullz for the original AROMA installation manifest
 
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-### INSTALLER BINARY INFO:
-#
-# AROMA Installer 1.60 - AROMA Installer Test Script Configuration
-#       (c) 2011-2012 by Ahmad Amarullah
-#           amarullz - xda-developers
-#           http://www.amarullz.com/
-#
-#       Binary Version  : 1.60
 
-# Distributed with .sense 2.0 and above.
+# [[Build information]]
+#
+# This is where we are going to set everything about the build including what phone this 
+# is installing on. Please make sure that you keep version information consistent across
+# different phones.
+#
 
-# Calibrate touch screen please :)
+#- Touch screen calibration information
 calibrate("2.5717","26","1.7809","30");
-
-
-##
-# Initializing Rom Information
-#
+#- Installer theme
+theme("dotsense2");
+#- Name
 ini_set("rom_name",             ".sense");
-ini_set("rom_version",          "beta 2.0");
+#- Version
+ini_set("rom_version",          "testing build");
+#- Me (aren't I awesome)
 ini_set("rom_author",           "benjamingynn");
-ini_set("rom_device",           "HTC Wildfire S");
-ini_set("rom_date",             "2012");
+#- Device this is built for (e.g. Wildfire S)
+ini_set("rom_device",           "----");
+#- Build date (e.g. 06/04/2012)
+ini_set("rom_date",             "----");
+#- ROM Codename (e.g. Nemesis)
+ini_set("rom_date",             "Chell");
+#- Device number
+#--- 1: Wildfire S - GSM
+#--- 2: Wildfire S - CDMA
+#--- 3: Salsa
+#--- 4: Hero - CDMA
+#--- 5: Hero - GSM
+#--- 6: Aria
+#--- 7: Legend
+#--- 8: Explorer/Pico
+writetmpfile(
+	  "device.prop",
+  		  "selected=0"
+ 	   );
 
+# [[End of ROM information]]
+#
+# If you are configuring the ROM to run on a certain device and is supported by me then
+# you do not need to change anything beyond this point in the script. You may need to
+# replace the 'updater-binary-installer' file in this folder from a 'updater-binary'
+# from a ROM designed for your phone.
 
-##
+#
 # Show Animated Splash
 #
 anisplash(
@@ -56,6 +72,21 @@ anisplash(
     "splash/a5", 30,
     "splash/a6", 30
 );
+
+#- Looks to see if the device is set and if not to refuse to install
+if prop("device.prop","selected")=="0" then
+viewbox(
+  #-- Title
+    "Error",
+  
+  #-- Text
+    "The installation can not continue. You have downloaded all files and not specifed what device you have. The system will now reboot.\n",
+  
+  #-- Icon
+    "@welcome"
+);
+run_program("/sbin/reboot");
+endif;
 
 # Bug fix centre
 #
@@ -74,156 +105,12 @@ writetmpfile(
   		  "selected=0\n"
  	   );
 
-#
-# STEP 1 - SELECT THEME
-#
-# Lets use the dotsense2 theme because it looks better
-
-theme("dotsense2");
+# Don't bother putting anymore fixes :)
 
 #
-# See if .sense is installed
-#
-if read("/system/dotsense")=="dotsense" then
-#
-# Write nothing to these files but do create them
-#
-writetmpfile(
-	  "customize.prop",
-  		  "item.1.0=0\n"
- 	   );
-writetmpfile(
-	  "kernel-marvel.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-legend.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-pico.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-explorer.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-marvelc.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-hero.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-heroc.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-liberty.prop",
-  		  "selected=0\n"
- 	   );
-#
-# Lets start a different setup because you have the ROM already.
-#
-viewbox(
-  #-- Title
-    "Post-install manager",
-  
-  #-- Text
-    "You seem to already have .sense installed. This installer will guide you through a number of options that you can use after installation.\n\n\n"+
-
-    "Press next to start...",
-  
-  #-- Icon
-    "@welcome"
-);
-#
-# They choose next.. lets give them an option to ask them what theme they want to change...
-#
-menubox(
-  #-- Title
-    "Change what?",
-  
-  #-- Sub Title
-    "Please select what you want to change",
-  
-  #-- Icon
-    "@install",
-    
-  #-- Will be saved in /tmp/aroma/pim.prop
-    "pim.prop",
-    
-  #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
-  # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
-  #-------------------------+-----------------------------------------------------------+---------------#
-	
-	    "Theme",        "Change what theme you are using",              "@install",      #-- selected.1 = 1
-	    "Normal install",        "Just throw me into the normal recovery",              "@install"      #-- selected.1 = 2
-);
-
-#
-# - Themes
-#
-if prop("pim.prop","selected")=="1" then
-  selectbox(
-    #-- Title
-      "Theme selection",
-	  
-    #-- Sub Title
-      "Please choose what theme to change",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@default",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "mods.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-	  
-	  "Theme",          "",                                                       2,  #-- Group 1. key = "selected.1"
-	    "Glass",          "White with transparent status bar",                    1,      #-- selected.1 = 1
-		"Stock",          "Normal Sense 3.5 looks",                               0,      #-- selected.1 = 2
-		"CM7",     "Fancy a bit of CM?",                              0      #-- selected.1 = 3
-);
-endif;
-
-#
-# - Let's apply this.
-#
-setvar("retstatus",
-  install(
-	#-- Title
-      "Installing",
-	
-	#-- Installation Process message
-	  "This may take several minutes...",
-	
-	#-- Installation Icon
-      "@install",
-	
-	#-- Installation Finish Message
-      ".sense installed!"
-  )
-);
-#- change button to reboot.
-ini_set("text_next", "Reboot now");
-#
-# - Now let's end the installer... before something goes badly wrong.
+# Let's start the actual GUI.
 #
 
-reboot("onfinish");
-
-#
-# Okay. Setups over... what happens next happens if you DON'T have the ROM already.
-#
-endif;
-#
-# if .sense isn't installed. Tell the user this.
-#
 viewbox(
   #-- Title
     "Welcome",
@@ -237,7 +124,7 @@ viewbox(
     ".sense is a sense 3.5 rom designed to be a universal and freindly ROM\n\n"+
 	
       "  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
-      "  CODENAME\t: <b><#selectbg_g>Nemesis</#></b>\n"+
+      "  CODENAME\t: <b><#selectbg_g>"+ini_get("rom_codename")+"</#></b>\n"+
       "  UPDATED\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
 
     "Press Next to Continue the Installation...",
@@ -270,82 +157,6 @@ agreebox(
     "Please check the agreement to continue."
 );
 
-#
-# STEP 5 - If it is not installed then ask what phone the user is on
-#
-
-#-- First lets fix a bug that happened when 2.0 was first distributed, failed IF commands due to the file not being there..
-
-#
-#- Looks like its not set to easy... to the kernel install screens we go :)
-#
-
-#- There is an error if it can't find a certain device if it is yes or know, so let's set everything to no.
-#- A bug was found in 2.0 where this would cripple everything. Changed to "select"
-writetmpfile(
-	  "kernel-marvel.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-marvelc.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-salsa.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-heroc.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-hero.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-liberty.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-legend.prop",
-  		  "selected=0\n"
- 	   );
-writetmpfile(
-	  "kernel-pico.prop",
-  		  "selected=0\n"
- 	   );
-#-- Thats done, man I hate some things in AROMA, but when it works boy is it awesome :)
-
-
-menubox(
-  #-- Title
-    ".sense on what?",
-  
-  #-- Sub Title
-    "What phone do you wish to be running .sense on?",
-  
-  #-- Icon
-    "@install",
-    
-  #-- Will be saved in /tmp/aroma/device.prop
-    "device.prop",
-    
-  #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
-  # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
-  #-------------------------+-----------------------------------------------------------+---------------#
-	
-	    "Wildfire S",        "Install for the Wildfire S",            "@install",      #-- selected.1 = 1
-		"Wildfire S CDMA",             "Install for the CDMA Wildfire S",                   "@install",      #-- selected.1 = 2
-		"Salsa",   "Install for the salsa",                 "@install",       #-- selected.1 = 3
-		"Hero CDMA",   "Experimental",                 "@install",       #-- selected.1 = 4
-		"Hero GSM",   "Exerimental",                 "@install",       #-- selected.1 = 5
-		"Aria",   "Experimental",                 "@install",       #-- selected.1 = 6
-		"Legend",   "Experimental",                 "@install",       #-- selected.1 = 7
-		"Pico",   "Experimental",                 "@install"       #-- selected.1 = 8
-);
-
-
-#
 #
 # STEP 6 - INSTALLATION OPTION / NOOB ASK
 #
@@ -386,49 +197,49 @@ writetmpfile(
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="2" then
 writetmpfile(
 	  "kernel-marvelc.prop",
   		  "selected=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="3" then
 writetmpfile(
 	  "kernel-salsa.prop",
   		  "selected=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="4" then
 writetmpfile(
 	  "kernel-heroc.prop",
   		  "selected=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="5" then
 writetmpfile(
 	  "kernel-hero.prop",
   		  "selected=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="6" then
 writetmpfile(
 	  "kernel-liberty.prop",
   		  "item.1.1=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="7" then
 writetmpfile(
 	  "kernel-legend.prop",
   		  "selected=1\n"
  	   );
 endif;
 
-if prop("device.prop","selected")=="1" then
+if prop("device.prop","selected")=="8" then
 writetmpfile(
 	  "kernel-pico.prop",
   		  "selected=1\n"
@@ -771,10 +582,10 @@ if prop("installtype.prop","selected")=="1" then
 		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
 		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
 
-	  "Rosie tweaks",                "",                                          2,  #-- Group 4. key = "selected.4"
-	    "Default",           "Normal Sense 3.5 launcher, no mods",                1,      #-- selected.4 = 1
-		"Default + 5x4 apps","Default launcher with 5x4 app drawer",              0,      #-- selected.4 = 2
-		"Rhyme Rosie",       "Rhyme Homescreen by SummerL Patch",                 0,      #-- selected.4 = 3
+	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
+	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
+		"ES File Explorer","Easysoft file explorer",              0,      #-- selected.4 = 2
+		"H File Manager",       "Simple, CM7 file manager",                 0,      #-- selected.4 = 3
 
 	  "Gallery",                "",                                               2,  #-- Group 5. key = "selected.5"
 	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
@@ -895,6 +706,41 @@ checkbox(
 	  #--------[ Initial Value = 0: Unselected, 1: Selected, 2: Group Item, 3: Not Visible ]---------#
   );
 
+# Let's make it yours...
+
+  menubox(
+    #-- Title
+      "Launcher",
+	  
+    #-- Sub Title
+      ".sense now supports multiple launchers",
+	  
+    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
+      "@default",
+	  
+    #-- Will be saved in /tmp/aroma/mods.prop
+      "launcher.prop",
+	  
+	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
+	  # TITLE            |  SUBTITLE                                                 | Initial Value #
+	  #------------------+-----------------------------------------------------------+---------------#
+	  
+	    "Rosie",          "Install normal Sense 3.5 launcher",                    "@personalize", #1
+		"Modded Rosie",          "Gives you Rosie with a 5x4 app drawer",                               "@personalize", #2
+		"Rhyme Rosie",     "Rosie modded to look like the HTC Rhyme",                              "@personalize", #3
+		"ADW.Launcher",     "One of the most stable launchers yet",                              "@personalize", #4
+		"GO Launcher EX",     "Themeable, configurable and stable",                              "@personalize", #5
+		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@personalize", #6
+		"MXHome",     "",                              "@personalize", #7
+		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@personalize", #8
+		"Zeam Launcher",     "",                              "@personalize", #9
+		"Balancer Launcher",     "",                              "@personalize", #10
+		"Regina 3D Launcher",     "The best 3D launcher around",                              "@personalize", #11
+		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@personalize", #12
+		"QQLauncher Pro",     "",                              "@personalize", #13
+		"HelixLauncher",     "",                              "@personalize" #14
+ 	   );
+
 #
 # Let's let the user select some experimental shiz
 #
@@ -929,7 +775,7 @@ writetmpfile(
 	  "customize.prop",
   		  "item.1.1=0\n"+
   		  "item.1.2=0\n"+
-  	          "item.1.3=1\n"
+  	          "item.1.3=1"
  	   );
 endif;
 

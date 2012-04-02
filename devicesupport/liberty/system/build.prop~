@@ -65,14 +65,13 @@ ro.wifi.channels=
 ro.board.platform=msm7k
 # ro.build.product is obsolete; use ro.product.device
 ro.build.product=marvel
-# Do not try to parse ro.build.description or .fingerprint
 ro.build.description=1.20.1400.7 CL188047 release-keys
 ro.build.description=1.20.1400.7 CL188047 release-keys
 ro.build.changelist=188047
 ro.product.ua=
 ro.build.fingerprint=htccn_chs/htc_marvel/marvel:2.3.5/GRJ90/188047.7:user/release-keys
 ro.build.project=Marvel_S:224294
-ro.product.version=.sense beta 2.0 - benjamingwynn
+ro.product.version=.sense beta 2.0.2 - benjamingwynn
 ro.build.languageremove=29
 ro.build.sense.version=3.5
 keyguard.no_require_sim=1
@@ -243,4 +242,4 @@ dalvik.vm.stack-trace-file=/data/anr/traces.txt
 
 ro.goo.developerid=benjamingwynn
 ro.goo.rom=dotSense
-ro.goo.version=5
+ro.goo.version=6

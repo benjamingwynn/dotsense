@@ -1,14 +1,12 @@
-.sense beta 2.0.1
-
-(it is named 2.0.1 after the ROM failed on many devices with 2.0)
+.sense beta 3.0
 
 .............................
 
 If you have got permission to disassemble this ROM or you are adding a mod then please note the following file information
 
-NAME: BETA 2.0.1
-CODENAME: Nemesis
-REAL-VERSION: 5
-FILE-STRUCTURE-TYPE: DevPackage 1.01
+NAME: BETA TESTING BUILD
+CODENAME: Chell
+REAL-VERSION: 6
+FILE-STRUCTURE-TYPE: DevPackage 2.01
 LAST-BUILD-DATE: 27/03/12
-TYPE: LABBUILD
+TYPE: LABBUILD (UNSTRIPPED)
