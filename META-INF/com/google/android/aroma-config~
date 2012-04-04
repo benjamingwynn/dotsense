@@ -726,20 +726,20 @@ checkbox(
 	  # TITLE            |  SUBTITLE                                                 | Initial Value #
 	  #------------------+-----------------------------------------------------------+---------------#
 	  
-	    "Rosie",          "Install normal Sense 3.5 launcher",                    "@personalize", #1
-		"Modded Rosie",          "Gives you Rosie with a 5x4 app drawer",                               "@personalize", #2
-		"Rhyme Rosie",     "Rosie modded to look like the HTC Rhyme",                              "@personalize", #3
-		"ADW.Launcher",     "One of the most stable launchers yet",                              "@personalize", #4
-		"GO Launcher EX",     "Themeable, configurable and stable",                              "@personalize", #5
-		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@personalize", #6
-		"MXHome",     "A new, redefined launcher",                              "@personalize", #7
-		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@personalize", #8
-		"Zeam Launcher",     "The underdog minimalistic launcher for Android phones",                              "@personalize", #9
-		"Balancer Launcher",     "Useful Launcher, good performance and UI",                              "@personalize", #10
-		"Regina 3D Launcher",     "The best 3D launcher around",                              "@personalize", #11
-		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@personalize", #12
-		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@personalize", #13
-		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@personalize" #14
+	    "Rosie",          "Install normal Sense 3.5 launcher",                    "@----", #1
+		"Modded Rosie",          "Gives you Rosie with a 5x4 app drawer",                               "@----", #2
+		"Rhyme Rosie",     "Rosie modded to look like the HTC Rhyme",                              "@----", #3
+		"ADW.Launcher",     "One of the most stable launchers yet",                              "@ADW1", #4
+		"GO Launcher EX",     "Themeable, configurable and stable",                              "@GO1", #5
+		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@----", #6
+		"MXHome",     "A new, redefined launcher",                              "@MXbb1", #7
+		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@----", #8
+		"Zeam Launcher",     "The underdog minimalistic launcher for Android phones",                              "@Zeam1", #9
+		"Balancer Launcher",     "Useful Launcher, good performance and UI",                              "@Balancer1", #10
+		"Regina 3D Launcher",     "The best 3D launcher around",                              "@Regina1", #11
+		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@GB1", #12
+		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@QQ1", #13
+		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1" #14
  	   );
 
 #

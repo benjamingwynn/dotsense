@@ -733,7 +733,7 @@ checkbox(
 		"GO Launcher EX",     "Themeable, configurable and stable",                              "@GO1", #5
 		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@----", #6
 		"MXHome",     "A new, redefined launcher",                              "@MXbb1", #7
-		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@----", #8
+		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@Launcher71", #8
 		"Zeam Launcher",     "The underdog minimalistic launcher for Android phones",                              "@Zeam1", #9
 		"Balancer Launcher",     "Useful Launcher, good performance and UI",                              "@Balancer1", #10
 		"Regina 3D Launcher",     "The best 3D launcher around",                              "@Regina1", #11
