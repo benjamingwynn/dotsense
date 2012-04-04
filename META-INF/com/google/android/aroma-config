@@ -531,6 +531,7 @@ if prop("installtype.prop","selected")=="2" then
 		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    1,      #-- selected.9 = 3
 		"Android",        "Old-style android text",                               0,      #-- selected.9 = 4
 		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,      #-- selected.9 = 5
+		"MIUI",      "-----------------",         0,      #-- selected.9 = 6
       
 	  "Internal memory to SD tweaks",           "",                               2,  #-- Group 10. key = "selected.10"
 	    "None",           "Use Normal Gingerbread app2sd",                        1,      #-- selected.10 = 1
@@ -582,6 +583,7 @@ if prop("installtype.prop","selected")=="1" then
 		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
 		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
 		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
+		"MIUI Music",      "---------------",                                      0,      #-- selected.3 = 6
 
 	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
 	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
@@ -592,6 +594,7 @@ if prop("installtype.prop","selected")=="1" then
 	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
 		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
 		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
+		"MIUI Gallery",      "---------------",                                      0,      #-- selected.5 = 4
 
 	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
 	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
@@ -660,7 +663,7 @@ checkbox(
 	   "Twitter",          "Follow your interests: instant updates from your friends",          0,      #-- item.1.2
 	   "ES File Explorer", "The best file manager for Android",                                 3,      #-- item.1.3 - NOT VISIBLE. DO NOT USE
 	   "Flash 11",         "Bring the FULL web to your device with Flash Player",               1,      #-- item.1.4
-           "Teeter",           "Classic HTC game that should come by default!",                     1,      #-- item.1.6
+           "Teeter",           "Classic HTC game. Enjoy :)",                     0,      #-- item.1.6
            "Flashlight",       "HTC Flashlight",                                                    0,      #-- item.1.7
            "GMail",            "If you don't want to use the default mail app",                     0,      #-- item.1.8
            "Better Facebook",  "Works better, credit to BigBearEvo",                                0,      #-- item.1.9
@@ -668,6 +671,8 @@ checkbox(
 	   "ROM Manager",      "Flash ROMS like its going out of fashion!",                         1,      #-- item.1.11
 	   "NoThrills CPU",    "Control your CPU, Overclock, Governoor, Voltage an many more",      1,      #-- item.1.12
 	   "Better Youtube",   "Mod Youtube to play HD 720p",                                       0,      #-- item 1.13
+	   "MIUI Sound Recorder",        "----------------",                                             1,      #-- item.1.14
+	   "MIUI Compass",        "----------------",                                             1,      #-- item.1.15
 		
 	  "System Applications",         "",                                                        2,  #-- Group 2. key = "item.2.x"
 	   "App Sharing",       "HTC's app sharing app",                                            1,      #-- item.2.1
@@ -677,16 +682,16 @@ checkbox(
 	   "Friend Stream",     "Default HTC Social App",                                           1,      #-- item.2.5
 	   "Google Search",     "Experimental app ported from CM7",                                 1,      #-- item.2.6
 	   "H File manager",    "Experimental app ported from CM7",                                 3,      #-- item.2.7 - NOT VISIBLE. DO NOT USE
-	   "FM Radio",          "Default HTC Radio App",                                            1,      #-- item.2.8
+	   "HTC FM Radio",          "Default HTC Radio App",                                            1,      #-- item.2.8
 	   "HTC Likes",         "Default HTC Likes App",                                            1,      #-- item.2.9
-	   "HTC Sound recorder","Default HTC Sound Recording App",                                  1,      #-- item.2.10
+	   "HTC Sound recorder","Default HTC Sound Recording App",                                  0,      #-- item.2.10
 	   "HTC Mail",         "Default HTC Main client",                                           1,      #-- item.2.11
 	   "Google Maps",      "Experimental app ported from CM7",                                  1,      #-- item.2.12
 	   "My HTC",           "Default My HTC App",                                                1,      #-- item.2.13
 	   "Google Talk",      "Experimental app ported from CM7",                                  1,      #-- item.2.14
 	   "HTC Task Manager", "Default HTC Task Manager App",                                      1,      #-- item.2.15
-	   "Usage Monitor",   "Crashes some CDMA phones.",                                          1,      #-- item.2.16
-	   "Weather",          "Default HTC Weather App",                                           1,      #-- item.2.17
+	   "HTC Usage Monitor",   "Crashes some CDMA phones.",                                          1,      #-- item.2.16
+	   "HTC Weather",          "Default HTC Weather App",                                           1,      #-- item.2.17
 	   "HTC Clock",        "Default HTC Clock App",                                             1,      #-- item.2.18
 	   "MIUI Filemanager",        "Strongly recommended",                                             3,      #-- item.2.19 - NOT VISIBLE. DO NOT USE
 
