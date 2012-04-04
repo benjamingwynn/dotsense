@@ -516,7 +516,8 @@ if prop("installtype.prop","selected")=="2" then
 	    "New",             "New ring lockscreen",                                 0,      #-- selected.7 = 1
 		"Old",             "Experimental old swipe down lockscreen",              0,      #-- selected.7 = 2
 		"Gingerbread",     "Experimental default Gingerbread lock",               0,      #-- selected.7 = 3
-		"4.0 Lockscreen",  "Experimental Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
+		"4.0 Lockscreen",  "Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
+		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         1,      #-- selected.6 = 5
 
 	  "Audio Enchatments",                "",                                     2,  #-- Group 8. key = "selected.8"
 	    "None",            "Keep stock audio stuff",                              1,      #-- selected.8 = 1
@@ -731,14 +732,14 @@ checkbox(
 		"ADW.Launcher",     "One of the most stable launchers yet",                              "@personalize", #4
 		"GO Launcher EX",     "Themeable, configurable and stable",                              "@personalize", #5
 		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@personalize", #6
-		"MXHome",     "",                              "@personalize", #7
+		"MXHome",     "A new, redefined launcher",                              "@personalize", #7
 		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@personalize", #8
-		"Zeam Launcher",     "",                              "@personalize", #9
-		"Balancer Launcher",     "",                              "@personalize", #10
+		"Zeam Launcher",     "The underdog minimalistic launcher for Android phones",                              "@personalize", #9
+		"Balancer Launcher",     "Useful Launcher, good performance and UI",                              "@personalize", #10
 		"Regina 3D Launcher",     "The best 3D launcher around",                              "@personalize", #11
 		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@personalize", #12
-		"QQLauncher Pro",     "",                              "@personalize", #13
-		"HelixLauncher",     "",                              "@personalize" #14
+		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@personalize", #13
+		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@personalize" #14
  	   );
 
 #
