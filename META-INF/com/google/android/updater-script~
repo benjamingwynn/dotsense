@@ -878,11 +878,18 @@ set_progress(0.5);
       ui_print("Installing Gingerbread lockscreen...");
     endif;
 	
-	    if
+    if
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "4"
     then
       ui_print("Installing new 4.0 lockscreen...");
       package_extract_dir("packages-onlyone/Lockscreen/40Lock", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.7") == "5"
+    then
+      ui_print("Installing BB's lockscreen...");
+      package_extract_dir("packages-onlyone/Lockscreen/BigBearEvo", "/system/app");
     endif;
 
 #- Audio Enchantments

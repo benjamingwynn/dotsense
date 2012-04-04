@@ -496,16 +496,18 @@ if prop("installtype.prop","selected")=="2" then
 		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
 		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
 		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
+		"MIUI Music",      "---------------",                                      0,      #-- selected.3 = 6
 
-	  "Rosie tweaks",                "",                                          2,  #-- Group 4. key = "selected.4"
-	    "Default",           "Normal Sense 3.5 launcher, no mods",                1,      #-- selected.4 = 1
-		"Default + 5x4 apps","Default launcher with 5x4 app drawer",              0,      #-- selected.4 = 2
-		"Rhyme Rosie",       "Rhyme Homescreen by SummerL Patch",                 0,      #-- selected.4 = 3
+	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
+	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
+		"ES File Explorer","Easysoft file explorer",              0,      #-- selected.4 = 2
+		"H File Manager",       "Simple, CM7 file manager",                 0,      #-- selected.4 = 3
 
 	  "Gallery",                "",                                               2,  #-- Group 5. key = "selected.5"
 	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
 		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
 		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
+		"MIUI Gallery",      "---------------",                                      0,      #-- selected.5 = 4
 
 	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
 	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
@@ -605,7 +607,8 @@ if prop("installtype.prop","selected")=="1" then
 	    "New",             "New ring lockscreen",                                 0,      #-- selected.7 = 1
 		"Old",             "Experimental old swipe down lockscreen",              0,      #-- selected.7 = 2
 		"Gingerbread",     "Experimental default Gingerbread lock",               0,      #-- selected.7 = 3
-		"4.0 Lockscreen",  "Experimental Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
+		"4.0 Lockscreen",  "Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
+		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         1,      #-- selected.6 = 5
 
 	  "Audio Enchatments",                "",                                     2,  #-- Group 8. key = "selected.8"
 	    "None",            "Keep stock audio stuff",                              0,      #-- selected.8 = 1

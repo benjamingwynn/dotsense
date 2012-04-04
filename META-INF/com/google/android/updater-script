@@ -401,13 +401,26 @@ ui_print("@Installing packages");
       package_extract_dir("packages/apps_data/NoThrillsCPU", "/data/app");
     endif;
 
-	    if
+    if
       file_getprop("/tmp/aroma/customize.prop","item.1.12") == "1"
     then
       ui_print("Installing Better YouTube");
       package_extract_dir("packages/apps_data/BetterYouTube", "/data/app");
     endif;
-	
+#- Now for our new MIUI friends.
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.14") == "1"
+    then
+      ui_print("Installing MIUI Sound Recorder");
+      package_extract_dir("packages/apps_sys/MIUI/SoundRecorder", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/customize.prop","item.1.15") == "1"
+    then
+      ui_print("Installing MIUI Compass");
+      package_extract_dir("packages/apps_sys/MIUI/Compass", "/system/app");
+    endif;
 #
 #-- Now for system apps
 set_progress(0.5);
@@ -719,9 +732,17 @@ set_progress(0.5);
     if
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "5"
     then
-      ui_print("Installing Honeycomb bootanimation");
-      package_extract_dir("packages-onlyone/BootAnimation/Honeycomb", "/system/customize/resource");
+      ui_print("Installing MIUI bootanimation");
+      package_extract_dir("packages-onlyone/BootAnimation/MIUI", "/system/customize/resource");
     endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "6"
+    then
+      ui_print("Installing MIUI Gallery");
+      package_extract_dir("packages/apps_sys/MIUI/BootAnimation", "/system/customize/resource");
+    endif;
+
 
 
 #- Themes
@@ -787,6 +808,14 @@ set_progress(0.5);
       package_extract_dir("packages-onlyone/Music/CM7", "/system/app");
     endif;
 
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.3") == "6"
+    then
+      ui_print("Installing MIUI Music");
+      package_extract_dir("packages/apps_sys/MIUI/Music", "/system/app");
+    endif;
+
+
 #- File Explorers
 
     if
@@ -831,6 +860,13 @@ set_progress(0.5);
     then
       ui_print("Installing Sense 3.5 Gallery");
       package_extract_dir("packages-onlyone/Gallery/Sense35", "/system/app");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.5") == "4"
+    then
+      ui_print("Installing MIUI Gallery");
+      package_extract_dir("packages/apps_sys/MIUI/Gallery", "/system/app");
     endif;
 
 #- Camera App
