@@ -28,8 +28,7 @@ mount("MTD", "system", "/system");
 #- Mount DATA
 ui_print("Mounting data...");
 mount("MTD", "userdata", "/data");
-# "DEVPACKAGE" SCRIPTING ENGINE
-#
+# "DEVPACKAGE" SCRIPTING ENGINE and folder layout
 
 # Main system files.
 
