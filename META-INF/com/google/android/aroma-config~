@@ -658,7 +658,7 @@ checkbox(
 	  "Applications",         "",                                                               2,  #-- Group 1. key = "item.1.x"
 	   "Ringtone Trimmer", "HTC-included ringtone trimmer",                                     1,      #-- item.1.1
 	   "Twitter",          "Follow your interests: instant updates from your friends",          0,      #-- item.1.2
-	   "ES File Explorer", "The best file manager for Android",                                 0,      #-- item.1.3
+	   "ES File Explorer", "The best file manager for Android",                                 3,      #-- item.1.3 - NOT VISIBLE. DO NOT USE
 	   "Flash 11",         "Bring the FULL web to your device with Flash Player",               1,      #-- item.1.4
            "Teeter",           "Classic HTC game that should come by default!",                     1,      #-- item.1.6
            "Flashlight",       "HTC Flashlight",                                                    0,      #-- item.1.7
@@ -676,7 +676,7 @@ checkbox(
 	   "Calendar",          "Default HTC Calendar App",                                         1,      #-- item.2.4
 	   "Friend Stream",     "Default HTC Social App",                                           1,      #-- item.2.5
 	   "Google Search",     "Experimental app ported from CM7",                                 1,      #-- item.2.6
-	   "H File manager",    "Experimental app ported from CM7",                                 0,      #-- item.2.7
+	   "H File manager",    "Experimental app ported from CM7",                                 3,      #-- item.2.7 - NOT VISIBLE. DO NOT USE
 	   "FM Radio",          "Default HTC Radio App",                                            1,      #-- item.2.8
 	   "HTC Likes",         "Default HTC Likes App",                                            1,      #-- item.2.9
 	   "HTC Sound recorder","Default HTC Sound Recording App",                                  1,      #-- item.2.10
@@ -688,7 +688,7 @@ checkbox(
 	   "Usage Monitor",   "Crashes some CDMA phones.",                                          1,      #-- item.2.16
 	   "Weather",          "Default HTC Weather App",                                           1,      #-- item.2.17
 	   "HTC Clock",        "Default HTC Clock App",                                             1,      #-- item.2.18
-	   "MIUI Filemanager",        "Strongly recommended",                                             1,      #-- item.2.19
+	   "MIUI Filemanager",        "Strongly recommended",                                             3,      #-- item.2.19 - NOT VISIBLE. DO NOT USE
 
 	  "Widgets",              "",                                                               2,  #-- Group 3. key = "item.3.x"
 	   "Calendar",         "HTC Calendar Widget",                                               1,      #-- item.3.1 = Selected by default
