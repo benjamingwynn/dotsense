@@ -530,10 +530,11 @@ if prop("installtype.prop","selected")=="2" then
           "Boot Animation",        "",                                                2,  #-- Group 9. key = "selected.9"
 	    "ICS Style",      "Default ICS boot animation",                           0,      #-- selected.9 = 1
 		"Nexus One",      "Like the old Nexus One boot?",                         0,      #-- selected.9 = 2
-		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    1,      #-- selected.9 = 3
+		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    0,      #-- selected.9 = 3
 		"Android",        "Old-style android text",                               0,      #-- selected.9 = 4
 		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,      #-- selected.9 = 5
 		"MIUI",      "-----------------",         0,      #-- selected.9 = 6
+		"Beats Audio",      "-----------------",         1,      #-- selected.9 = 7
       
 	  "Internal memory to SD tweaks",           "",                               2,  #-- Group 10. key = "selected.10"
 	    "None",           "Use Normal Gingerbread app2sd",                        1,      #-- selected.10 = 1
