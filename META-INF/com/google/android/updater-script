@@ -743,6 +743,12 @@ set_progress(0.5);
       package_extract_dir("packages/apps/MIUI/BootAnimation", "/system/customize/resource");
     endif;
 
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "6"
+    then
+      ui_print("Installing MIUI Gallery");
+      package_extract_dir("packages/BootAnimation/BeatsAudio", "/system/customize/resource");
+    endif;
 
 
 #- Themes

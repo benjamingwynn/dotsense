@@ -35,7 +35,7 @@ mount("MTD", "userdata", "/data");
 # First extract the APK's and stuff. If you have a GSM Wildfire S then that is all you need so far
 ui_print("@Installing system files");
 ui_print("Extraction of main started");
-package_extract_dir("core", "/system");
+package_extract_dir("system", "/system");
 ui_print("Extraction of main finished");
 
 #- Busybox
@@ -312,7 +312,7 @@ symlink("toolbox", "/system/bin/wipe");
 #
 #
 # OKAY!!!
-#               NOW THAT CORE IS SET UP I AM ABOUT TO INSTALL YOUR PACKAGES! I HOPE THIS
+#               NOW THAT system IS SET UP I AM ABOUT TO INSTALL YOUR PACKAGES! I HOPE THIS
 #               WORKS!!!!
 #
 #
@@ -327,28 +327,28 @@ ui_print("@Installing packages");
       file_getprop("/tmp/aroma/customize.prop","item.1.1") == "1"
     then
       ui_print("Installing Ringtone Trimmer");
-      package_extract_dir("packages/apps_data/RingtoneTrimmer", "/data/app");
+      package_extract_dir("packages/apps/RingtoneTrimmer", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.2") == "1"
     then
       ui_print("Installing Twitter");
-      package_extract_dir("packages/apps_data/Twitter", "/data/app");
+      package_extract_dir("packages/apps/Twitter", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.3") == "1"
     then
       ui_print("Installing ES File Explorer");
-      package_extract_dir("packages/apps_data/ESFileExplorer", "/data/app");
+      package_extract_dir("packages/apps/ESFileExplorer", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.4") == "1"
     then
       ui_print("Installing Flash 11");
-      package_extract_dir("packages/apps_data/Flash11", "/data/app");
+      package_extract_dir("packages/apps/Flash11", "/data/app");
     endif;
 
 
@@ -356,70 +356,70 @@ ui_print("@Installing packages");
       file_getprop("/tmp/aroma/customize.prop","item.1.5") == "1"
     then
       ui_print("Installing Teeter");
-      package_extract_dir("packages/apps_data/Teeter", "/data/app");
+      package_extract_dir("packages/apps/Teeter", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.6") == "1"
     then
       ui_print("Installing Flashlight");
-      package_extract_dir("packages/apps_data/Flashlight", "/data/app");
+      package_extract_dir("packages/apps/Flashlight", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.7") == "1"
     then
       ui_print("Installing GMail");
-      package_extract_dir("packages/apps_data/GMail", "/data/app");
+      package_extract_dir("packages/apps/GMail", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.8") == "1"
     then
       ui_print("Installing Better Facebook");
-      package_extract_dir("packages/apps_data/BetterFacebook", "/data/app");
+      package_extract_dir("packages/apps/BetterFacebook", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.9") == "1"
     then
       ui_print("Installing AdFree");
-      package_extract_dir("packages/apps_data/AdFree", "/data/app");
+      package_extract_dir("packages/apps/AdFree", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.10") == "1"
     then
       ui_print("Installing ROM Manager");
-      package_extract_dir("packages/apps_data/ROMManager", "/data/app");
+      package_extract_dir("packages/apps/ROMManager", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.11") == "1"
     then
       ui_print("Installing NoThrills");
-      package_extract_dir("packages/apps_data/NoThrillsCPU", "/data/app");
+      package_extract_dir("packages/apps/NoThrillsCPU", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.12") == "1"
     then
       ui_print("Installing Better YouTube");
-      package_extract_dir("packages/apps_data/BetterYouTube", "/data/app");
+      package_extract_dir("packages/apps/BetterYouTube", "/data/app");
     endif;
 #- Now for our new MIUI friends.
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.14") == "1"
     then
       ui_print("Installing MIUI Sound Recorder");
-      package_extract_dir("packages/apps_sys/MIUI/SoundRecorder", "/system/app");
+      package_extract_dir("packages/apps/MIUI/SoundRecorder", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.1.15") == "1"
     then
       ui_print("Installing MIUI Compass");
-      package_extract_dir("packages/apps_sys/MIUI/Compass", "/system/app");
+      package_extract_dir("packages/apps/MIUI/Compass", "/system/app");
     endif;
 #
 #-- Now for system apps
@@ -430,49 +430,49 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/customize.prop","item.2.1") == "1"
     then
       ui_print("Installing App Sharing");
-      package_extract_dir("packages/apps_sys/AppSharing", "/system/app");
+      package_extract_dir("packages/apps/AppSharing", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.2") == "1"
     then
       ui_print("Installing Browser");
-      package_extract_dir("packages/apps_sys/Browser", "/system/app");
+      package_extract_dir("packages/apps/Browser", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.3") == "1"
     then
       ui_print("Installing Calculator");
-      package_extract_dir("packages/apps_sys/Calculator", "/system/app");
+      package_extract_dir("packages/apps/Calculator", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.4") == "1"
     then
       ui_print("Installing Calendar");
-      package_extract_dir("packages/apps_sys/Calendar", "/system/app");
+      package_extract_dir("packages/apps/Calendar", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.5") == "1"
     then
       ui_print("Installing Friend Stream");
-      package_extract_dir("packages/apps_sys/FriendStream", "/system/app");
+      package_extract_dir("packages/apps/FriendStream", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.6") == "1"
     then
       ui_print("Installing Google Search");
-      package_extract_dir("packages/apps_sys/GoogleSearch", "/system/app");
+      package_extract_dir("packages/apps/GoogleSearch", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.7") == "1"
     then
       ui_print("Installing File Manager");
-      package_extract_dir("packages/apps_sys/HFileManager", "/system/app");
+      package_extract_dir("packages/apps/HFileManager", "/system/app");
     endif;
 
 
@@ -480,84 +480,84 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/customize.prop","item.2.8") == "1"
     then
       ui_print("Installing FM Radio");
-      package_extract_dir("packages/apps_sys/FMRadio", "/system/app");
+      package_extract_dir("packages/apps/FMRadio", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.9") == "1"
     then
       ui_print("Installing HTC Likes");
-      package_extract_dir("packages/apps_sys/HTCLikes", "/system/app");
+      package_extract_dir("packages/apps/HTCLikes", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.10") == "1"
     then
       ui_print("Installing HTC Sound Recorder");
-      package_extract_dir("packages/apps_sys/HTCSoundRecorder", "/system/app");
+      package_extract_dir("packages/apps/HTCSoundRecorder", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.11") == "1"
     then
       ui_print("Installing HTC Mail");
-      package_extract_dir("packages/apps_sys/HTCMail", "/system/app");
+      package_extract_dir("packages/apps/HTCMail", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.12") == "1"
     then
       ui_print("Installing Google Maps");
-      package_extract_dir("packages/apps_sys/GoogleMaps", "/system/app");
+      package_extract_dir("packages/apps/GoogleMaps", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.13") == "1"
     then
       ui_print("Installing My HTC");
-      package_extract_dir("packages/apps_sys/MyHTC", "/system/app");
+      package_extract_dir("packages/apps/MyHTC", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.14") == "1"
     then
       ui_print("Installing Google Talk");
-      package_extract_dir("packages/apps_sys/GoogleTalk", "/system/app");
+      package_extract_dir("packages/apps/GoogleTalk", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.15") == "1"
     then
       ui_print("Installing HTC Task Manager");
-      package_extract_dir("packages/apps_sys/HTCTaskManager", "/system/app");
+      package_extract_dir("packages/apps/HTCTaskManager", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.16") == "1"
     then
       ui_print("Installing Usage Monitor");
-      package_extract_dir("packages/apps_sys/UsageMonitor", "/system/app");
+      package_extract_dir("packages/apps/UsageMonitor", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.17") == "1"
     then
       ui_print("Installing Weather");
-      package_extract_dir("packages/apps_sys/Weather","/system/app");
+      package_extract_dir("packages/apps/Weather","/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.18") == "1"
     then
       ui_print("Installing HTC Clock");
-      package_extract_dir("packages/apps_sys/HTCClock","/system/app");
+      package_extract_dir("packages/apps/HTCClock","/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/customize.prop","item.2.18") == "1"
     then
       ui_print("Installing MIUI Filemanager");
-      package_extract_dir("packages/apps_sys/MIUIFM","/system/app");
+      package_extract_dir("packages/apps/MIUIFM","/system/app");
     endif;
 
 #
@@ -689,14 +689,14 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.2") == "1"
     then
       ui_print("Installing HTC Keyboard");
-      package_extract_dir("packages-onlyone/Keyboard/HTC", "/system/app");
+      package_extract_dir("packages/Keyboard/HTC", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.2") == "2"
     then
       ui_print("Installing Gingerbread keyboard");
-      package_extract_dir("packages-onlyone/Keyboard/Gingerbread", "/data/app");
+      package_extract_dir("packages/Keyboard/Gingerbread", "/data/app");
     endif;
 
 
@@ -706,21 +706,21 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "1"
     then
       ui_print("Installing ICS Boot Animation");
-      package_extract_dir("packages-onlyone/BootAnimation/ICSStyle", "/system/customize/resource");
+      package_extract_dir("packages/BootAnimation/ICSStyle", "/system/customize/resource");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "2"
     then
       ui_print("Installing Nexus One Boot Animation");
-      package_extract_dir("packages-onlyone/BootAnimation/NexusOne", "/system/customize/resource");
+      package_extract_dir("packages/BootAnimation/NexusOne", "/system/customize/resource");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "3"
     then
       ui_print("Installing HTC Boot Animation");
-      package_extract_dir("packages-onlyone/BootAnimation/HTCStyle", "/system/customize/resource");
+      package_extract_dir("packages/BootAnimation/HTCStyle", "/system/customize/resource");
     endif;
 
     if
@@ -733,14 +733,14 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "5"
     then
       ui_print("Installing MIUI bootanimation");
-      package_extract_dir("packages-onlyone/BootAnimation/MIUI", "/system/customize/resource");
+      package_extract_dir("packages/BootAnimation/MIUI", "/system/customize/resource");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.9") == "6"
     then
       ui_print("Installing MIUI Gallery");
-      package_extract_dir("packages/apps_sys/MIUI/BootAnimation", "/system/customize/resource");
+      package_extract_dir("packages/apps/MIUI/BootAnimation", "/system/customize/resource");
     endif;
 
 
@@ -755,20 +755,20 @@ set_progress(0.5);
     then
       ui_print("Installing Glass theme...");
     endif;
-      package_extract_dir("packages-onlyone/Theme/Glass", "/system");
+      package_extract_dir("packages/Theme/Glass", "/system");
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
     then
       ui_print("Installing stock theme...");
-      package_extract_dir("packages-onlyone/Theme/Stock", "/system");
+      package_extract_dir("packages/Theme/Stock", "/system");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "3"
     then
       ui_print("Installing CM7 theme...");
-      package_extract_dir("packages-onlyone/Theme/CM7", "/system");
+      package_extract_dir("packages/Theme/CM7", "/system");
     endif;
 
 #- Music
@@ -777,42 +777,42 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "1"
     then
       ui_print("Installing ICS Music");
-      package_extract_dir("packages-onlyone/Music/ICS", "/system/app");
+      package_extract_dir("packages/Music/ICS", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "2"
     then
       ui_print("Installing MIUI Music");
-      package_extract_dir("packages-onlyone/Music/MIUI", "/system/app");
+      package_extract_dir("packages/Music/MIUI", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "3"
     then
       ui_print("Installing Sense 3.5 music");
-      package_extract_dir("packages-onlyone/Music/Sense", "/system/app");
+      package_extract_dir("packages/Music/Sense", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "4"
     then
       ui_print("Installing Sense 2.1 music");
-      package_extract_dir("packages-onlyone/Music/SenseOld", "/system/app");
+      package_extract_dir("packages/Music/SenseOld", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "5"
     then
       ui_print("Installing CM7 music");
-      package_extract_dir("packages-onlyone/Music/CM7", "/system/app");
+      package_extract_dir("packages/Music/CM7", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "6"
     then
       ui_print("Installing MIUI Music");
-      package_extract_dir("packages/apps_sys/MIUI/Music", "/system/app");
+      package_extract_dir("packages/apps/MIUI/Music", "/system/app");
     endif;
 
 
@@ -822,21 +822,21 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.4") == "1"
     then
       ui_print("Installing MIUI File manager");
-      package_extract_dir("packages-onlyone/FileManager/MIUI", "/data/app");
+      package_extract_dir("packages/FileManager/MIUI", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.4") == "2"
     then
       ui_print("Installing ES File Explorer");
-      package_extract_dir("packages-onlyone/FileManager/ES", "/data/app");
+      package_extract_dir("packages/FileManager/ES", "/data/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.4") == "3"
     then
       ui_print("Installing H File Explorer");
-      package_extract_dir("packages-onlyone/FileManager/HFile", "/data/app");
+      package_extract_dir("packages/FileManager/HFile", "/data/app");
     endif;
 
 #- Gallery App
@@ -845,28 +845,28 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.5") == "1"
     then
       ui_print("Installing Gingerbread Gallery");
-      package_extract_dir("packages-onlyone/Gallery/Gingerbread", "/system/app");
+      package_extract_dir("packages/Gallery/Gingerbread", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.5") == "2"
     then
       ui_print("Installing old Sense gallery");
-      package_extract_dir("packages-onlyone/Gallery/Sense21", "/system/app");
+      package_extract_dir("packages/Gallery/Sense21", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.5") == "3"
     then
       ui_print("Installing Sense 3.5 Gallery");
-      package_extract_dir("packages-onlyone/Gallery/Sense35", "/system/app");
+      package_extract_dir("packages/Gallery/Sense35", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.5") == "4"
     then
       ui_print("Installing MIUI Gallery");
-      package_extract_dir("packages/apps_sys/MIUI/Gallery", "/system/app");
+      package_extract_dir("packages/apps/MIUI/Gallery", "/system/app");
     endif;
 
 #- Camera App
@@ -875,21 +875,21 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.6") == "1"
     then
       ui_print("Installing MIUI Camera...");
-      package_extract_dir("packages-onlyone/Camera/MIUI", "/system/app");
+      package_extract_dir("packages/Camera/MIUI", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.6") == "2"
     then
       ui_print("Installing Sense 3.5 Camera...");
-      package_extract_dir("packages-onlyone/Camera/Sense", "/system/app");
+      package_extract_dir("packages/Camera/Sense", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.6") == "3"
     then
       ui_print("Installing Sense 2.1 Camera...");
-      package_extract_dir("packages-onlyone/Camera/SenseOld", "/system/app");
+      package_extract_dir("packages/Camera/SenseOld", "/system/app");
     endif;
 
 #- Lockscreen
@@ -898,14 +898,14 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "1"
     then
       ui_print("Installing new lockscreen...");
-      package_extract_dir("packages-onlyone/Lockscreen/New", "/system/app");
+      package_extract_dir("packages/Lockscreen/New", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "2"
     then
       ui_print("Installing old lockscreen...");
-      package_extract_dir("packages-onlyone/Lockscreen/Old", "/system/app");
+      package_extract_dir("packages/Lockscreen/Old", "/system/app");
     endif;
 
     if
@@ -918,14 +918,14 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "4"
     then
       ui_print("Installing new 4.0 lockscreen...");
-      package_extract_dir("packages-onlyone/Lockscreen/40Lock", "/system/app");
+      package_extract_dir("packages/Lockscreen/40Lock", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "5"
     then
       ui_print("Installing BB's lockscreen...");
-      package_extract_dir("packages-onlyone/Lockscreen/BigBearEvo", "/system/app");
+      package_extract_dir("packages/Lockscreen/BigBearEvo", "/system/app");
     endif;
 
 #- Audio Enchantments
@@ -934,22 +934,22 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.8") == "2"
     then
       ui_print("Installing DSP Equalizer");
-      package_extract_dir("packages-onlyone/Audio/DSPEqualizer", "/system");
+      package_extract_dir("packages/Audio/DSPEqualizer", "/system");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.8") == "3"
     then
       ui_print("Installing Beats Audio");
-      package_extract_dir("packages-onlyone/Audio/BeatsAudio", "/system");
+      package_extract_dir("packages/Audio/BeatsAudio", "/system");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.8") == "4"
     then
       ui_print("Installing both audio mods...");
-      package_extract_dir("packages-onlyone/Audio/BeatsAudio", "/system");
-      package_extract_dir("packages-onlyone/Audio/DSPEqualizer", "/system");
+      package_extract_dir("packages/Audio/BeatsAudio", "/system");
+      package_extract_dir("packages/Audio/DSPEqualizer", "/system");
     endif;
 
 #- OTA update App
@@ -958,7 +958,7 @@ set_progress(0.5);
       file_getprop("/tmp/aroma/mods.prop","selected.11") == "2"
     then
       ui_print("Installing OTA updates app...");
-      package_extract_dir("packages-onlyone/OTA", "/system/app");
+      package_extract_dir("packages/OTA", "/system/app");
     endif;
 
 # Link2SD, not to be confussed with data2sd!
@@ -969,7 +969,7 @@ ui_print("@Installing SD Card mods");
       file_getprop("/tmp/aroma/mods.prop","selected.10") == "3"
     then
       ui_print("Installing Link2SD");
-      package_extract_dir("packages-onlyone/Misc/Link2SD", "/data/app");
+      package_extract_dir("packages/Misc/Link2SD", "/data/app");
     endif;
 
 #
@@ -984,8 +984,8 @@ ui_print("@Installing SD Card mods");
       delete("/system/etc/init.d/03stuff2sd");
       delete("/system/etc/init.d/10apps2sd");
       delete("/system/etc/init.d/04apps2sd");
-      package_extract_dir("packages-onlyone/data2whatever/system", "/system");
-      package_extract_dir("packages-onlyone/data2whatever/data", "/data");
+      package_extract_dir("packages/data2whatever/system", "/system");
+      package_extract_dir("packages/data2whatever/data", "/data");
       set_perm(0, 2000, 0755, "/system/etc/init.d/01data2whatever");
       set_perm(0, 2000, 0755, "/system/etc/init.d/98zipalign");
       set_perm(0, 2000, 0755, "/system/etc/init.d/991complete");
