@@ -35,7 +35,7 @@ ini_set("rom_device",           "----");
 #- Build date (e.g. 06/04/2012)
 ini_set("rom_date",             "----");
 #- ROM Codename (e.g. Nemesis)
-ini_set("rom_date",             "Chell");
+ini_set("rom_codename",             "Chell");
 #- Device number
 #--- 1: Wildfire S - GSM
 #--- 2: Wildfire S - CDMA

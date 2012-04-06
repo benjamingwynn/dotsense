@@ -749,6 +749,7 @@ checkbox(
 		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@GB1", #12
 		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@QQ1", #13
 		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1" #14
+		"360 Launcher",     "'clean and just amazing'",                              "@----" #14
  	   );
 
 #

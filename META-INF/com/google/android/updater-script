@@ -1106,6 +1106,14 @@ ui_print("@Installing Launcher");
       package_extract_dir("packages/launchers/Helix", "/system/app");
     endif;
 
+    if
+      file_getprop("/tmp/aroma/launcher.prop","selected") == "15"
+    then
+      ui_print("Installing 360 Launcher");
+      package_extract_dir("packages/launchers/360", "/system/app");
+    endif;
+
+
 #
 #
 #
