@@ -104,6 +104,43 @@ writetmpfile(
 	  "experimental.prop",
   		  "selected=0\n"
  	   );
+	   
+#
+#- Fixes bad kernel bug
+#
+
+writetmpfile(
+	  "kernel-marvel.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-salsa.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-marvelc.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-hero.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-heroc.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-legend.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-liberty.prop",
+  		  "selected=0\n"
+ 	   );
+writetmpfile(
+	  "kernel-pico.prop",
+  		  "selected=0\n"
+ 	   );
 
 # Don't bother putting anymore fixes :)
 
@@ -750,7 +787,7 @@ checkbox(
 		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@GB1", #12
 		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@QQ1", #13
 		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1" #14
-		"360 Launcher",     "'clean and just amazing'",                              "@----" #14
+		"360 Launcher",     "Clean and just amazing",                              "@----" #15
  	   );
 
 #
