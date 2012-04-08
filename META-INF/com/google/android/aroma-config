@@ -535,6 +535,7 @@ if prop("installtype.prop","selected")=="2" then
 		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,      #-- selected.9 = 5
 		"MIUI",      "-----------------",         0,      #-- selected.9 = 6
 		"Beats Audio",      "-----------------",         1,      #-- selected.9 = 7
+		"Interesting",      "-----------------",         0,      #-- selected.9 = 8
       
 	  "Internal memory to SD tweaks",           "",                               2,  #-- Group 10. key = "selected.10"
 	    "None",           "Use Normal Gingerbread app2sd",                        1,      #-- selected.10 = 1

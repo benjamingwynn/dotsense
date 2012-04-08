@@ -744,10 +744,17 @@ set_progress(0.5);
     endif;
 
     if
-      file_getprop("/tmp/aroma/mods.prop","selected.9") == "6"
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "7"
     then
-      ui_print("Installing MIUI Gallery");
+      ui_print("Installing Beats Audio boot");
       package_extract_dir("packages/BootAnimation/BeatsAudio", "/system/customize/resource");
+    endif;
+
+    if
+      file_getprop("/tmp/aroma/mods.prop","selected.9") == "8"
+    then
+      ui_print("Installing Interesting boot animation");
+      package_extract_dir("packages/BootAnimation/Interesting", "/system/customize/resource");
     endif;
 
 
