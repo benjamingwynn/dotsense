@@ -786,7 +786,7 @@ checkbox(
 		"Regina 3D Launcher",     "The best 3D launcher around",                              "@Regina1", #11
 		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@GB1", #12
 		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@QQ1", #13
-		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1" #14
+		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1", #14
 		"360 Launcher",     "Clean and just amazing",                              "@----" #15
  	   );
 
