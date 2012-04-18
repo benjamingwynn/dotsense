@@ -27,15 +27,15 @@ theme("dotsense2");
 #- Name
 ini_set("rom_name",             ".sense");
 #- Version
-ini_set("rom_version",          "testing build");
+ini_set("rom_version",          "3.0");
 #- Me (aren't I awesome)
 ini_set("rom_author",           "benjamingynn");
 #- Device this is built for (e.g. Wildfire S)
-ini_set("rom_device",           "----");
+ini_set("rom_device",           "HTC Salsa");
 #- Build date (e.g. 06/04/2012)
-ini_set("rom_date",             "----");
+ini_set("rom_date",             "14/04/12");
 #- ROM Codename (e.g. Nemesis)
-ini_set("rom_codename",             "Chell");
+ini_set("rom_codename",             "Freefire");
 #- Device number
 #--- 1: Wildfire S - GSM
 #--- 2: Wildfire S - CDMA
@@ -47,7 +47,7 @@ ini_set("rom_codename",             "Chell");
 #--- 8: Explorer/Pico
 writetmpfile(
 	  "device.prop",
-  		  "selected=0"
+  		  "selected=3"
  	   );
 
 # [[End of ROM information]]
@@ -533,7 +533,6 @@ if prop("installtype.prop","selected")=="2" then
 		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
 		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
 		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
-		"MIUI Music",      "---------------",                                      0,      #-- selected.3 = 6
 
 	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
 	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
@@ -544,7 +543,7 @@ if prop("installtype.prop","selected")=="2" then
 	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
 		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
 		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
-		"MIUI Gallery",      "---------------",                                      0,      #-- selected.5 = 4
+		"MIUI Gallery",      "A MIUI-style gallery app",                                      0,      #-- selected.5 = 4
 
 	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
 	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
@@ -570,9 +569,9 @@ if prop("installtype.prop","selected")=="2" then
 		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    0,      #-- selected.9 = 3
 		"Android",        "Old-style android text",                               0,      #-- selected.9 = 4
 		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,      #-- selected.9 = 5
-		"MIUI",      "-----------------",         0,      #-- selected.9 = 6
-		"Beats Audio",      "-----------------",         1,      #-- selected.9 = 7
-		"Interesting",      "-----------------",         0,      #-- selected.9 = 8
+		"MIUI",      "Get the MIUI love on your Sense ROM.",         0,      #-- selected.9 = 6
+		"Beats Audio",      "Ripped HTC Beats Audio boot animation",         1,      #-- selected.9 = 7
+		"Interesting",      "Thanks to einstain.frat",         0,      #-- selected.9 = 8
       
 	  "Internal memory to SD tweaks",           "",                               2,  #-- Group 10. key = "selected.10"
 	    "None",           "Use Normal Gingerbread app2sd",                        1,      #-- selected.10 = 1
@@ -624,7 +623,6 @@ if prop("installtype.prop","selected")=="1" then
 		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
 		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
 		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
-		"MIUI Music",      "---------------",                                      0,      #-- selected.3 = 6
 
 	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
 	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
@@ -635,7 +633,7 @@ if prop("installtype.prop","selected")=="1" then
 	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
 		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
 		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
-		"MIUI Gallery",      "---------------",                                      0,      #-- selected.5 = 4
+		"MIUI Gallery",      "A MIUI-Style Gallery app.",                                      0,      #-- selected.5 = 4
 
 	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
 	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
@@ -647,7 +645,7 @@ if prop("installtype.prop","selected")=="1" then
 		"Old",             "Experimental old swipe down lockscreen",              0,      #-- selected.7 = 2
 		"Gingerbread",     "Experimental default Gingerbread lock",               0,      #-- selected.7 = 3
 		"4.0 Lockscreen",  "Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
-		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         1,      #-- selected.6 = 5
+		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         0,      #-- selected.6 = 5
 
 	  "Audio Enchatments",                "",                                     2,  #-- Group 8. key = "selected.8"
 	    "None",            "Keep stock audio stuff",                              0,      #-- selected.8 = 1
@@ -713,8 +711,8 @@ checkbox(
 	   "ROM Manager",      "Flash ROMS like its going out of fashion!",                         1,      #-- item.1.11
 	   "NoThrills CPU",    "Control your CPU, Overclock, Governoor, Voltage an many more",      1,      #-- item.1.12
 	   "Better Youtube",   "Mod Youtube to play HD 720p",                                       0,      #-- item 1.13
-	   "MIUI Sound Recorder",        "----------------",                                             1,      #-- item.1.14
-	   "MIUI Compass",        "----------------",                                             1,      #-- item.1.15
+	   "MIUI Sound Recorder",        "A nice MIUI sound recorder",                                             1,      #-- item.1.14
+	   "MIUI Compass",        "A MIUI-like compass",                                             1,      #-- item.1.15
 		
 	  "System Applications",         "",                                                        2,  #-- Group 2. key = "item.2.x"
 	   "App Sharing",       "HTC's app sharing app",                                            1,      #-- item.2.1
