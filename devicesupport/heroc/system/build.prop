@@ -116,7 +116,7 @@ dalvik.vm.heapsize=20m
 
 # Default network type
 # 0 => WCDMA Preferred.
-ro.telephony.default_network = 0
+ro.telephony.default_network = 4
 
 # View configuration for QVGA
 view.fading_edge_length = 8
