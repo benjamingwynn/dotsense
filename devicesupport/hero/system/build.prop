@@ -57,7 +57,8 @@ ro.product.brand=htc_hero
 ro.product.name=htc_hero
 ro.product.device=hero
 ro.product.board=hero
-ro.product.cpu.abi=armeabi
+ro.product.cpu.abi=armeabi-v5te
+ro.product.cpu.abi2=armeabi
 ro.product.manufacturer=HTC
 ro.product.locale.language=mdpi
 ro.product.locale.region=
@@ -187,12 +188,12 @@ ro.htc.appupdate.exmsg.url = http://apu-msg.htc.com/extra-msg/rws/and-app/msg
 ro.htc.appupdate.exmsg.url_CN = http://apu-msg.htccomm.com.cn/extra-msg/rws/and-app/msg
 
 # Release Bluetooth HW/SW information
-ro.bt.chipset	= Broadcom BCM4329-B1
-ro.bt.version	= Bluetooth 2.1 + EDR
-ro.bt.stack	= Broadcom BTL-A
-ro.bt.stack.version	= 2.2.017
+#ro.bt.chipset	= Broadcom BCM4329-B1
+ro.bt.version	= Bluetooth 2.0 + EDR
+#ro.bt.stack	= Broadcom BTL-A
+#ro.bt.stack.version	= 2.2.017
 #0x10000010010100100000011 represent bt profile list
-ro.bt.profiles	= 4270339
+#ro.bt.profiles	= 4270339
 
 # Properties of BTLA stack
 service.brcm.bt.activation = 0
