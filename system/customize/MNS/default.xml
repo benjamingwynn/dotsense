@@ -5,7 +5,7 @@
       <function>
         <set name="single">
           <item name="auto_detect">false</item>
-          <item name="defeault">nl_NL</item>
+          <item name="default">nl_NL</item>
         </set>
       </function>
     </module>
@@ -64,7 +64,7 @@
     <module name="IME">
       <function>
         <set type="list:IME,CIME,SWYPE,A4,PDACHebrew" name="single">
-          <item name="defeault">IME</item>
+          <item name="default">IME</item>
         </set>
       </function>
     </module>
