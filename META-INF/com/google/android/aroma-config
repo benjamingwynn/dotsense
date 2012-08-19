@@ -2,16 +2,6 @@
 #
 # Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
 # Copyright (C) 2012 Benjamin Gwynn ( http://benjaminprofile.moonfruit.com/ )
-#
-# Distributed with .sense 3.0 and above.
-#
-# .sense installation script using aroma with "devpackage"
-#
-# made using some simple code from ONeill123 and the default AROMA sample
-# some bugs fixed by jmztaylor and skippycentral.
-#
-# Thanks to amarullz for the original AROMA installation manifest
-
 
 # [[Build information]]
 #
@@ -28,14 +18,13 @@ theme("dotsense2");
 ini_set("rom_name",             ".sense");
 #- Version
 ini_set("rom_version",          "3.0");
-#- Me (aren't I awesome)
 ini_set("rom_author",           "benjamingynn");
 #- Device this is built for (e.g. Wildfire S)
-ini_set("rom_device",           "HTC Salsa");
+ini_set("rom_device",           "HTC Wildfire S");
 #- Build date (e.g. 06/04/2012)
 ini_set("rom_date",             "14/04/12");
 #- ROM Codename (e.g. Nemesis)
-ini_set("rom_codename",             "Freefire");
+ini_set("rom_codename",             "Xephos");
 #- Device number
 #--- 1: Wildfire S - GSM
 #--- 2: Wildfire S - CDMA
@@ -47,7 +36,7 @@ ini_set("rom_codename",             "Freefire");
 #--- 8: Explorer/Pico
 writetmpfile(
 	  "device.prop",
-  		  "selected=3"
+  		  "selected=1"
  	   );
 
 # [[End of ROM information]]
@@ -153,16 +142,7 @@ viewbox(
     "Welcome",
   
   #-- Text
-    "You are about to Install <b>"+
-	  #-- Get Config Value
-	  ini_get("rom_name")+
-	"</b> for <b>"+ini_get("rom_device")+"</b>.\n\n"+
-    
-    ".sense is a sense 3.5 rom designed to be a universal and freindly ROM\n\n"+
-	
-      "  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
-      "  CODENAME\t: <b><#selectbg_g>"+ini_get("rom_codename")+"</#></b>\n"+
-      "  UPDATED\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
+    "Welcome to the .sense installer, this installer will help you install .sense onto your phone./n"+
 
     "Press Next to Continue the Installation...",
   
@@ -194,108 +174,7 @@ agreebox(
     "Please check the agreement to continue."
 );
 
-#
-# STEP 6 - INSTALLATION OPTION / NOOB ASK
-#
-
 menubox(
-  #-- Title
-    "Are you a noob?",
-  
-  #-- Sub Title
-    "Please select if you want to be shown advance or experimental options.",
-  
-  #-- Icon
-    "@apps",
-    
-  #-- Will be saved in /tmp/aroma/device.prop
-    "installtype.prop",
-    
-  #-------------------------+-----------------[ Menubox Items ]-------------------------+---------------#
-  # TITLE                   |  SUBTITLE                                                 |   Item Icons  #
-  #-------------------------+-----------------------------------------------------------+---------------#
-	
-	    "Easy",        "Hide advanced stuff, show basic options only",              "@apps",      #-- selected = 1
-		"Advanced",             "Show all options except experimental ones",                   "@apps"      #-- selected = 2
-);
-
-#
-# SYSTEM KERNEL INSTALLATION SELECTION FOR "DEVPACKAGE" FILE FORMAT
-#
-
-# Lets look if you have selected easy and install the kernels automatically if so.
-
-if prop("installtype.prop","selected")=="1" then
-
-if prop("device.prop","selected")=="1" then
-writetmpfile(
-	  "kernel-marvel.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="2" then
-writetmpfile(
-	  "kernel-marvelc.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="3" then
-writetmpfile(
-	  "kernel-salsa.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="4" then
-writetmpfile(
-	  "kernel-heroc.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="5" then
-writetmpfile(
-	  "kernel-hero.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="6" then
-writetmpfile(
-	  "kernel-liberty.prop",
-  		  "item.1.1=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="7" then
-writetmpfile(
-	  "kernel-legend.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-if prop("device.prop","selected")=="8" then
-writetmpfile(
-	  "kernel-pico.prop",
-  		  "selected=1\n"
- 	   );
-endif;
-
-endif;
-#
-#- Lets make some install screens for these kernels if there ISN'T noob selected
-#
-
-if prop("installtype.prop","selected")=="2" then
-
-#
-# - Now for options...
-#
-
-if prop("device.prop","selected")=="1" then
-  menubox(
     #-- Title
       "Kernel",
 	  
@@ -316,179 +195,7 @@ if prop("device.prop","selected")=="1" then
 		"Stable",          "idogx's non-oc kernel",                               "@personalize",
 		"JMZ OC 3.5",     "Now stable overclockable 3.5 kernel",                              "@personalize"
 
-  );
-endif;
-
-if prop("device.prop","selected")=="2" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your CDMA Wildfire S",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-marvelc.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Stable",          "idogx's non-oc kernel",                    "@personalize",
-		"JMZ OC 3.5",          "Now stable overclockable 3.5 kernel",                               "@personalize"
-
-  );
-endif;
-
-if prop("device.prop","selected")=="3" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your Salsa",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-salsa.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Modified stock",          "Modified stock to boot with Sense 3.5",                    "@personalize"
-
-  );
-endif;
-
-if prop("device.prop","selected")=="4" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your CDMA hero",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-heroc.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Team Hydra",          "Team Hydra's HEROC kernel.",                    "@personalize"
-
-  );
-endif;
-
-if prop("device.prop","selected")=="5" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your GSM Hero",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-hero.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Team Hydra",          "Team Hydra's HERO kernel.",                    "@personalize"
-
-
-  );
-endif;
-
-if prop("device.prop","selected")=="6" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your Aria",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-liberty.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Modified stock",          "Modified stock to boot with Sense 3.5",                    "@personalize"
-
-
-  );
-endif;
-
-if prop("device.prop","selected")=="7" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your Legend",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-legend.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Modified stock",          "Modified stock to boot with Sense 3.5",                    "@personalize"
-
-  );
-endif;
-
-if prop("device.prop","selected")=="8" then
-  menubox(
-    #-- Title
-      "Kernel",
-	  
-    #-- Sub Title
-      "Please select the kernel you want to use with your Explorer",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@personalize",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "kernel-pico.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-
-	    "Stock",          "HTC's kernel, very stable",                    "@personalize",
-		"yannou90",          "Overclockable to over 800mhz!",                               "@personalize"
-
-  );
-endif;
-
-endif;
-#
-# END OF KERNEL INSTALLATION SELECTION
-#
-
+);
 
 #
 # STEP 8 - SELECT MAIN MODS
@@ -500,8 +207,7 @@ endif;
 #- Advanced options
 #
 
-if prop("installtype.prop","selected")=="2" then
-  selectbox(
+selectbox(
     #-- Title
       "Main Features",
 	  
@@ -517,163 +223,71 @@ if prop("installtype.prop","selected")=="2" then
 	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
 	  # TITLE            |  SUBTITLE                                                 | Initial Value #
 	  #------------------+-----------------------------------------------------------+---------------#
-	  
-	  "Theme",          "",                                                       2,  #-- Group 1. key = "selected.1"
-	    "Glass",          "White with transparent status bar",                    1,      #-- selected.1 = 1
-		"Stock",          "Normal Sense 3.5 looks",                               0,      #-- selected.1 = 2
-		"CM7",     "Fancy a bit of CM7?",                              0,      #-- selected.1 = 3
-	  
-          "Keyboard",                "",                                              2,  #-- Group 2. key = "selected.2"
-	    "HTC Keyboard",   "Normal HTC Sense keyboard",                            1,      #-- selected.2 = 1
-	    "Gingerbread",    "Normal Gingerbread keyboard",                          0,      #-- selected.2 = 2
+	   
+	  "Theme",             "",                                                               2,
+	    ".sense",          "Transparent, original goodness",                                 1,
+            "HTC",             "Normal Sense 3.5 looks",                                         0
 
-	  "Music",           "",                                                      2,  #-- Group 3. key = "selected.3"
-	    "ICS Music",      "Stable and new with full support for Google Music",    1,      #-- selected.3 = 1
-		"MIUI Music",     "Give your phone a bit of a MIUI feel",                 0,      #-- selected.3 = 2
-		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
-		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
-		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
+          "Keyboard",         "",                                                                2,
+	    "HTC Keyboard",   "Normal HTC Sense keyboard",                                       1,
+	    "Gingerbread",    "Normal Gingerbread keyboard",                                     0,
 
-	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
-	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
-		"ES File Explorer","Easysoft file explorer",              0,      #-- selected.4 = 2
-		"H File Manager",       "Simple, CM7 file manager",                 0,      #-- selected.4 = 3
+	  "Music",            "",                                                                2,
+	    "Google Music",   "Stable and new with full support for Google Music",               0,
+            "MIUI 3",         "Give your phone a bit of a MIUI feel",                            0,
+            "HTC Sense",      "Comes with built-in equalizer",                                   1,
 
-	  "Gallery",                "",                                               2,  #-- Group 5. key = "selected.5"
-	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
-		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
-		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
-		"MIUI Gallery",      "A MIUI-style gallery app",                                      0,      #-- selected.5 = 4
+	  "File Explorer",     "",                                                               2,
+	    "MIUI 3",          "Ported MIUI file manager",                                       0,
+            "ES File explorer","Easysoft file explorer",                                         0,
+            "H File Manager",  "Simple and easy to use file manager",                            0,
+            "None",            "Don't install a file manager",                                   1,
 
-	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
-	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
-		"Sense 3.5",        "No option for camera flash",                         0,      #-- selected.6 = 2
-		"Sense 2.1",        "Old camera app from Sense 2.1",                      1,      #-- selected.6 = 3
+	  "Gallery",           "",                                                               2,
+	    "Gingerbread",     "Looks awesome but sometimes slow",                               0,
+            "HTC",             "Faster, but not as good looking",                                1,
 
-	  "Lockscreen",                "",                                            2,  #-- Group 7. key = "selected.7"
-	    "New",             "New ring lockscreen",                                 0,      #-- selected.7 = 1
-		"Old",             "Experimental old swipe down lockscreen",              0,      #-- selected.7 = 2
-		"Gingerbread",     "Experimental default Gingerbread lock",               0,      #-- selected.7 = 3
-		"4.0 Lockscreen",  "Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
-		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         1,      #-- selected.6 = 5
+	  "Camera",            "",                                                               2,
+            "MIUI 3",          "Fast and friendly, fully working",                               0,
+            "HTC",             "No option for camera flash",                                     1,
 
-	  "Audio Enchatments",                "",                                     2,  #-- Group 8. key = "selected.8"
-	    "None",            "Keep stock audio stuff",                              1,      #-- selected.8 = 1
-		"DSP Equalizer",   "Ripped from CM7",                                     0,      #-- selected.8 = 2
-		"Beats audio",     "The best sound system out there",                     0,      #-- selected.8 = 3
-		"Both",            "For the ultimate phone DJ",                           0,      #-- selected.8 = 4
+	  "Lockscreen",        "",                                                               2,
+	    "HTC",             "New ring lockscreen",                                            0,
+            ".sense",          "not built",                                                      1,
+            "Gingerbread",     "Experimental default Gingerbread lock",                          0,
+            "Sense 4 lock",    "Sense 4.0 themed Lockscreen",                                    0,
+            "Black Lock Ring", "Made by BigBearEvo. Enjoy.",                                     1,
 
-          "Boot Animation",        "",                                                2,  #-- Group 9. key = "selected.9"
-	    "ICS Style",      "Default ICS boot animation",                           0,      #-- selected.9 = 1
-		"Nexus One",      "Like the old Nexus One boot?",                         0,      #-- selected.9 = 2
-		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    0,      #-- selected.9 = 3
-		"Android",        "Old-style android text",                               0,      #-- selected.9 = 4
-		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,      #-- selected.9 = 5
-		"MIUI",      "Get the MIUI love on your Sense ROM.",         0,      #-- selected.9 = 6
-		"Beats Audio",      "Ripped HTC Beats Audio boot animation",         1,      #-- selected.9 = 7
-		"Interesting",      "Thanks to einstain.frat",         0,      #-- selected.9 = 8
+	  "Audio Enchatments", "",                                                               2,
+	    "None",            "Just stock audio",                                               1,
+            "DSP Equalizer",   "Ported from Cyanogenmod 7",                                      0,
+            "Beats audio",     "Feel the beat",                                                  0,
+            "Both",            "All the above",                                                  0,
+
+# del here
+
+          "Boot Animation",        "",                                                2,
+	    "ICS Style",      "Default ICS boot animation",                           0,
+		"Nexus One",      "Like the old Nexus One boot?",                         0,
+		"HTC Style",      "Generic white HTC Quitely Briliant boot animation",    0,
+		"Android",        "Old-style android text",                               0,
+		"Honeycomb",      "Android 3.x boot animation ripped for phones",         0,
+		"MIUI",      "Get the MIUI love on your Sense ROM.",         0,
+		"Beats Audio",      "Ripped HTC Beats Audio boot animation",         1,
+		"Interesting",      "Thanks to einstain.frat",         0,
       
-	  "Internal memory to SD tweaks",           "",                               2,  #-- Group 10. key = "selected.10"
-	    "None",           "Use Normal Gingerbread app2sd",                        1,      #-- selected.10 = 1
-		"Data2Whatever",        "Move almost everything to a EXT3 partition",           0,      #-- selected.10 = 2
-		"Link2SD",        "Installs the Link2SD app for linking madness",         0,      #-- selected.10 = 3
+	  "Internal memory to SD tweaks",           "",                               2,
+	    "None",           "Use Normal Gingerbread app2sd",                        1,
+		"Data2Whatever",        "Move almost everything to a EXT3 partition",           0,
+		"Link2SD",        "Installs the Link2SD app for linking madness",         0,
 
-	  "OTA Updates",                "",                                           2,  #-- Group 11. key = "selected.11"
-	    "Disable",        "I don't want .sense OTA updates",                      0,      #-- selected.11 = 1
-		"Enable",         "I do want OTA updates for .sense",                     1       #-- selected.11 = 2
+# to here
 
+	  "OTA Updates",      "",                                                            d  2,
+            "Disable",        "I don't want .sense OTA updates",                               0,
+            "Enable",         "I do want OTA updates for .sense",                              1
 
-  );
-endif;
-
-#
-# - Noob options
-#
-
-if prop("installtype.prop","selected")=="1" then
-  selectbox(
-    #-- Title
-      "Main Features",
-	  
-    #-- Sub Title
-      "Please select installer theme that you want to use in this installation test:",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@default",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "mods.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-	  
-	  "Theme",          "",                                                       2,  #-- Group 1. key = "selected.1"
-	    "Glass",          "White with transparent status bar",                    1,      #-- selected.1 = 1
-		"Stock",          "Normal Sense 3.5 looks",                               0,      #-- selected.1 = 2
-		"CM7",     "Fancy a bit of CM7?",                              0,      #-- selected.1 = 3
-	  
-          "Keyboard",                "",                                              2,  #-- Group 2. key = "selected.2"
-	    "HTC Keyboard",   "Normal HTC Sense keyboard",                            1,      #-- selected.2 = 1
-	    "Gingerbread",    "Normal Gingerbread keyboard",                          0,      #-- selected.2 = 2
-
-	  "Music",           "",                                                      2,  #-- Group 3. key = "selected.3"
-	    "ICS Music",      "Stable and new with full support for Google Music",    1,      #-- selected.3 = 1
-		"MIUI Music",     "Give your phone a bit of a MIUI feel",                 0,      #-- selected.3 = 2
-		"Sense 3.5 Music",      "Comes with built-in equalizer",                        0,      #-- selected.3 = 3
-		"Sense 2.1 Music",      "Old-school sense music",                               0,      #-- selected.3 = 4
-		"CM7 Music",      "Ripped from CM7",                                      0,      #-- selected.3 = 5
-
-	  "File Explorer",                "",                                          2,  #-- Group 4. key = "selected.4"
-	    "MIUI File Manager",           "Ported MIUI file manager",                1,      #-- selected.4 = 1
-		"ES File Explorer","Easysoft file explorer",              0,      #-- selected.4 = 2
-		"H File Manager",       "Simple, CM7 file manager",                 0,      #-- selected.4 = 3
-
-	  "Gallery",                "",                                               2,  #-- Group 5. key = "selected.5"
-	    "Gingerbread",      "Looks awesome but sometimes slow",                   1,      #-- selected.5 = 1
-		"Sense 2.1 Gallery",      "Experimental, ripped from HTC Sense 2.1",            0,      #-- selected.5 = 2
-		"Sense 3.5 Gallery",      "Faster, can force close sometimes",                  0,      #-- selected.5 = 3
-		"MIUI Gallery",      "A MIUI-Style Gallery app.",                                      0,      #-- selected.5 = 4
-
-	  "Camera",                "",                                                2,  #-- Group 6. key = "selected.6"
-	    "MIUI",             "Fast and friendly, fully working",                   0,      #-- selected.6 = 1
-		"Sense 3.5",        "No option for camera flash",                         0,      #-- selected.6 = 2
-		"Sense 2.1",        "Old camera app from Sense 2.1",                      1,      #-- selected.6 = 3
-
-	  "Lockscreen",                "",                                            2,  #-- Group 7. key = "selected.7"
-	    "New",             "New ring lockscreen",                                 0,      #-- selected.7 = 1
-		"Old",             "Experimental old swipe down lockscreen",              0,      #-- selected.7 = 2
-		"Gingerbread",     "Experimental default Gingerbread lock",               0,      #-- selected.7 = 3
-		"4.0 Lockscreen",  "Sense 4.0 Lockscreen",                         1,      #-- selected.6 = 4
-		"Black Lock Ring",  "Made by BigBearEvo. Enjoy.",                         0,      #-- selected.6 = 5
-
-	  "Audio Enchatments",                "",                                     2,  #-- Group 8. key = "selected.8"
-	    "None",            "Keep stock audio stuff",                              0,      #-- selected.8 = 1
-		"DSP Equalizer",   "Ripped from CM7",                                     0,      #-- selected.8 = 2
-		"Beats audio",     "The best sound system out there",                     0,      #-- selected.8 = 3
-		"Both",            "For the ultimate phone DJ",                           1      #-- selected.8 = 4
-	  );
-
-	  # Override the above missing options.
-
-writetmpfile(
-	  "customize.prop",
-  		  "item.9.1=0\n"+
-  		  "item.9.2=0\n"+
-  	          "item.9.3=3\n"+
-  		  "item.9.4=0\n"+
-  		  "item.9.4=0\n"+
-	  
-  		  "item.10.1=1\n"+
-  		  "item.10.2=0\n"+
-  		  "item.10.3=0\n"+
-
-	  	  "item.11.4=0\n"+
-  		  "item.11.4=1\n"
- 	   );
-endif;
-
-
+);
 
 #
 # STEP 9 - CUSTOMIZE YOUR INSTALLATION
@@ -774,61 +388,9 @@ checkbox(
 	    "Rosie",          "Install normal Sense 3.5 launcher",                    "@----", #1
 		"Modded Rosie",          "Gives you Rosie with a 5x4 app drawer",                               "@----", #2
 		"Rhyme Rosie",     "Rosie modded to look like the HTC Rhyme",                              "@----", #3
-		"ADW.Launcher",     "One of the most stable launchers yet",                              "@ADW1", #4
-		"GO Launcher EX",     "Themeable, configurable and stable",                              "@GO1", #5
-		"MIUI Launcher",     "Ported for MDPI phones. The brillent MIUI launcher",                              "@----", #6
-		"MXHome",     "A new, redefined launcher",                              "@MXbb1", #7
-		"Launcher 7",     "Looks like Windows Phone 7 and is easy to use",                              "@Launcher71", #8
-		"Zeam Launcher",     "The underdog minimalistic launcher for Android phones",                              "@Zeam1", #9
-		"Balancer Launcher",     "Useful Launcher, good performance and UI",                              "@Balancer1", #10
-		"Regina 3D Launcher",     "The best 3D launcher around",                              "@Regina1", #11
-		"Stock Gingerbread Launcher",     "A simple launcher from stock GB",                              "@GB1", #12
-		"QQLauncher Pro",     "One of my favorite launchers of all time",                              "@QQ1", #13
-		"HelixLauncher",     "Experimental, VERY OLD launcher",                              "@Helix1", #14
-		"360 Launcher",     "Clean and just amazing",                              "@----" #15
+		".sense",     "todo",                              "@----", #3
+# this is sense, removed up to 15. change 4 into .sense install
  	   );
-
-#
-# Let's let the user select some experimental shiz
-#
-
-if prop("installtype.prop","selected")=="2" then
-  selectbox(
-    #-- Title
-      "Experimental",
-	  
-    #-- Sub Title
-      "Please pick any experimental options",
-	  
-    #-- Icon: <AROMA Resource Dir>/icons/default.png or <ThemeDir>/icon.default.png
-      "@default",
-	  
-    #-- Will be saved in /tmp/aroma/mods.prop
-      "experimental.prop",
-	  
-	  #-----------------------------------[ Selectbox With Groups ]----------------------------------#
-	  # TITLE            |  SUBTITLE                                                 | Initial Value #
-	  #------------------+-----------------------------------------------------------+---------------#
-	  
-	  "Experimental options",          "",                                                       2,  #-- Group 1. key = "selected.1"
-	    "Sense 2.1 widgets (all)",          "Experimental!",                    0,      #-- selected.1 = 1
-		"Sense 2.1 widgets",          "Experimental!",                               0,      #-- selected.1 = 2
-		"None",     "Don't apply any of the above",                              1      #-- selected.1 = 3
- 	   );
-endif;
-
-if prop("installtype.prop","selected")=="1" then
-writetmpfile(
-	  "customize.prop",
-  		  "item.1.1=0\n"+
-  		  "item.1.2=0\n"+
-  	          "item.1.3=1"
- 	   );
-endif;
-
-#
-# Done.
-#
 
 ##
 #

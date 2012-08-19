@@ -46,72 +46,7 @@ package_extract_file("scripts/installbusybox", "/tmp/installbusybox");
 set_perm(0, 0, 0777, "/tmp/installbusybox");
 run_program("/tmp/installbusybox");
 ui_print("Busybox installed");
-
-# Okay, now if you have a different device then extract the support for it to run correctly...
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "1"
-    then
-      ui_print("Installing packages for the GSM WFS");
-      package_extract_dir("devicesupport/marvel/system", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "2"
-    then
-      ui_print("Installing packages for the CDMA WFS");
-      package_extract_dir("devicesupport/marvelc/system", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "3"
-    then
-      ui_print("Installing packages for the Salsa");
-      package_extract_dir("devicesupport/salsa/system", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "4"
-    then
-      ui_print("Installing packages for the Heroc");
-      package_extract_dir("devicesupport/heroc/system", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "5"
-    then
-      ui_print("Installing packages for the Hero");
-      package_extract_dir("devicesupport/system/hero", "/system");
-    endif;
-
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "6"
-    then
-      ui_print("Installing packages for the Liberty");
-      package_extract_dir("devicesupport/liberty/system", "/system");
-    endif;
-
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "7"
-    then
-      ui_print("Installing packages for the Legend");
-      package_extract_dir("devicesupport/system/legend", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/device.prop","selected") == "8"
-    then
-      ui_print("Installing packages for the Pico");
-      package_extract_dir("devicesupport/pico/system", "/system");
-    endif;
-
-
-# Now that we have that out of the way we can extract the kernel depending on what you selected
-
 ui_print("@Kernel installation");
-
-# Look for marvel kernel's
 
     if
       file_getprop("/tmp/aroma/kernel-marvel.prop","selected") == "1"
@@ -142,113 +77,6 @@ ui_print("@Kernel installation");
        delete("/tmp/boot.img");
       package_extract_dir("devicesupport/marvel/modules/MarvelKernel3", "/system/lib/modules");
     endif;
-
-# Look for other device kernels
-
-#- marvelc
-
-    if
-      file_getprop("/tmp/aroma/kernel-marvelc.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (MC1)...");
-      package_extract_dir("devicesupport/marvelc/kernels/MarvelcKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/marvelc/modules/MarvelcKernel1", "/system/lib/modules");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/kernel-marvelc.prop","selected") == "2"
-    then
-      ui_print("Installing kernel (MC2)...");
-      package_extract_dir("devicesupport/marvelc/kernels/MarvelcKernel2", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/marvelc/modules/MarvelcKernel2", "/system/lib/modules");
-    endif;
-
-#- Salsa
-
-    if
-      file_getprop("/tmp/aroma/kernel-salsa.prop","selected") == "1"
-    then
-      ui_print("Installing kernel...");
-      package_extract_dir("devicesupport/salsa/kernels/SalsaKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/salsa/modules/SalsaKernel1", "/system/lib/modules");
-    endif;
-
-#- Heroc
-
-    if
-      file_getprop("/tmp/aroma/kernel-heroc.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (HC1)...");
-      package_extract_dir("devicesupport/heroc/kernels/HerocKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/heroc/modules/HerocKernel1", "/system/lib/modules");
-    endif;
-
-#- Hero
-
-    if
-      file_getprop("/tmp/aroma/kernel-hero.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (H1)...");
-      package_extract_dir("devicesupport/hero/kernels/HerocKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/hero/modules/HerocKernel1", "/system/lib/modules");
-    endif;
-
-#- Liberty
-
-    if
-      file_getprop("/tmp/aroma/kernel-liberty.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (LI1)...");
-      package_extract_dir("devicesupport/marvel/kernels/MarvelKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/marvel/modules/MarvelKernel1", "/system/lib/modules");
-    endif;
-
-#- Legend
-
-    if
-      file_getprop("/tmp/aroma/kernel-legend.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (LE1)...");
-      package_extract_dir("devicesupport/legend/kernels/LegendKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/legend/modules/LegendKernel1", "/system/lib/modules");
-    endif;
-
-#- Pico
-
-    if
-      file_getprop("/tmp/aroma/kernel-pico.prop","selected") == "1"
-    then
-      ui_print("Installing kernel (P1)...");
-      package_extract_dir("devicesupport/pico/kernels/PicoKernel1", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/pico/modules/PicoKernel1", "/system/lib/modules");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/kernel-pico.prop","selected") == "2"
-    then
-      ui_print("Installing kernel (P2)...");
-      package_extract_dir("devicesupport/pico/kernels/PicoKernel2", "/tmp");
-       write_raw_image("/tmp/boot.img", "boot");
-       delete("/tmp/boot.img");
-      package_extract_dir("devicesupport/pico/modules/PicoKernel2", "/system/lib/modules");
-    endif;
-
 
 #-- Okay thats done... now lets link up stuff with the toolbox.
 ui_print("@Toolbox");
@@ -311,12 +139,7 @@ symlink("toolbox", "/system/bin/wipe");
 
 #
 #
-# OKAY!!!
-#               NOW THAT system IS SET UP I AM ABOUT TO INSTALL YOUR PACKAGES! I HOPE THIS
-#               WORKS!!!!
-#
-#
-# APPS AND WIDGETS... LETS GO!
+# Install packages
 #
 #
 
@@ -648,24 +471,6 @@ set_progress(0.5);
       package_extract_dir("packages/widgets/Weather", "/system/app");
     endif;
 
-#- Now that we've scared the crap out of our users we can begin installation of experimental stuff
-
-    if
-      file_getprop("/tmp/aroma/experimental.prop","item.1.1") == "1"
-    then
-      ui_print("Installing EXPERIMENTAL 1");
-      package_extract_dir("packages/experimental/package1", "/system");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/experimental.prop","item.1.2") == "1"
-    then
-      ui_print("Installing experimental 2");
-      package_extract_dir("packages/experimental/package2", "/system");
-    endif;
-
-#- Okay, all experimental stuff done!
-
 #
 # - Keyboard []
 # - Boot animation []
@@ -766,9 +571,9 @@ set_progress(0.5);
     if
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "1"
     then
-      ui_print("Installing Glass theme...");
+      ui_print("Installing .sense theme...");
     endif;
-      package_extract_dir("packages/Theme/Glass", "/system");
+      package_extract_dir("packages/Theme/dotsense", "/system");
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.1") == "2"
@@ -777,19 +582,12 @@ set_progress(0.5);
       package_extract_dir("packages/Theme/Stock", "/system");
     endif;
 
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.1") == "3"
-    then
-      ui_print("Installing CM7 theme...");
-      package_extract_dir("packages/Theme/CM7", "/system");
-    endif;
-
 #- Music
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "1"
     then
-      ui_print("Installing ICS Music");
+      ui_print("Installing Google Music");
       package_extract_dir("packages/Music/ICS", "/system/app");
     endif;
 
@@ -803,31 +601,9 @@ set_progress(0.5);
     if
       file_getprop("/tmp/aroma/mods.prop","selected.3") == "3"
     then
-      ui_print("Installing Sense 3.5 music");
+      ui_print("Installing HTC music");
       package_extract_dir("packages/Music/Sense", "/system/app");
     endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.3") == "4"
-    then
-      ui_print("Installing Sense 2.1 music");
-      package_extract_dir("packages/Music/SenseOld", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.3") == "5"
-    then
-      ui_print("Installing CM7 music");
-      package_extract_dir("packages/Music/CM7", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.3") == "6"
-    then
-      ui_print("Installing MIUI Music");
-      package_extract_dir("packages/apps/MIUI/Music", "/system/app");
-    endif;
-
 
 #- File Explorers
 
@@ -864,22 +640,8 @@ set_progress(0.5);
     if
       file_getprop("/tmp/aroma/mods.prop","selected.5") == "2"
     then
-      ui_print("Installing old Sense gallery");
-      package_extract_dir("packages/Gallery/Sense21", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.5") == "3"
-    then
-      ui_print("Installing Sense 3.5 Gallery");
+      ui_print("Installing Sense gallery");
       package_extract_dir("packages/Gallery/Sense35", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.5") == "4"
-    then
-      ui_print("Installing MIUI Gallery");
-      package_extract_dir("packages/apps/MIUI/Gallery", "/system/app");
     endif;
 
 #- Camera App
@@ -898,27 +660,20 @@ set_progress(0.5);
       package_extract_dir("packages/Camera/Sense", "/system/app");
     endif;
 
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.6") == "3"
-    then
-      ui_print("Installing Sense 2.1 Camera...");
-      package_extract_dir("packages/Camera/SenseOld", "/system/app");
-    endif;
-
 #- Lockscreen
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "1"
     then
-      ui_print("Installing new lockscreen...");
+      ui_print("Installing HTC lockscreen...");
       package_extract_dir("packages/Lockscreen/New", "/system/app");
     endif;
 
     if
       file_getprop("/tmp/aroma/mods.prop","selected.7") == "2"
     then
-      ui_print("Installing old lockscreen...");
-      package_extract_dir("packages/Lockscreen/Old", "/system/app");
+      ui_print("Installing .sense lockscreen...");
+      package_extract_dir("packages/Lockscreen/dotsense", "/system/app");
     endif;
 
     if
@@ -974,44 +729,6 @@ set_progress(0.5);
       package_extract_dir("packages/OTA", "/system/app");
     endif;
 
-# Link2SD, not to be confussed with data2sd!
-
-ui_print("@Installing SD Card mods");
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.10") == "3"
-    then
-      ui_print("Installing Link2SD");
-      package_extract_dir("packages/Misc/Link2SD", "/data/app");
-    endif;
-
-#
-# Now that thats done I'm going to see if you selected Data2SD and install it if so.
-#
-
-    if
-      file_getprop("/tmp/aroma/mods.prop","selected.10") == "2"
-    then
-      ui_print("Installing Data2SD");
-      delete("/system/etc/init.d/40a2sd");
-      delete("/system/etc/init.d/03stuff2sd");
-      delete("/system/etc/init.d/10apps2sd");
-      delete("/system/etc/init.d/04apps2sd");
-      package_extract_dir("packages/data2whatever/system", "/system");
-      package_extract_dir("packages/data2whatever/data", "/data");
-      set_perm(0, 2000, 0755, "/system/etc/init.d/01data2whatever");
-      set_perm(0, 2000, 0755, "/system/etc/init.d/98zipalign");
-      set_perm(0, 2000, 0755, "/system/etc/init.d/991complete");
-      set_perm(0, 2000, 0755, "/system/xbin/e2fsck");
-      set_perm(0, 2000, 0755, "/system/xbin/tune2fs");
-      set_perm(0, 2000, 0755, "/system/xbin/mkfs.ext4");
-      set_perm(1000, 1000, 771, "/system/data_internal");
-      symlink("/system/xbin/e2fsck", "/system/bin/e2fsck");
-      symlink("/system/xbin/tune2fs", "/system/bin/tune2fs");
-      symlink("/system/xbin/mkfs.ext4", "/system/bin/mkfs.ext4");
-      symlink("/system/data_internal/mtab", "/system/etc/mtab");
-    endif;
-
 #- LAUNCHERS
 ui_print("@Installing Launcher");
 
@@ -1039,97 +756,13 @@ ui_print("@Installing Launcher");
     if
       file_getprop("/tmp/aroma/launcher.prop","selected") == "4"
     then
-      ui_print("Installing ADW");
-      package_extract_dir("packages/launchers/ADW", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "5"
-    then
-      ui_print("Installing Go Launcher EX");
-      package_extract_dir("packages/launchers/GoLauncher", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "6"
-    then
-      ui_print("Installing MIUI Launcher");
-      package_extract_dir("packages/launchers/MIUI", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "7"
-    then
-      ui_print("Installing MXHome");
-      package_extract_dir("packages/launchers/MXHome", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "8"
-    then
-      ui_print("Installing Launcher7");
-      package_extract_dir("packages/launchers/Launcher7", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "9"
-    then
-      ui_print("Installing ZeamLauncher");
-      package_extract_dir("packages/launchers/ZeamLauncher", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "10"
-    then
-      ui_print("Installing Balancer Launcher");
-      package_extract_dir("packages/launchers/Balancer", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "11"
-    then
-      ui_print("Installing Regina 3D Launcher");
-      package_extract_dir("packages/launchers/Regina", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "12"
-    then
-      ui_print("Installing Gingerbread Launcher");
-      package_extract_dir("packages/launchers/Gingerbread", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "13"
-    then
-      ui_print("Installing QQLauncher Pro");
-      package_extract_dir("packages/launchers/QQLauncher", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "14"
-    then
-      ui_print("Installing HelixLauncher");
-      package_extract_dir("packages/launchers/Helix", "/system/app");
-    endif;
-
-    if
-      file_getprop("/tmp/aroma/launcher.prop","selected") == "15"
-    then
-      ui_print("Installing 360 Launcher");
-      package_extract_dir("packages/launchers/360", "/system/app");
+      ui_print("Installing .sense launcher");
+      package_extract_dir("packages/launchers/dotsense", "/data/app");
     endif;
 
 
-#
-#
-#
-#
-#
-#
-# CUSTOMIZATION SCRIPTING END NOW!
+# End custom stuffs
 
-#-- End our MASSIVE if command from eairlier.
 # Do some permission stuff
 ui_print("@Post-install");
 ui_print("System permissions");
