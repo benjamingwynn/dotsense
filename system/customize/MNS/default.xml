@@ -5,7 +5,7 @@
       <function>
         <set name="single">
           <item name="auto_detect">false</item>
-          <item name="default">nl_NL</item>
+          <item name="defeault">en_US</item>
         </set>
       </function>
     </module>
@@ -33,7 +33,7 @@
       </function>
       <function name="default_IKB_settings_checked">
         <set name="single">
-          <item name="checked_list_latin">Dutch</item>
+          <item name="checked_list_latin">English;</item>
         </set>
       </function>
       <function name="default_IKB_init_value">
@@ -43,28 +43,28 @@
       </function>
       <function name="default_IME_language_set">
         <set name="single">
-          <item name="default">Dutch;English</item>
+          <item name="default">English</item>
         </set>
       </function>
     </module>
     <module name="defaultTimeFormatSetting">
       <function>
         <set name="single">
-          <item name="default">EE. MMM d, yyyy</item>
+          <item name="default">yyyy MMM d, EE</item>
         </set>
       </function>
     </module>
     <module name="defaultTimeFormatSettingShort">
       <function>
         <set name="single">
-          <item name="default">EE, MMM, d</item>
+          <item name="default">MMM d, EE</item>
         </set>
       </function>
     </module>
     <module name="IME">
       <function>
         <set type="list:IME,CIME,SWYPE,A4,PDACHebrew" name="single">
-          <item name="default">IME</item>
+          <item name="defeault">IME</item>
         </set>
       </function>
     </module>
@@ -94,43 +94,141 @@
       </function>
       <function name="1_wallpaper">
         <set name="single" max="1">
-          <item type="file_name" name="image">color.jpg</item>
+          <item type="file_name" name="image">wallpaper1.jpg</item>
         </set>
       </function>
       <function name="2_wallpaper">
         <set name="single" max="1">
-          <item type="file_name" name="image">color.jpg</item>
+          <item type="file_name" name="image">wallpaper2.jpg</item>
         </set>
       </function>
       <function name="extra_wallpapers">
         <set name="plenty" max="10">
-          <item type="file_name" name="thumb">color_grid.jpg</item>
-          <item type="file_name" name="image">color.jpg</item>
-          <item type="file_name" name="preview">color_panel.jpg</item>
+          <item type="file_name" name="thumb">wallpaper3.jpg</item>
+          <item type="file_name" name="image">wallpaper3.jpg</item>
+          <item type="file_name" name="preview">wallpaper3.jpg</item>
           <!--%%Extra_Preveiw_image_landscape_Mode%%-->
           <!--%%Extra_Normal_image_landscape_Mode%%-->
         </set>
         <set name="plenty" max="10">
-          <item type="file_name" name="thumb">curtain_call_grid.jpg</item>
-          <item type="file_name" name="image">curtain_call.jpg</item>
-          <item type="file_name" name="preview">curtain_call_panel.jpg</item>
+          <item type="file_name" name="thumb">wallpaper4.jpg</item>
+          <item type="file_name" name="image">wallpaper4.jpg</item>
+          <item type="file_name" name="preview">wallpaper4.jpg</item>
           <!--%%Extra_Preveiw_image_landscape_Mode%%-->
           <!--%%Extra_Normal_image_landscape_Mode%%-->
         </set>
         <set name="plenty" max="10">
-          <item type="file_name" name="thumb">hex_grid.jpg</item>
-          <item type="file_name" name="image">hex.jpg</item>
-          <item type="file_name" name="preview">hex_panel.jpg</item>
+          <item type="file_name" name="thumb">wallpaper5.jpg</item>
+          <item type="file_name" name="image">wallpaper5.jpg</item>
+          <item type="file_name" name="preview">wallpaper5.jpg</item>
           <!--%%Extra_Preveiw_image_landscape_Mode%%-->
           <!--%%Extra_Normal_image_landscape_Mode%%-->
         </set>
         <set name="plenty" max="10">
-          <item type="file_name" name="thumb">string_theory_grid.jpg</item>
-          <item type="file_name" name="image">string_theory.jpg</item>
-          <item type="file_name" name="preview">string_theory_panel.jpg</item>
+          <item type="file_name" name="thumb">wallpaper6.jpg</item>
+          <item type="file_name" name="image">wallpaper6.jpg</item>
+          <item type="file_name" name="preview">wallpaper6.jpg</item>
           <!--%%Extra_Preveiw_image_landscape_Mode%%-->
           <!--%%Extra_Normal_image_landscape_Mode%%-->
         </set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper7.jpg</item>
+          <item type="file_name" name="image">wallpaper7.jpg</item>
+          <item type="file_name" name="preview">wallpaper7.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper8.jpg</item>
+          <item type="file_name" name="image">wallpaper8.jpg</item>
+          <item type="file_name" name="preview">wallpaper8.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper9.jpg</item>
+          <item type="file_name" name="image">wallpaper9.jpg</item>
+          <item type="file_name" name="preview">wallpaper9.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper10.jpg</item>
+          <item type="file_name" name="image">wallpaper10.jpg</item>
+          <item type="file_name" name="preview">wallpaper10.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper11.jpg</item>
+          <item type="file_name" name="image">wallpaper11.jpg</item>
+          <item type="file_name" name="preview">wallpaper11.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper12.jpg</item>
+          <item type="file_name" name="image">wallpaper12.jpg</item>
+          <item type="file_name" name="preview">wallpaper12.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper13.jpg</item>
+          <item type="file_name" name="image">wallpaper13.jpg</item>
+          <item type="file_name" name="preview">wallpaper13.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper14.jpg</item>
+          <item type="file_name" name="image">wallpaper14.jpg</item>
+          <item type="file_name" name="preview">wallpaper14.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper15.jpg</item>
+          <item type="file_name" name="image">wallpaper15.jpg</item>
+          <item type="file_name" name="preview">wallpaper15.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper16.jpg</item>
+          <item type="file_name" name="image">wallpaper16.jpg</item>
+          <item type="file_name" name="preview">wallpaper16.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper17.jpg</item>
+          <item type="file_name" name="image">wallpaper17.jpg</item>
+          <item type="file_name" name="preview">wallpaper17.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper18.jpg</item>
+          <item type="file_name" name="image">wallpaper18.jpg</item>
+          <item type="file_name" name="preview">wallpaper18.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper19.jpg</item>
+          <item type="file_name" name="image">wallpaper19.jpg</item>
+          <item type="file_name" name="preview">wallpaper19.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
+		<set name="plenty" max="10">
+          <item type="file_name" name="thumb">wallpaper20.jpg</item>
+          <item type="file_name" name="image">wallpaper20.jpg</item>
+          <item type="file_name" name="preview">wallpaper20.jpg</item>
+          <!--%%Extra_Preveiw_image_landscape_Mode%%-->
+          <!--%%Extra_Normal_image_landscape_Mode%%-->
+		</set>
       </function>
       <function name="1_widgets">
         <set name="plenty">
@@ -274,12 +372,12 @@
       </function>
       <function name="scene_list">
         <set name="plenty" max="1">
-          <item name="scenename">dot Sense</item>
+          <item name="scenename">.sense</item>
           <item name="scene_preview_large">scenes_picker_1.png</item>
         </set>
         <set name="plenty" max="1">
           <item name="scenename">HTC</item>
-          <item name="scene_preview_large">CN_scenes_picker_2.png</item>
+          <item name="scene_preview_large">scenes_picker_2.png</item>
         </set>
       </function>
     </module>
@@ -383,7 +481,7 @@
       </function>
       <function name="homepage">
         <set name="single" max="15">
-          <item name="url">http://www.google.com</item>
+          <item name="url">http://m.google.com</item>
         </set>
       </function>
     </module>

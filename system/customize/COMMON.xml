@@ -149,57 +149,45 @@
 		</module>
 		<module name="Browser">
 			<function name="bookmark">
-				<set name="plenty" max="15">
+				<set name="plenty" max="12">
 					<item name="title">Google</item>
 					<item name="url">http://www.google.com/m?client=ms-{ro.com.google.clientid:unknown}</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">Yahoo!</item>
-					<item name="url">http://www.yahoo.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">WFSDEV</item>
+					<item name="url">http://www.wfsdev.net23.net/</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">MSN</item>
-					<item name="url">http://www.msn.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">.sense on github</item>
+					<item name="url">http://www.github.com/benjamingwynn/dotsense</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">MySpace</item>
-					<item name="url">http://www.myspace.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">Donate to me</item>
+					<item name="url">http://www.benjamingwynn.moonfruit.com/donate</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">Facebook</item>
-					<item name="url">http://www.facebook.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">XDA</item>
+					<item name="url">http://www.xda-developers.com/</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">Wikipedia</item>
-					<item name="url">http://www.wikipedia.org/</item>
+				<set name="plenty" max="12">
+					<item name="title">XDA Wildfire S fora</item>
+					<item name="url">http://forum.xda-developers.com/forumdisplay.php?f=1038/</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">eBay</item>
-					<item name="url">http://www.ebay.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">benjamingwynn's twitter</item>
+					<item name="url">http://www.twitter.com/benjamingwynn</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">CNN</item>
-					<item name="url">http://www.cnn.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">WFSDEV on G+</item>
+					<item name="url">https://plus.google.com/102989615451917543665</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">New York Times</item>
-					<item name="url">http://www.nytimes.com/</item>
+				<set name="plenty" max="12">
+					<item name="title">benjamingwynn's G+</item>
+					<item name="url">https://plus.google.com/101087323958122715186</item>
 				</set>
-				<set name="plenty" max="15">
-					<item name="title">ESPN</item>
-					<item name="url">http://espn.go.com/</item>
-				</set>
-				<set name="plenty" max="15">
-					<item name="title">Amazon</item>
-					<item name="url">http://www.amazon.com/</item>
-				</set>
-				<set name="plenty" max="15">
-					<item name="title">Weather Channel</item>
-					<item name="url">http://www.weather.com/</item>
-				</set>
-				<set name="plenty" max="15">
-					<item name="title">BBC</item>
-					<item name="url">http://www.bbc.co.uk/</item>
+				<set name="plenty" max="12">
+					<item name="title">Update GooManager</item>
+					<item name="url">https://play.google.com/store/apps/details?id=com.s0up.goomanager</item>
 				</set>
 			</function>
 			<function name="ua_string">
