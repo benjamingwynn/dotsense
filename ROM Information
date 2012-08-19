@@ -1,12 +1,10 @@
-.sense beta 3.0
+.sense RC 1
 
 .............................
 
-If you have got permission to disassemble this ROM or you are adding a mod then please note the following file information
-
-NAME: BETA TESTING BUILD
-CODENAME: Freefire
-REAL-VERSION: 6
-FILE-STRUCTURE-TYPE: DevPackage 2.02
+NAME: RC TESTING BUILD
+CODENAME: Xephos
+REAL-VERSION: 7
+FILE-STRUCTURE-TYPE: Fukkit
 LAST-BUILD-DATE: 27/03/12
-TYPE: LABBUILD (UNSTRIPPED)
+TYPE: 0xB00B15

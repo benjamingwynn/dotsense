@@ -1,7 +1,0 @@
-#!/system/bin/sh
-#
-# enableswap - enables swap
-# Swap is what you selected when you formated sdcard 
-#
-busybox swapon /dev/block/mmcblk0p3;
-
