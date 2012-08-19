@@ -1,0 +1,41 @@
+#!/system/bin/sh
+#
+# Print startup info for the .sense ROM, this is useful for diagnostic reasons.
+#
+
+#- Set the DSLOG flag to do this command
+DSLOG="log -p i -t .sense"
+
+#- Print a cool banner
+$DSLOG "Based on..."
+$DSLOG "__________      ___.           __            _____   ________  ________    ";
+$DSLOG "\______   \ ____\_ )__   _____/  (_  ____   /     \  \_____  \ \______ \   ";
+$DSLOG " (       _//  _ \) __ \ /  _ \   __\/  _ \ /       \  /  ()   \ )    )  \  ";
+$DSLOG " (    )   (  <_> ) \_\ (  <_> )  ( (  <_> )    Y    \/   ()    \)   _'   \ ";
+$DSLOG " (____)_  /\____/)___  /\____/(__(  \____/\___/ \__  /\_______  /_______  / ";
+$DSLOG "        \/           \/                           \/         \/        \/  ";
+
+#- Welcome :)
+$DSLOG "Welcome to Android `getprop ro.build.version.release` / .sense-`getprop ro.goo.version`";
+
+#- Print info
+
+$DSLOG "---------------------------------------------------------------------------";
+$DSLOG ".sense diagnosic information, please provide this information with the";
+$DSLOG "rest of the logcat, thanks :)";
+
+#- Print system info
+$DSLOG "";
+$DSLOG "LCD DENSITY - `getprop ro.sf.lcd_density`";
+$DSLOG "DEVICE - `getprop ro.product.model` (`ro.product.board`)";
+$DSLOG "ROM - `getprop ro.build.version.release`";
+$DSLOG "";
+
+#- Print msg
+$DSLOG "";
+$DSLOG "If you encounter any other problems when using .sense, please enclose this document and the contents of /tmp after install.";
+$DSLOG "";
+$DSLOG "";
+$DSLOG "";
+$DSLOG "";
+$DSLOG "Carry on the logcat please";

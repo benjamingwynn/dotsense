@@ -7,7 +7,8 @@ ro.ril.hsdpa.category=8
 ro.ril.hsxpa=1
 ro.ril.disable.fd.plmn.prefix=23402,23410,23411,23420
 ro.ril.enable.sdr=0
-ril.watchdog.ping_address=www.google.com
+ril.watchdog.ping_address=www.wikipedia.com
+# Wikipedia is almost never blocked
 ro.product.locale.language=mdpi
 ro.product.locale.region=
 ro.com.google.clientidbase=android-htc
@@ -72,7 +73,7 @@ ro.build.changelist=188047
 ro.product.ua=
 ro.build.fingerprint=htccn_chs/htc_marvel/marvel:2.3.5/GRJ90/188047.7:user/release-keys
 ro.build.project=Marvel_S:224294
-ro.product.version=.sense beta 3.0 - benjamingwynn
+ro.product.version=.sense xephos RC1
 ro.build.languageremove=29
 ro.build.sense.version=3.5
 keyguard.no_require_sim=1
@@ -100,7 +101,7 @@ ro.ril.htcmaskw1 = 14449
 # Time between scans in seconds. Keep it high to minimize battery drain.
 # This only affects the case in which there are remembered access points,
 # but none are in range.
-wifi.supplicant_scan_interval = 15
+wifi.supplicant_scan_interval = 60
 
 # density in DPI of the LCD of this board. This is used to scale the UI
 # appropriately. If this property is not defined, the default value is 160 dpi.
@@ -187,9 +188,9 @@ ro.htc.appupdate.exmsg.url = http://apu-msg.htc.com/extra-msg/rws/and-app/msg
 ro.htc.appupdate.exmsg.url_CN = http://apu-msg.htccomm.com.cn/extra-msg/rws/and-app/msg
 
 # Release Bluetooth HW/SW information
-ro.bt.chipset	= Broadcom BCM4329-B1
-ro.bt.version	= Bluetooth 2.1 + EDR
-ro.bt.stack	= Broadcom BTL-A
+ro.bt.chipset         	= Broadcom BCM4329-B1
+ro.bt.version	        = Bluetooth 2.1 + EDR
+ro.bt.stack     	= Broadcom BTL-A
 ro.bt.stack.version	= 2.2.017
 #0x10000010010100100000011 represent bt profile list
 ro.bt.profiles	= 4270339
@@ -210,7 +211,7 @@ htc.audio.alc.enable = true
 # Following property will be reference by Settings.
 ro.product.processor=600MHz
 ro.product.ram=512MB
-ro.product.display_resolution=3.2 inch HVGA resolution
+ro.product.display_resolution=3.2 inch Wildfire S display
 ro.product.main_camera=5M
 ro.product.front_camera=NA
 ro.product.bluetooth= 3.0
@@ -243,4 +244,18 @@ dalvik.vm.stack-trace-file=/data/anr/traces.txt
 
 ro.goo.developerid=benjamingwynn
 ro.goo.rom=dotSense
-ro.goo.version=6
+ro.goo.version=7
+
++##############################################
+# Additional tweaks
+#
+windowsmgr.max_events_per_sec=150
+pm.sleep_mode=1
+ro.ril.disable.power.collapse=0
+debug.performance.tuning=1
+video.accelerate.hw=1
+net.tcp.buffersize.default=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.wifi=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.umts=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.gprs=4096,87380,256960,4096,16384,256960
+net.tcp.buffersize.edge=4096,87380,256960,4096,16384,256960

@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-SLEEP=120
+SLEEP=5
 
 if [ -e /data/.battery-calibrated ] ; then
         exit 0
@@ -16,7 +16,7 @@ while : ; do
                 touch /data/.battery-calibrated
                 exit 0
         fi
-        # log -p i -t battery-calibration "*** LEVEL: $LEVEL CUR: $CUR ***: sleeping for $SLEEP s..."
+        log -p i -t battery-calibration "*** LEVEL: $LEVEL CUR: $CUR ***: sleeping for $SLEEP s..."
         sleep $SLEEP
 done
 ) &
